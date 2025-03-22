@@ -7,12 +7,7 @@ import {
   ModalFooter,
   ModalTrigger,
 } from "./Animated-Modal";
-import Image from "next/image";
-import {
-  ChatInstance,
-  CHAT_HISTORY,
-  DEMO_CHAT_HISTORY,
-} from "./demoChatHistory";
+import { ChatInstance, CHAT_HISTORY } from "./demoChatHistory";
 import { motion, LayoutGroup } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/getReply";
 import { v4 as uuidv4 } from "uuid";
@@ -78,7 +73,7 @@ export function AnimatedModal() {
       <Modal>
         <ModalTrigger
           onOpen={scrollToBottom}
-          className="fixed bottom-[30px] right-[30px] z-5"
+          className="fixed bottom-[30px] right-[30px] z-5 cursor-pointer"
         >
           <span className="text-center">Start a Chat</span>
         </ModalTrigger>

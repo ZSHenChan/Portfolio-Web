@@ -20,6 +20,7 @@ interface InfiniteCardInterface {
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   speed = "fast",
   pauseOnHover = true,
   className,

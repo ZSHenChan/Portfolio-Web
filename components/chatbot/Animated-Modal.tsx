@@ -62,7 +62,7 @@ export const ModalTrigger = ({
       <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="dark:bg-black bg-slate-100 text-black dark:text-slate-100 flex items-center px-8"
+        className="dark:bg-black bg-slate-100 text-black dark:text-slate-100 flex items-center px-8 cursor-pointer"
       >
         {children}
       </HoverBorderGradient>
@@ -284,6 +284,7 @@ const AnimationToggleButton = ({
 // Add it in a separate file, I've added here for simplicity
 export const useOutsideClick = (
   ref: React.RefObject<HTMLDivElement | null>,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   callback: Function
 ) => {
   useEffect(() => {

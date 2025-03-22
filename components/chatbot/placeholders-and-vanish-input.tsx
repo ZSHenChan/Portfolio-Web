@@ -1,13 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/app/utils/cn";
 
 export function PlaceholdersAndVanishInput({
@@ -54,7 +48,12 @@ export function PlaceholdersAndVanishInput({
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const newDataRef = useRef<
-    { x: number; y: number; color: number[] | string }[]
+    {
+      r: number;
+      x: number;
+      y: number;
+      color: number[] | string;
+    }[]
   >([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
@@ -82,9 +81,9 @@ export function PlaceholdersAndVanishInput({
     const newData: { x: number; y: number; color: number[] }[] = [];
 
     for (let t = 0; t < 800; t++) {
-      let i = 4 * t * 800;
+      const i = 4 * t * 800;
       for (let n = 0; n < 800; n++) {
-        let e = i + 4 * n;
+        const e = i + 4 * n;
         if (
           pixelData[e] !== 0 &&
           pixelData[e + 1] !== 0 &&
@@ -144,8 +143,10 @@ export function PlaceholdersAndVanishInput({
             if (n > pos) {
               ctx.beginPath();
               ctx.rect(n, i, s, s);
-              ctx.fillStyle = color;
-              ctx.strokeStyle = color;
+              ctx.fillStyle =
+                typeof color === "string" ? color : `rgba(${color.join(",")})`;
+              ctx.strokeStyle =
+                typeof color === "string" ? color : `rgba(${color.join(",")})`;
               ctx.stroke();
             }
           });

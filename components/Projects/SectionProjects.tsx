@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { SectionHeading } from "../Headings/SectionHeading";
 import React, { ReactNode, useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/Timeline";
