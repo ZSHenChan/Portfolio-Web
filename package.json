@@ -9,19 +9,41 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@google/generative-ai": "^0.24.0",
+    "@radix-ui/react-hover-card": "^1.1.6",
+    "@radix-ui/react-label": "^2.1.2",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tanstack/react-query": "^5.68.0",
+    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.482.0",
+    "mini-svg-data-uri": "^1.4.4",
+    "motion": "^12.5.0",
+    "next": "15.2.2",
+    "qss": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.2"
+    "react-hot-toast": "^2.5.2",
+    "react-player": "^2.16.0",
+    "tailwind-merge": "^3.0.2",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.14",
+    "typescript": "^5"
   }
 }
