@@ -107,12 +107,12 @@ async function generateSummary() {
   `;
   const result = await summaryModel.generateContent(request);
   const resultText = result.response.text();
-  console.log(resultText);
+  // console.log(resultText);
   const parts = resultText.split("[SUMMARY_START]");
   context = parts[0].replace("[CONTEXT_START]", ""); // conversation context
-  console.log(`Context: ${context}`);
+  // console.log(`Context: ${context}`);
   summary = parts[1]; // summary
-  console.log(`Summary: ${summary}`);
+  // console.log(`Summary: ${summary}`);
   return;
 }
 
