@@ -46,7 +46,9 @@ export function AnimatedModal() {
       500
     );
 
-    const reply = (await fetchChatbotReply({ query: textInput })) as Reply;
+    const reply = (await fetchChatbotReply({
+      query: textInput,
+    })) as Reply;
     setIsThinking(false);
     setTimeout(
       () =>
@@ -69,7 +71,7 @@ export function AnimatedModal() {
   };
 
   return (
-    <div className="w-screen py-40  flex items-center justify-center">
+    <div className="w-screen py-40 flex items-center justify-center">
       <Modal>
         <ModalTrigger
           onOpen={scrollToBottom}
@@ -78,13 +80,6 @@ export function AnimatedModal() {
           <span className="text-center">Start a Chat</span>
         </ModalTrigger>
         <ModalBody>
-          {/* <Image
-            src={"/temp/azure.png"}
-            height="64"
-            width="64"
-            alt="Chatbot"
-            className="absolute top-[16px] left-[16px]"
-          ></Image> */}
           <ModalContent className="h-full overflow-y-scroll">
             <ul
               ref={listRef}

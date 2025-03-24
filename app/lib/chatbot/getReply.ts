@@ -52,6 +52,8 @@ const model = genAI.getGenerativeModel({
   model: MODEL_NAME,
 });
 
+const summaryModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
 const generationConfig = {
   temperature: 0.25,
   topP: 0.95,
@@ -59,6 +61,60 @@ const generationConfig = {
   maxOutputTokens: 120,
   responseMimeType: "text/plain",
 };
+
+const instructions = `You are Zi Shen's portfolio assistant. Your name is Zi Shen. Your job is to help users with their question regarding Zi Shen's portfolio in a slightly playful way, like you are a friendly tour guide of the portfolio. Do not answer irrelevant questions. 
+Here are some basic information regarding the portfolio website: 
+1. the portfolio url is www.zishenchan.com 
+2. Zi Shen's portfolio website has 5 recent projects: personal portfolio AI assistance (that's you!), automation manager (an internship project with Rohde and Schwarz in Singapore Changi Business Park), XCuisite Fullstack website (also known as xcuisite or xcuisite website), hologram chatbot (currently in production, no URL), and SCCC - Interactive Articulatory Accent Database (often referred to as SCCC, a part-time project at NTU). 
+Here are some rules for your response: 
+1. If a user's question is unclear, ask for more details before attempting to answer. 
+2. Give your answer without any Markdown formatting such as bold (**), italics (*), or code blocks. 
+3. Keep your answer short , concise and limit to 3 sentences. 
+That is all of the instructions.`;
+
+let conversationHistory = "";
+let summary = "";
+let context = "";
+let lastBotResponse = "";
+
+async function generatePrompt(userInput: string) {
+  conversationHistory += `User: ${userInput}\nBot: ${lastBotResponse}\n`;
+  // generate a summary based on the new input and response.
+  await generateSummary();
+
+  const prompt = `
+      Instruction:
+      ${instructions}
+      Summary:
+      ${summary}
+      ${context && `Context: \n${context}`}
+      User: ${userInput}
+      `;
+  // console.log(prompt);
+  return prompt;
+}
+
+async function generateSummary() {
+  const summaryInstruction = `summarize the conversation given below in short and concise sentences, provide summary and conversation context in given format: [CONTEXT_START] [Conversation Context] [SUMMARY_START] [Summary]`;
+
+  const request = `
+  Instructions:
+  ${summaryInstruction}
+  Conversation Summary:
+  ${summary}
+  Last Conversation:
+  ${conversationHistory}
+  `;
+  const result = await summaryModel.generateContent(request);
+  const resultText = result.response.text();
+  console.log(resultText);
+  const parts = resultText.split("[SUMMARY_START]");
+  context = parts[0].replace("[CONTEXT_START]", ""); // conversation context
+  console.log(`Context: ${context}`);
+  summary = parts[1]; // summary
+  console.log(`Summary: ${summary}`);
+  return;
+}
 
 const chatSession = model.startChat({
   generationConfig,
@@ -76,8 +132,10 @@ const chatSession = model.startChat({
 
 export async function fetchChatbotReply(request: Request) {
   try {
-    const result = await chatSession.sendMessage(request.query);
+    const query = await generatePrompt(request.query);
+    const result = await chatSession.sendMessage(query);
     const replyText = result.response.text();
+    lastBotResponse = replyText;
     return { message: replyText, error: false };
   } catch (err) {
     console.error(err);
