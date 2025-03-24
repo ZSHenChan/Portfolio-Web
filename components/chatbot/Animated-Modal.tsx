@@ -11,6 +11,7 @@ import React, {
   useState,
 } from "react";
 import { HoverBorderGradient } from "./HoverBorderGradient";
+import { env } from "@/app/env/client";
 
 interface ModalContextType {
   open: boolean;
@@ -181,7 +182,12 @@ export const ModalFooter = ({
         className
       )}
     >
-      <AnimationToggleButton isOn={isOn} setIsOn={setIsOn} />
+      <div className="flex items-center gap-10">
+        <AnimationToggleButton isOn={isOn} setIsOn={setIsOn} />
+        <span className="text-xs md:text-sm">
+          model: {env.NEXT_PUBLIC_GEMINI_MODEL_NAME}
+        </span>
+      </div>
       <ChatbotInput
         onSubmit={onSubmit}
         isSubmitting={isSubmitting}
