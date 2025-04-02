@@ -2,24 +2,20 @@
 import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
+import { ResumeButton } from "./ResumeButton";
+import { FadeUpInView } from "../ui/FadeUpInView";
 
 export function Lamp() {
   return (
-    <LampContainer className="w-dvw">
-      <motion.h1
-        initial={{ opacity: 0.5, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="mt-8 bg-gradient-to-br text-transparent from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-7xl"
-      >
-        My name is Zi Shen <br />
-        <br />
-        Im a Software Developer
-      </motion.h1>
+    <LampContainer>
+      <FadeUpInView className="text-center">
+        <h1 className="bg-gradient-to-br text-transparent from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight lg:text-7xl ">
+          My name is Zi Shen <br />
+          <br />
+          Im a Software Developer
+        </h1>
+        <ResumeButton />
+      </FadeUpInView>
     </LampContainer>
   );
 }
@@ -38,7 +34,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 -translate-y-[10%]">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
@@ -98,7 +94,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+      <div className="relative z-50 flex -translate-y-[100%] flex-col items-center px-5">
         {children}
       </div>
     </div>

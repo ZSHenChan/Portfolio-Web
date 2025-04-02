@@ -71,7 +71,7 @@ export function AnimatedModal() {
   };
 
   return (
-    <div className="w-screen py-40 flex items-center justify-center">
+    <div className="w-screen flex items-center justify-center">
       <Modal>
         <ModalTrigger
           onOpen={scrollToBottom}

@@ -35,13 +35,16 @@ export function SectionProjects() {
         <div className="grid grid-cols-1 gap-32">
           <div>
             <ProjectHeading>Personal AI Assistant</ProjectHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-start">
+            <div className="grid grid-cols-1 gap-4 text-start">
               {isClient ? (
-                <ProjectVideo src="/videos/video-portfolio-short.mp4" />
+                <ProjectVideo
+                  src="/videos/video-portfolio-short.mp4"
+                  height="400px"
+                />
               ) : (
                 <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
               )}
-              <div className="h-full place-content-center pr-[25%]">
+              <div className="h-full place-content-center text-center">
                 <ProjectText>
                   Fine-tuned AI to handle questions regarding my portfolio
                   website.
@@ -54,14 +57,18 @@ export function SectionProjects() {
             <ProjectHeading>Automation Manager</ProjectHeading>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-start">
               {isClient ? (
-                <ProjectVideo src="/videos/video-portfolio-short.mp4" />
+                <ProjectVideo
+                  src="/videos/video-portfolio-short.mp4"
+                  playing={false}
+                />
               ) : (
                 <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
               )}
               <div className="h-full place-content-center pr-[25%]">
                 <ProjectText>
-                  Automated 5G signal testing powered by gRPC and Consul
+                  Automated 5G signal testing powered by .NET gRPC and Consul
                 </ProjectText>
+                <ProjectText>Demo video coming soon!</ProjectText>
               </div>
             </div>
           </div>
@@ -114,13 +121,13 @@ export function SectionProjects() {
       content: (
         <div>
           <ProjectHeading>SCCC Articulatory Accent Database</ProjectHeading>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-start">
+          <div className="grid grid-cols-1 gap-4 text-center">
             {isClient ? (
-              <ProjectVideo src="/videos/video-sccc.mp4" />
+              <ProjectVideo src="/videos/video-sccc.mp4" height="300px" />
             ) : (
               <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
             )}
-            <div className="h-full place-content-center pr-[25%]">
+            <div className="h-full place-content-center">
               <ProjectText>Collection of Recorded Audios</ProjectText>
             </div>
           </div>
