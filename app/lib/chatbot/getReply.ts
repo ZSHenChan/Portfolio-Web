@@ -1,4 +1,7 @@
+"use server";
+
 import { env } from "@/app/env/client";
+import { envServer } from "@/app/env/server";
 import { getFunctionCalls } from "./getFunctionCalls";
 import { generateSummary } from "./generateSummary";
 import { FunctionCall } from "@google/genai";
@@ -15,7 +18,7 @@ interface Request {
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = env.NEXT_PUBLIC_GEMINI_API_KEY;
+const API_KEY = envServer.GEMINI_API_KEY;
 const MODEL_NAME = env.NEXT_PUBLIC_GEMINI_MODEL_NAME;
 
 const genAI = new GoogleGenerativeAI(API_KEY);

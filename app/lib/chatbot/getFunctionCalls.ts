@@ -1,11 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
-import { env } from "@/app/env/client";
+import { envServer } from "@/app/env/server";
 import {
   navigateSectionDeclaration,
   sendEmailDeclaration,
 } from "./functionCalls";
 
-const GOOGLE_CONSOLE_API_KEY = env.NEXT_PUBLIC_GOOGLE_CONSOLE_API_KEY;
+const GOOGLE_CONSOLE_API_KEY = envServer.GOOGLE_CONSOLE_API_KEY;
 
 interface Request {
   query: string;

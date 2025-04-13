@@ -1,7 +1,9 @@
-import { env } from "@/app/env/client";
+"use server";
+
+import { envServer } from "@/app/env/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = env.NEXT_PUBLIC_GEMINI_API_KEY;
+const API_KEY = envServer.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const summaryModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
