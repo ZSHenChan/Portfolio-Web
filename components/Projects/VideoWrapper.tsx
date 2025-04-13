@@ -7,7 +7,7 @@ export function VideoWrapper({
   height = "300px",
   src,
 }: {
-  height: string;
+  height?: string;
   src: string;
 }) {
   const [isClient, setIsClient] = useState(false);

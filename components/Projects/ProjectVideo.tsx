@@ -18,7 +18,7 @@ export function ProjectVideo({
       <Suspense
         fallback={
           <div
-            className={`w-full h-[200px] bg-gray-200 animate-pulse ${className}`}
+            className={`w-full h-[200px] h-[${height}] bg-gray-200 animate-pulse ${className}`}
           />
         }
       >
