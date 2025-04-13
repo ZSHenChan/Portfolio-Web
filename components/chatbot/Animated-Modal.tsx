@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/app/utils/cn";
 import { AnimatePresence, motion } from "motion/react";
-import { ChatbotInput } from "./ChatbotInput";
 import React, {
   ReactNode,
   createContext,
@@ -11,21 +10,25 @@ import React, {
   useState,
 } from "react";
 import { HoverBorderGradient } from "./HoverBorderGradient";
-import { env } from "@/app/env/client";
-// import { useRefs } from "@/app/context/RefsContext";
+import { ChatInstance, CHAT_HISTORY } from "./demoChatHistory";
 
 interface ModalContextType {
   open: boolean;
   setOpen: (open: boolean) => void;
+  chatHistory: ChatInstance[];
+  setChatHistory: React.Dispatch<React.SetStateAction<ChatInstance[]>>;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
+  const [chatHistory, setChatHistory] = useState<ChatInstance[]>(CHAT_HISTORY);
 
   return (
-    <ModalContext.Provider value={{ open, setOpen }}>
+    <ModalContext.Provider
+      value={{ open, setOpen, chatHistory, setChatHistory }}
+    >
       {children}
     </ModalContext.Provider>
   );
@@ -80,14 +83,6 @@ export const ModalBody = ({
   className?: string;
 }) => {
   const { open } = useModal();
-
-  // useEffect(() => {
-  //   if (open) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  // }, [open]);
 
   const modalRef = useRef<HTMLDivElement>(null);
   const { setOpen } = useModal();
@@ -166,38 +161,6 @@ export const ModalContent = ({
   );
 };
 
-export const ModalFooter = ({
-  onSubmit,
-  isSubmitting,
-  className,
-}: {
-  onSubmit: (textInput: string) => void;
-  isSubmitting: boolean;
-  className?: string;
-}) => {
-  const [isOn, setIsOn] = useState(true);
-  return (
-    <div
-      className={cn(
-        "flex justify-between p-4 backdrop-blur-md bg-slate-50/20",
-        className
-      )}
-    >
-      <div className="flex items-center gap-10">
-        <AnimationToggleButton isOn={isOn} setIsOn={setIsOn} />
-        <span className="text-xs md:text-sm hidden md:block">
-          {env.NEXT_PUBLIC_GEMINI_MODEL_NAME}
-        </span>
-      </div>
-      <ChatbotInput
-        onSubmit={onSubmit}
-        isSubmitting={isSubmitting}
-        activeAnimation={isOn}
-      />
-    </div>
-  );
-};
-
 const Overlay = ({ className }: { className?: string }) => {
   return (
     <motion.div
@@ -241,49 +204,6 @@ const CloseIcon = () => {
         <path d="M6 6l12 12" />
       </svg>
     </button>
-  );
-};
-
-const AnimationToggleButton = ({
-  isOn,
-  setIsOn,
-}: {
-  isOn: boolean;
-  setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const toggleSwitch = () =>
-    setIsOn((prev) => {
-      // console.log(!prev);
-      return !prev;
-    });
-
-  return (
-    <div className="flex flex-col items-center justify-center ">
-      <motion.button
-        className={`w-[40px] h-[20px] rounded-[25px] flex p-[2px] cursor-pointer`}
-        style={{
-          justifyContent: "flex-" + (isOn ? "end" : "start"),
-        }}
-        onClick={toggleSwitch}
-        animate={{
-          backgroundColor: isOn ? "#1f2937" : "#e2e8f0",
-        }}
-      >
-        <motion.div
-          className="w-[16px] h-full bg-white/80 rounded-[25px]"
-          layout
-          transition={{
-            type: "spring",
-            visualDuration: 0.3,
-            bounce: 0.2,
-          }}
-          animate={{
-            backgroundColor: isOn ? "#e2e8f0" : "#1f2937",
-          }}
-        />
-      </motion.button>
-      <p className="text-xs text-slate-300">Animation</p>
-    </div>
   );
 };
 

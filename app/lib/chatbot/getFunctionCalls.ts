@@ -12,7 +12,7 @@ interface Request {
 }
 
 export async function getFunctionCalls(request: Request) {
-  console.log(`Query: ${request.query}`);
+  // console.log(`Query: ${request.query}`);
   const ai = new GoogleGenAI({ apiKey: GOOGLE_CONSOLE_API_KEY });
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash-001",

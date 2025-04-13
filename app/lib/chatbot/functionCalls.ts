@@ -25,15 +25,16 @@ const navigateSectionDeclaration: FunctionDeclaration = {
   name: "navigateSection",
   parameters: {
     type: Type.OBJECT,
-    description: "navigate to a section of the website.",
+    description:
+      "navigate to a section of the website. Only return function when keyword navigate is detected.",
     properties: {
       section: {
         type: Type.STRING,
         description: "The target section to navigate to.",
-        enum: ["projects", "contact"],
+        enum: ["projects", "contact", "hero", "techstack"],
       },
     },
-    required: [],
+    required: ["section"],
   },
 };
 

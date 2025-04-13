@@ -1,11 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { InfiniteMovingCards } from "./InfiniteCard";
+import { useRefs } from "@/app/context/RefsContext";
 
 export function InfiniteMovingCardsGrid() {
+  const { registerRef } = useRefs();
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    registerRef("techstack", sectionRef.current);
+  }, [registerRef, sectionRef]);
+
   return (
-    <div className="mb-[10rem]">
+    <div className="mb-[10rem]" ref={sectionRef}>
       <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}

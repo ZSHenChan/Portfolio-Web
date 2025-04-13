@@ -4,18 +4,24 @@ import { templateParams } from "@/app/interfaces/templateParams";
 
 const executeFunctionCall = (
   functionCall: FunctionCall | undefined,
-  scrollToSection: (section: string) => void | null
+  scrollToSection: (section: string) => void | null,
+  setOpen: (open: boolean) => void
 ) => {
   if (functionCall) {
     const functionName = functionCall.name;
     const functionArguments = functionCall.args;
-    console.log(`executing function call: ${functionName}`);
+    // console.log(`executing function call: ${functionName}`);
 
     switch (functionName) {
       case "controlLight":
         return;
       case "navigateSection":
-        scrollToSection(functionArguments?.section as string);
+        console.log(functionArguments?.section);
+        setTimeout(() => setOpen(false), 300);
+        setTimeout(
+          () => scrollToSection(functionArguments?.section as string),
+          500
+        );
         return;
       case "sendEmail":
         const params = {

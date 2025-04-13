@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
 import { ResumeButton } from "./ResumeButton";
 import { FadeUpInView } from "../ui/FadeUpInView";
+import { useRefs } from "@/app/context/RefsContext";
 
 export function Lamp() {
   return (
@@ -27,8 +28,15 @@ export const LampContainer = ({
   children: React.ReactNode;
   className?: string;
 }) => {
+  const { registerRef } = useRefs();
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    registerRef("hero", sectionRef.current);
+  }, [registerRef, sectionRef]);
+
   return (
     <div
+      ref={sectionRef}
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
         className

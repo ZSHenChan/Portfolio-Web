@@ -4,6 +4,7 @@ interface RefsContextType {
   sectionRefs: React.MutableRefObject<
     Record<string, HTMLDivElement | HTMLElement | null>
   >;
+  registerRef: (key: string, element: HTMLDivElement | null) => void;
   scrollToSection: (section: string) => void;
 }
 
@@ -14,6 +15,10 @@ export const RefsProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
+  const registerRef = (key: string, element: HTMLDivElement | null) => {
+    sectionRefs.current[key] = element;
+  };
+
   const scrollToSection = (section: string) => {
     const targetRef = sectionRefs.current[section];
     if (targetRef) {
@@ -22,7 +27,7 @@ export const RefsProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <RefsContext.Provider value={{ sectionRefs, scrollToSection }}>
+    <RefsContext.Provider value={{ sectionRefs, scrollToSection, registerRef }}>
       {children}
     </RefsContext.Provider>
   );
