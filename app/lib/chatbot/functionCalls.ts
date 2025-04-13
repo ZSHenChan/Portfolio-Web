@@ -25,20 +25,15 @@ const navigateSectionDeclaration: FunctionDeclaration = {
   name: "navigateSection",
   parameters: {
     type: Type.OBJECT,
-    description: "Navigate user to a specific section of the website.",
+    description: "navigate to a section of the website.",
     properties: {
-      brightness: {
-        type: Type.NUMBER,
-        description:
-          "Light level from 0 to 100. Zero is off and 100 is full brightness.",
-      },
-      colorTemperature: {
+      section: {
         type: Type.STRING,
-        description:
-          "Color temperature of the light fixture which can be `daylight`, `cool`, or `warm`.",
+        description: "The target section to navigate to.",
+        enum: ["projects", "contact"],
       },
     },
-    required: ["brightness", "colorTemperature"],
+    required: [],
   },
 };
 

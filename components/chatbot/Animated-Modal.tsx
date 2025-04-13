@@ -12,6 +12,7 @@ import React, {
 } from "react";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { env } from "@/app/env/client";
+// import { useRefs } from "@/app/context/RefsContext";
 
 interface ModalContextType {
   open: boolean;

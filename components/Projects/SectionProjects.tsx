@@ -7,12 +7,17 @@ import { AutomtionManagerProject } from "./Project/AutomationManager";
 import { XcuisiteProject } from "./Project/Xcuisite";
 import { ScccProject } from "./Project/Sccc";
 import { ReminderApiProject } from "./Project/ReminderApi";
+import { useRefs } from "@/app/context/RefsContext";
 
 export function SectionProjects() {
   const [isClient, setIsClient] = useState(false);
+  const { sectionRefs } = useRefs();
+
   useEffect(() => {
+    sectionRefs.current["projects"] =
+      document.getElementById("projects-section");
     setIsClient(true);
-  }, []);
+  }, [sectionRefs]);
 
   const data = [
     {
@@ -42,7 +47,10 @@ export function SectionProjects() {
     },
   ];
   return (
-    <div className="w-full relative text-center bg-transparent">
+    <div
+      id="projects-section"
+      className="w-full relative text-center bg-transparent"
+    >
       <SectionHeading className="pt-[10rem] mb-[5rem]">Projects</SectionHeading>
       <Timeline data={data} onUpdateHeight={isClient} />
     </div>

@@ -2,7 +2,10 @@ import { FunctionCall } from "@google/genai";
 import { sendEmail } from "@/app/api/sendEmail";
 import { templateParams } from "@/app/interfaces/templateParams";
 
-const executeFunctionCall = (functionCall: FunctionCall | undefined) => {
+const executeFunctionCall = (
+  functionCall: FunctionCall | undefined,
+  scrollToSection: (section: string) => void | null
+) => {
   if (functionCall) {
     const functionName = functionCall.name;
     const functionArguments = functionCall.args;
@@ -12,6 +15,7 @@ const executeFunctionCall = (functionCall: FunctionCall | undefined) => {
       case "controlLight":
         return;
       case "navigateSection":
+        scrollToSection(functionArguments?.section as string);
         return;
       case "sendEmail":
         const params = {

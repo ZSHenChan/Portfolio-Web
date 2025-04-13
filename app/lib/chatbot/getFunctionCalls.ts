@@ -1,6 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { env } from "@/app/env/client";
-import { controlLightDeclaration, sendEmailDeclaration } from "./functionCalls";
+import {
+  navigateSectionDeclaration,
+  sendEmailDeclaration,
+} from "./functionCalls";
 
 const GOOGLE_CONSOLE_API_KEY = env.NEXT_PUBLIC_GOOGLE_CONSOLE_API_KEY;
 
@@ -17,7 +20,10 @@ export async function getFunctionCalls(request: Request) {
     config: {
       tools: [
         {
-          functionDeclarations: [controlLightDeclaration, sendEmailDeclaration],
+          functionDeclarations: [
+            navigateSectionDeclaration,
+            sendEmailDeclaration,
+          ],
         },
       ],
     },

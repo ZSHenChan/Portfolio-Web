@@ -53,21 +53,17 @@ async function generatePrompt(userInput: string) {
   // generate a new context based on the new input and response.
   context = await generateSummary(context, conversationHistory);
   const functions = await getFunctionCalls({ query: context });
+  const functionCall = functions.functionCalls
+    ? functions.functionCalls[0]
+    : null;
   const prompt = `
       Instruction:
       ${instructions}
       ${context && `Context: \n${context}`}
-      ${
-        functions.functionCalls
-          ? `Action: ${functions.functionCalls[0].name}`
-          : ""
-      }
+      ${functionCall && `Action: ${functionCall.name}`}
       User: ${userInput}
       `;
   // console.log(prompt);
-  const functionCall = functions.functionCalls
-    ? functions.functionCalls[0]
-    : null;
   return {
     prompt: prompt,
     functionCall: functionCall,

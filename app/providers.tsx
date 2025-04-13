@@ -2,6 +2,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RefsProvider } from "@/app/context/RefsContext";
 import { ReactNode, useState } from "react";
 
 interface ProvidersProps {
@@ -12,6 +13,8 @@ export function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <RefsProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </RefsProvider>
   );
 }

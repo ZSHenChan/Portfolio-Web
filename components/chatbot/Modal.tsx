@@ -12,12 +12,25 @@ import { motion, LayoutGroup } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/getReply";
 import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
 import { v4 as uuidv4 } from "uuid";
+import { getFunctionCalls } from "@/app/lib/chatbot/getFunctionCalls";
+import { useRefs } from "@/app/context/RefsContext";
 
 export function AnimatedModal() {
   const [chatHistory, setChatHistory] = useState<ChatInstance[]>(CHAT_HISTORY);
   const [isThinking, setIsThinking] = useState(false);
   const listRef = useRef<null | HTMLUListElement>(null);
   const listEndRef = useRef<null | HTMLDivElement>(null);
+  const { scrollToSection } = useRefs();
+
+  // * testing use
+  useEffect(() => {
+    const handle = async () => {
+      getFunctionCalls({
+        query: "navigate to section projects",
+      });
+    };
+    // handle();
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -60,7 +73,10 @@ export function AnimatedModal() {
           isBot: true,
         })
     );
-    setTimeout(() => executeFunctionCall(reply.functionCall), 500);
+    setTimeout(
+      () => executeFunctionCall(reply.functionCall, scrollToSection),
+      500
+    );
   };
 
   const itemVariants = {
