@@ -17,10 +17,10 @@ function PersonalAIProject() {
         {isClient ? (
           <ProjectVideo
             src="/videos/video-portfolio-short.mp4"
-            height="400px"
+            height="300px"
           />
         ) : (
-          <div className="w-full h-[400px] bg-gray-800 animate-pulse" />
+          <div className="w-full h-[300px] bg-gray-800 animate-pulse" />
         )}
         <div className="h-full place-content-center text-center">
           <ProjectText>
@@ -33,10 +33,10 @@ function PersonalAIProject() {
         {isClient ? (
           <ProjectVideo
             src="/videos/video-portfolio-email.mp4"
-            height="400px"
+            height="300px"
           />
         ) : (
-          <div className="w-full h-[400px] bg-gray-800 animate-pulse" />
+          <div className="w-full h-[300px] bg-gray-800 animate-pulse" />
         )}
         <div className="h-full place-content-center text-center">
           <ProjectText>Ask my AI to email for you!</ProjectText>
@@ -46,10 +46,10 @@ function PersonalAIProject() {
         {isClient ? (
           <ProjectVideo
             src="/videos/video-portfolio-scroll.mp4"
-            height="400px"
+            height="300px"
           />
         ) : (
-          <div className="w-full h-[400px] bg-gray-800 animate-pulse" />
+          <div className="w-full h-[300px] bg-gray-800 animate-pulse" />
         )}
         <div className="h-full place-content-center text-center">
           <ProjectText>Navigation for visitors</ProjectText>

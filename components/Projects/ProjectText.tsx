@@ -9,7 +9,7 @@ export function ProjectText({
 }) {
   return (
     <p
-      className={`text-neutral-200 tex-md md:text-lg font-normal mb-8 ${className}`}
+      className={`text-neutral-200 text-sm lg:text-lg font-normal mb-8 ${className}`}
     >
       {children}
     </p>
