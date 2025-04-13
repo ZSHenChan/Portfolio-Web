@@ -60,7 +60,7 @@ export function AnimatedModal() {
           isBot: true,
         })
     );
-    setTimeout(() => executeFunctionCall(reply.functions), 500);
+    setTimeout(() => executeFunctionCall(reply.functionCall), 500);
   };
 
   const itemVariants = {

@@ -46,7 +46,7 @@ const sendEmailDeclaration: FunctionDeclaration = {
   name: "sendEmail",
   parameters: {
     type: Type.OBJECT,
-    description: "Send an email to zi shen based on user input.",
+    description: "Help the user to send an email to zi shen.",
     properties: {
       email: {
         type: Type.STRING,
@@ -59,15 +59,15 @@ const sendEmailDeclaration: FunctionDeclaration = {
       title: {
         type: Type.STRING,
         description:
-          "email title. Write a short title for the email, provide 'No Title' if no title is given.",
+          "email title. Write a short title for the email, summarize the content if no title is given",
       },
       description: {
         type: Type.STRING,
         description:
-          "email description. This can be empty if the user doesn't provide any.",
+          "email description. This is the message that will be sent to zi shen. If no description is given, write a short message to zi shen.",
       },
     },
-    required: ["name", "email", "title"],
+    required: ["name", "email"],
   },
 };
 

@@ -2,11 +2,11 @@ import { FunctionCall } from "@google/genai";
 import { sendEmail } from "@/app/api/sendEmail";
 import { templateParams } from "@/app/interfaces/templateParams";
 
-const executeFunctionCall = (functionCalls: FunctionCall[] | undefined) => {
-  if (functionCalls && functionCalls.length > 0) {
-    const functionCall = functionCalls[0];
+const executeFunctionCall = (functionCall: FunctionCall | undefined) => {
+  if (functionCall) {
     const functionName = functionCall.name;
     const functionArguments = functionCall.args;
+    console.log(`executing function call: ${functionName}`);
 
     switch (functionName) {
       case "controlLight":

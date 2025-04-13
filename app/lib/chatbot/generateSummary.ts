@@ -13,8 +13,9 @@ async function generateSummary(context: string, conversationHistory: string) {
   2. Your summary should be concise and short, keep in mind that it is very likely the user will ask for more details regarding a project.
   3. The context should write in first person, where I am the bot, and the other person is the user. If empty context means it is the beginning of the conversation.
   4. There are 5 projects presented in the website: personal portfolio AI assistance, automation manager, XCuisite Fullstack website, hologram chatbot, and SCCC - Interactive Articulatory Accent Database.
-  5. Give the context as your only response.
-  6. Here is some examples of context: 'The user is asking about the hologram chatbot project.', 'The user is asking more details regarding the automation manager project.'
+  5. Include and retain user details such as name and email address in the context. The user may ask to execute some functions, such as sending an email.
+  6. Give the context as your only response.
+  7. Here is some examples of context: 'The user is asking about the hologram chatbot project.', 'The user is asking more details regarding the automation manager project'. 'The user wih name Youtuber with email address youtuber@youtube.com is asking me to send email to zi shen with title 'Lets connect!'.'
   `;
 
   const request = `

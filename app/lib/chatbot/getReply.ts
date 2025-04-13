@@ -6,7 +6,7 @@ import { FunctionCall } from "@google/genai";
 export interface Reply {
   message: string;
   error: boolean;
-  functions?: FunctionCall[];
+  functionCall?: FunctionCall;
 }
 
 interface Request {
@@ -48,20 +48,30 @@ let conversationHistory = "";
 let context = "";
 let lastBotResponse = "";
 
-async function generatePrompt(userInput: string, functionName?: string) {
+async function generatePrompt(userInput: string) {
   conversationHistory = `Bot: ${lastBotResponse}\nUser: ${userInput}\n`;
   // generate a new context based on the new input and response.
   context = await generateSummary(context, conversationHistory);
-
+  const functions = await getFunctionCalls({ query: context });
   const prompt = `
       Instruction:
       ${instructions}
       ${context && `Context: \n${context}`}
-      ${functionName ? `Action: ${functionName}` : ""}
+      ${
+        functions.functionCalls
+          ? `Action: ${functions.functionCalls[0].name}`
+          : ""
+      }
       User: ${userInput}
       `;
   // console.log(prompt);
-  return prompt;
+  const functionCall = functions.functionCalls
+    ? functions.functionCalls[0]
+    : null;
+  return {
+    prompt: prompt,
+    functionCall: functionCall,
+  };
 }
 
 const chatSession = model.startChat({
@@ -78,23 +88,16 @@ const chatSession = model.startChat({
   ],
 });
 
-export async function fetchChatbotReply(request: Request) {
+export async function fetchChatbotReply(request: Request): Promise<Reply> {
   try {
-    const functionsObj = await getFunctionCalls(request);
-    console.log(functionsObj);
-    const query = await generatePrompt(
-      request.query,
-      functionsObj.functionCalls
-        ? functionsObj.functionCalls[0].name
-        : undefined
-    );
-    const result = await chatSession.sendMessage(query);
+    const { prompt, functionCall } = await generatePrompt(request.query);
+    const result = await chatSession.sendMessage(prompt);
     const replyText = result.response.text();
     lastBotResponse = replyText;
     return {
       message: replyText,
       error: false,
-      functions: functionsObj.functionCalls,
+      functionCall: functionCall || undefined,
     };
   } catch (err) {
     console.error(err);
