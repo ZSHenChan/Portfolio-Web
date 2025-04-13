@@ -28,7 +28,7 @@ async function generateSummary(context: string, conversationHistory: string) {
   `;
   const result = await summaryModel.generateContent(request);
   const resultText = result.response.text();
-  console.log(`Context: ${resultText}`);
+  // console.log(`Context: ${resultText}`);
 
   return resultText;
 }

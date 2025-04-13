@@ -28,6 +28,6 @@ export async function getFunctionCalls(request: Request) {
       ],
     },
   });
-  console.log(response.functionCalls);
+  // console.log(response.functionCalls);
   return { functionCalls: response.functionCalls, error: false };
 }
