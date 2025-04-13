@@ -50,7 +50,9 @@ export function SectionProjects() {
       ref={sectionRef}
       className="w-full relative text-center bg-transparent"
     >
-      <SectionHeading className="pt-[10rem] mb-[5rem]">Projects</SectionHeading>
+      <SectionHeading className="pt-[10rem] mb-[10rem] lg:mb-[5rem]">
+        Projects
+      </SectionHeading>
       <Timeline data={data} onUpdateHeight={isClient} />
     </div>
   );
