@@ -3,28 +3,15 @@ import React, { useRef } from "react";
 import { Label } from "./Label";
 import { Input } from "./Input";
 import { cn } from "@/app/utils/cn";
-import emailjs from "@emailjs/browser";
-import toast from "react-hot-toast";
-import { env } from "@/app/env/client";
+import { sendFormEmail } from "@/app/api/sendEmail";
 
 export function Form() {
   const form = useRef<HTMLFormElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // toast.success("Email service is disabled");
 
     if (form.current) {
-      const sendEmailPromise = emailjs.sendForm(
-        env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        form.current,
-        env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      );
-      toast.promise(sendEmailPromise, {
-        loading: "Sending email...",
-        success: "Email sent!",
-        error: "Failed to send email",
-      });
+      sendFormEmail({ formDetails: form.current });
     }
   };
   return (

@@ -184,8 +184,8 @@ export const ModalFooter = ({
     >
       <div className="flex items-center gap-10">
         <AnimationToggleButton isOn={isOn} setIsOn={setIsOn} />
-        <span className="text-xs md:text-sm">
-          model: {env.NEXT_PUBLIC_GEMINI_MODEL_NAME}
+        <span className="text-xs md:text-sm hidden md:block">
+          {env.NEXT_PUBLIC_GEMINI_MODEL_NAME}
         </span>
       </div>
       <ChatbotInput

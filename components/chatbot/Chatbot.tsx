@@ -1,3 +1,4 @@
+// !deprecated
 "use client";
 
 import { FormEvent, useState, useRef } from "react";
@@ -6,13 +7,14 @@ import Form from "next/form";
 
 import { useMutation } from "@tanstack/react-query";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/getReply";
+import { generateContentFromVertexAI } from "@/app/lib/chatbot/executeFunction";
 
 export function Chatbot() {
   const [query, setQuery] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const mutation = useMutation({
-    mutationFn: fetchChatbotReply,
+    mutationFn: generateContentFromVertexAI,
     onSuccess: (data: Reply) => {
       // console.log(data.message);
       setQuery(data.message);

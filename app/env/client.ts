@@ -9,6 +9,7 @@ export const env = createEnv({
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: z.string(),
+    NEXT_PUBLIC_GOOGLE_CONSOLE_API_KEY: z.string(),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_GEMINI_API_KEY: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
@@ -17,5 +18,7 @@ export const env = createEnv({
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    NEXT_PUBLIC_GOOGLE_CONSOLE_API_KEY:
+      process.env.NEXT_PUBLIC_GOOGLE_CONSOLE_API_KEY,
   },
 });

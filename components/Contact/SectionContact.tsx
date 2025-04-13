@@ -6,10 +6,10 @@ import { EmailCopy } from "./EmailCopy";
 
 export function SectionContact() {
   return (
-    <div className="w-screen">
+    <div className="w-full mt-[8rem]">
       <SectionHeading>Contact Me</SectionHeading>
-      <div className="w-screen flex flex-row align-center justify-center gap-[10rem] mb-[15rem]">
-        <div className="text-xl md:text-3xl flex flex-col justify-around">
+      <div className="flex flex-col md:flex-row align-center place-items-center justify-center gap-[10dvw] mb-[15rem]">
+        <div className="text-xl md:text-3xl flex flex-row md:flex-col justify-around items-center gap-[5rem]">
           <LinkPreview url="https://github.com/ZSHenChan" className="font-bold">
             GitHub
           </LinkPreview>

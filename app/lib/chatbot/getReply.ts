@@ -1,5 +1,6 @@
 import { env } from "@/app/env/client";
-// import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getFunctionCalls } from "./getFunctionCalls";
+import { executeFunctionCall } from "./executeFunctionCall";
 
 export interface Reply {
   message: string;
@@ -111,6 +112,8 @@ const chatSession = model.startChat({
 
 export async function fetchChatbotReply(request: Request) {
   try {
+    const functions = await getFunctionCalls(request);
+    executeFunctionCall(functions.functionCalls);
     const query = await generatePrompt(request.query);
     const result = await chatSession.sendMessage(query);
     const replyText = result.response.text();
