@@ -252,7 +252,7 @@ const AnimationToggleButton = ({
 }) => {
   const toggleSwitch = () =>
     setIsOn((prev) => {
-      console.log(!prev);
+      // console.log(!prev);
       return !prev;
     });
 

@@ -6,14 +6,14 @@ import { InfiniteMovingCards } from "./InfiniteCard";
 export function InfiniteMovingCardsGrid() {
   return (
     <div className="mb-[10rem]">
-      <div className="h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
+      <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}
           direction="right"
           speed="slow"
         />
       </div>
-      <div className="h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
+      <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials2}
           direction="left"

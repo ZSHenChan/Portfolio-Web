@@ -69,7 +69,7 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item) => (
           <li
-            className="w-[128px] h-[128px] max-w-full relative rounded-2xl border border-b-0 shrink-0 border-slate-700 px-8 py-6 md:h-[192px] md:w-[192px]"
+            className="w-[96px] h-[96px] max-w-full relative rounded-2xl border border-b-0 shrink-0 border-slate-700 px-8 py-6 md:h-[196px] md:w-[196px]"
             style={{
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
@@ -80,8 +80,8 @@ export const InfiniteMovingCards = ({
               aria-hidden="true"
               className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
             ></div>
-            <div className="relative z-20 mt-6 flex flex-col items-center">
-              <div className="mb-4 h-full">
+            <div className="h-full grid place-items-center items-center z-20">
+              <div className="align-self-end">
                 <Image
                   src={item.url}
                   width={64}
@@ -89,7 +89,7 @@ export const InfiniteMovingCards = ({
                   alt={`${item.name} icon`}
                 />
               </div>
-              <div className=" text-lg leading-[1.6] text-center text-gray-400 font-normal">
+              <div className="hidden md:block text-lg leading-[1.6] text-center text-gray-400 font-normal">
                 {item.name}
               </div>
             </div>

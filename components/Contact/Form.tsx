@@ -15,14 +15,14 @@ export function Form() {
     }
   };
   return (
-    <div className="shadow-input w-full max-w-lg rounded-non p-4 md:rounded-2xl md:p-8 bg-zinc-800/85 backdrop-blur-md">
+    <div className="shadow-input w-full max-w-full md:max-w-lg rounded-non p-4 md:rounded-2xl md:p-8 bg-zinc-800/85 backdrop-blur-md">
       <form className="my-8" onSubmit={handleSubmit} ref={form}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="name">Name*</Label>
           <Input
             name="name"
             id="name"
-            // required
+            required
             placeholder="Zi Shen"
             type="text"
           />
@@ -32,7 +32,7 @@ export function Form() {
           <Input
             name="email"
             id="email"
-            // required
+            required
             placeholder="zshen2002@gmail.com"
             type="email"
           />
@@ -43,7 +43,7 @@ export function Form() {
             name="title"
             id="title"
             placeholder="Input your title"
-            // required
+            required
             type="text"
           />
         </LabelInputContainer>
@@ -61,7 +61,7 @@ export function Form() {
           className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-zinc-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-500 dark:from-zinc-500 dark:to-zinc-700 backdrop-blur-md dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] cursor-pointer"
           type="submit"
         >
-          Send Email &rarr;
+          Send Email &nbsp; &rarr;
           <BottomGradient />
         </button>
       </form>

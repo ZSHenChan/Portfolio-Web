@@ -1,10 +1,12 @@
 "use client";
 import { SectionHeading } from "../Headings/SectionHeading";
-import React, { ReactNode, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/Timeline";
-import { ProjectHeading } from "./ProjectHeading";
-import { ProjectVideo } from "./ProjectVideo";
-import { LinkPreview } from "@/components/Contact/LinkPreview";
+import { PersonalAIProject } from "./Project/PersonalAI";
+import { AutomtionManagerProject } from "./Project/AutomationManager";
+import { XcuisiteProject } from "./Project/Xcuisite";
+import { ScccProject } from "./Project/Sccc";
+import { ReminderApiProject } from "./Project/ReminderApi";
 
 export function SectionProjects() {
   const [isClient, setIsClient] = useState(false);
@@ -12,127 +14,31 @@ export function SectionProjects() {
     setIsClient(true);
   }, []);
 
-  const ProjectText = ({
-    children,
-    className,
-  }: {
-    children: ReactNode;
-    className?: string;
-  }) => {
-    return (
-      <p
-        className={`text-neutral-200 tex-md md:text-lg font-normal mb-8 ${className}`}
-      >
-        {children}
-      </p>
-    );
-  };
-
   const data = [
     {
       title: "2025",
       content: (
         <div className="grid grid-cols-1 gap-32">
-          <div>
-            <ProjectHeading>Personal AI Assistant</ProjectHeading>
-            <div className="grid grid-cols-1 gap-4 text-start">
-              {isClient ? (
-                <ProjectVideo
-                  src="/videos/video-portfolio-short.mp4"
-                  height="400px"
-                />
-              ) : (
-                <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-              )}
-              <div className="h-full place-content-center text-center">
-                <ProjectText>
-                  Fine-tuned AI to handle questions regarding my portfolio
-                  website.
-                </ProjectText>
-                <ProjectText>This is just one of my trained AI!</ProjectText>
-              </div>
-            </div>
-          </div>
-          <div>
-            <ProjectHeading>Automation Manager</ProjectHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-start">
-              {isClient ? (
-                <ProjectVideo
-                  src="/videos/video-portfolio-short.mp4"
-                  playing={false}
-                />
-              ) : (
-                <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-              )}
-              <div className="h-full place-content-center pr-[25%]">
-                <ProjectText>
-                  Automated 5G signal testing powered by .NET gRPC and Consul
-                </ProjectText>
-                <ProjectText>Demo video coming soon!</ProjectText>
-              </div>
-            </div>
-          </div>
+          <ReminderApiProject />
+        </div>
+      ),
+    },
+    {
+      title: "Early 2025",
+      content: (
+        <div className="grid grid-cols-1 gap-32">
+          <PersonalAIProject />
+          <AutomtionManagerProject />
         </div>
       ),
     },
     {
       title: "2024",
-      content: (
-        <div>
-          <ProjectHeading>XCuisite Ecommerce Website</ProjectHeading>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-8 text-start">
-            {isClient ? (
-              <ProjectVideo src="/videos/video-xcuisite-1.mp4" />
-            ) : (
-              <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-            )}
-            <div className="h-full place-content-center pr-[25%]">
-              <LinkPreview
-                className="text-xl lg:text-3xl font-bold"
-                url="https://xcuisite.store"
-              >
-                Link
-              </LinkPreview>
-            </div>
-            {isClient ? (
-              <ProjectVideo src="/videos/video-xcuisite-2.mp4" />
-            ) : (
-              <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-            )}
-            <div className="h-full place-content-center pr-[25%]">
-              <ProjectText>Effective Cart System With Animations</ProjectText>
-            </div>
-            {isClient ? (
-              <ProjectVideo src="/videos/video-xcuisite-3.mp4" />
-            ) : (
-              <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-            )}
-            <div className="h-full place-content-center pr-[25%]">
-              <ProjectText>
-                Authentication and Payment Gateway Integration
-              </ProjectText>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <XcuisiteProject />,
     },
     {
       title: "Early 2024",
-      content: (
-        <div>
-          <ProjectHeading>SCCC Articulatory Accent Database</ProjectHeading>
-          <div className="grid grid-cols-1 gap-4 text-center">
-            {isClient ? (
-              <ProjectVideo src="/videos/video-sccc.mp4" height="300px" />
-            ) : (
-              <div className="w-full h-[200px] bg-gray-800 animate-pulse" />
-            )}
-            <div className="h-full place-content-center">
-              <ProjectText>Collection of Recorded Audios</ProjectText>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <ScccProject />,
     },
   ];
   return (

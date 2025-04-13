@@ -9,7 +9,7 @@ export function SectionContact() {
     <div className="w-full mt-[8rem]">
       <SectionHeading>Contact Me</SectionHeading>
       <div className="flex flex-col md:flex-row align-center place-items-center justify-center gap-[10dvw] mb-[15rem]">
-        <div className="text-xl md:text-3xl flex flex-row md:flex-col justify-around items-center gap-[5rem]">
+        <div className="text-xl md:text-3xl flex flex-row md:flex-col justify-around items-center gap-[10dvw]">
           <LinkPreview url="https://github.com/ZSHenChan" className="font-bold">
             GitHub
           </LinkPreview>
@@ -21,7 +21,7 @@ export function SectionContact() {
           </LinkPreview>
           <EmailCopy />
         </div>
-        <div className="min-w-[25rem]">
+        <div className="min-w-[90%] md:min-w-[25rem]">
           <div className="items-center justify-center">
             <h3 className="text-lg text-center mb-[1rem] text-zinc-400">
               Or simply fill out this form

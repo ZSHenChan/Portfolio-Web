@@ -10,6 +10,7 @@ import {
 import { ChatInstance, CHAT_HISTORY } from "./demoChatHistory";
 import { motion, LayoutGroup } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/getReply";
+import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
 import { v4 as uuidv4 } from "uuid";
 
 export function AnimatedModal() {
@@ -50,19 +51,16 @@ export function AnimatedModal() {
       query: textInput,
     })) as Reply;
     setIsThinking(false);
-    setTimeout(
-      () =>
-        setChatHistory((prev) =>
-          prev
-            .filter((chat) => chat.id !== botId)
-            .concat({
-              id: uuidv4(),
-              message: reply.message,
-              isBot: true,
-            })
-        ),
-      300
+    setChatHistory((prev) =>
+      prev
+        .filter((chat) => chat.id !== botId)
+        .concat({
+          id: uuidv4(),
+          message: reply.message,
+          isBot: true,
+        })
     );
+    setTimeout(() => executeFunctionCall(reply.functions), 500);
   };
 
   const itemVariants = {

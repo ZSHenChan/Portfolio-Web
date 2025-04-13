@@ -11,7 +11,7 @@ export function DottedBackground({ children }: { children: React.ReactNode }) {
         )}")`,
       }}
     >
-      <div className="z-4 h-full w-full absolute pointer-events-none inset-0 flex items-center justify-center bg-[radial-gradient(ellipse_farthest-corner_at_center,rgba(0,0,0,0)_30%,#0a0a0a)]"></div>
+      <div className="z-4 h-full w-full absolute pointer-events-none inset-0 flex items-center justify-center bg-[radial-gradient(ellipse_farthest-corner_at_center,rgba(0,0,0,0)_50%,#0a0a0a)]"></div>
       {children}
     </div>
   );
