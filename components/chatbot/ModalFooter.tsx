@@ -1,10 +1,9 @@
 "use client";
 import { cn } from "@/app/utils/cn";
-import { env } from "@/app/env/client";
 import React, { useState } from "react";
 import { ChatInstance } from "./demoChatHistory";
 import { motion } from "motion/react";
-import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/getReply";
+import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
 import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
 import { v4 as uuidv4 } from "uuid";
 import { useModal } from "./Animated-Modal";
@@ -20,7 +19,6 @@ const AnimationToggleButton = ({
 }) => {
   const toggleSwitch = () =>
     setIsOn((prev) => {
-      // console.log(!prev);
       return !prev;
     });
 
@@ -55,18 +53,20 @@ const AnimationToggleButton = ({
 };
 
 export const ModalFooter = () => {
-  const [activeAnimation, setActiveAnimation] = useState(true);
+  const [activeAnimation, setActiveAnimation] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
-  const { setChatHistory, setOpen } = useModal();
+  const { setChatHistory, setOpen, chatHistory } = useModal();
   const { scrollToSection } = useRefs();
 
   const handleSubmit = async (textInput: string) => {
-    setChatHistory((chatHistory: ChatInstance[]) => [
+    const updatedChatHistory = [
       ...chatHistory,
       { id: uuidv4(), message: textInput, isBot: false } as ChatInstance,
-    ]);
+    ];
+    setChatHistory(updatedChatHistory);
+
     setIsThinking(true);
-    const botId = uuidv4();
+    const botId = uuidv4().slice(0, 8);
     setTimeout(
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
@@ -77,14 +77,14 @@ export const ModalFooter = () => {
     );
 
     const reply = (await fetchChatbotReply({
-      query: textInput,
+      chatHistory: updatedChatHistory.slice(-10),
     })) as Reply;
     setIsThinking(false);
     setChatHistory((prev) =>
       prev
         .filter((chat) => chat.id !== botId)
         .concat({
-          id: uuidv4(),
+          id: uuidv4().slice(0, 8),
           message: reply.message,
           isBot: true,
         })
@@ -105,7 +105,7 @@ export const ModalFooter = () => {
           setIsOn={setActiveAnimation}
         />
         <span className="text-xs md:text-sm hidden md:block">
-          {env.NEXT_PUBLIC_GEMINI_MODEL_NAME}
+          Double check information as LLM may make mistakes.
         </span>
       </div>
       <ChatbotInput

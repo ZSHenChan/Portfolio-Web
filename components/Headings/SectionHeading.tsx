@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 export function SectionHeading({
   children,
   className,
+  animation = true,
 }: {
   children: React.ReactNode | string;
   className?: string;
+  animation?: boolean;
 }) {
-  return (
+  return animation ? (
     <div className={`h-[10rem] text-center ${className}`}>
       <motion.h2
         initial={{ opacity: 0.5, y: 100 }}
@@ -22,6 +24,12 @@ export function SectionHeading({
       >
         {children}
       </motion.h2>
+    </div>
+  ) : (
+    <div className={`text-center ${className}`}>
+      <h2 className="bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl">
+        {children}
+      </h2>
     </div>
   );
 }

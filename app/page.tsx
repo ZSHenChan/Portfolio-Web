@@ -4,59 +4,12 @@ import { InfiniteMovingCardsGrid } from "@/components/TechGrid/InfiniteMovingCar
 import { SectionProjects } from "@/components/Projects/SectionProjects";
 import { DottedBackground } from "@/components/ui/DottedBackground";
 import { SectionContact } from "@/components/Contact/SectionContact";
-import { Toaster } from "react-hot-toast";
-import { AnimatedModal } from "@/components/chatbot/Modal";
+import { CustomToaster } from "./utils/Toaster";
 
 export default function Home() {
   return (
-    <main>
-      <Toaster
-        toastOptions={{
-          style: {
-            backdropFilter: "--toast-backdrop",
-            background: "var(--toast-bg) ",
-            color: "var(--toast-text)",
-            fontWeight: "bold",
-          },
-          success: {
-            iconTheme: {
-              primary: "var(--toast-success-text)",
-              secondary: "var(--toast-text)",
-            },
-            style: {
-              backdropFilter: "--toast-backdrop",
-              background: "var(--toast-bg) ",
-              color: "var(--toast-success-text)",
-              fontWeight: "bold",
-            },
-          },
-          error: {
-            iconTheme: {
-              primary: "var(--toast-error-text)",
-              secondary: "var(--toast-text)",
-            },
-            style: {
-              backdropFilter: "--toast-backdrop",
-              background: "var(--toast-bg) ",
-              color: "var(--toast-error-text)",
-              fontWeight: "bold",
-            },
-          },
-          loading: {
-            iconTheme: {
-              primary: "var(--toast-loading-text)",
-              secondary: "var(--toast-bg)",
-            },
-            style: {
-              backdropFilter: "--toast-backdrop",
-              background: "var(--toast-loading-bg) ",
-              color: "var(--toast-loading-text)",
-              fontWeight: "bold",
-            },
-          },
-        }}
-      />
-
+    <>
+      <CustomToaster />
       <Lamp></Lamp>
       <SectionTransition />
       <InfiniteMovingCardsGrid />
@@ -64,7 +17,6 @@ export default function Home() {
         <SectionProjects />
         <SectionContact />
       </DottedBackground>
-      <AnimatedModal />
-    </main>
+    </>
   );
 }

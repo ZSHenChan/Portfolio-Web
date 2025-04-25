@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import { Modal, ModalBody, ModalTrigger } from "./Animated-Modal";
-import { Chatbot } from "./Chatbot";
+import { ModalContent } from "./ModalContent";
 import { ModalFooter } from "./ModalFooter";
 
 export function AnimatedModal() {
@@ -26,7 +26,7 @@ export function AnimatedModal() {
       if (listEndRef.current) {
         listEndRef.current.scrollIntoView({ behavior: "smooth" });
       }
-    }, 100); // Adjust delay (milliseconds) as needed
+    }, 100);
   };
 
   return (
@@ -39,7 +39,7 @@ export function AnimatedModal() {
           <span className="text-center">Start a Chat</span>
         </ModalTrigger>
         <ModalBody>
-          <Chatbot />
+          <ModalContent />
           <ModalFooter />
         </ModalBody>
       </Modal>

@@ -42,7 +42,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 -translate-y-[10%]">
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-[0%]">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
@@ -102,7 +102,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-[100%] flex-col items-center px-5">
+      <div className="relative z-50 flex -translate-y-[130%] lg:-translate-y-[80%] flex-col items-center px-5">
         {children}
       </div>
     </div>

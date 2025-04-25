@@ -6,7 +6,7 @@ import { PersonalAIProject } from "./Project/PersonalAI";
 import { AutomtionManagerProject } from "./Project/AutomationManager";
 import { XcuisiteProject } from "./Project/Xcuisite";
 import { ScccProject } from "./Project/Sccc";
-// import { ReminderApiProject } from "./Project/ReminderApi";
+import { ReminderApiProject } from "./Project/ReminderApi";
 import { useRefs } from "@/app/context/RefsContext";
 
 export function SectionProjects() {
@@ -19,14 +19,14 @@ export function SectionProjects() {
   }, [registerRef, sectionRef]);
 
   const data = [
-    // {
-    //   title: "2025",
-    //   content: (
-    //     <div className="grid grid-cols-1 gap-32">
-    //       <ReminderApiProject />
-    //     </div>
-    //   ),
-    // },
+    {
+      title: "2025",
+      content: (
+        <div className="grid grid-cols-1 gap-32">
+          <ReminderApiProject />
+        </div>
+      ),
+    },
     {
       title: "Early 2025",
       content: (

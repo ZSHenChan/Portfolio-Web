@@ -1,31 +1,33 @@
+"use client";
 import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
+import { useEffect, useRef } from "react";
+import { useRefs } from "@/app/context/RefsContext";
+import { LinkPreview } from "@/components/Contact/LinkPreview";
 
 function PersonalAIProject() {
+  const { registerRef } = useRefs();
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    registerRef("personal-assistant", sectionRef.current);
+  }, [registerRef, sectionRef]);
   return (
-    <div>
+    <div ref={sectionRef}>
       <ProjectHeading>Personal AI Assistant</ProjectHeading>
-      <ProjectDetail
-        videoSrc="/videos/video-portfolio-short.mp4"
-        multipleCol={false}
-      >
-        <ProjectText>
-          Fine-tuned AI to handle questions regarding my portfolio website.
+      <ProjectDetail videoSrc="/videos/video-portfolio-short.mp4" multipleCol>
+        <ProjectText className="max-w-[33ch]">
+          Fine-tuned AI to handle queries.
         </ProjectText>
-        <ProjectText>This is just one of my trained AI!</ProjectText>
       </ProjectDetail>
-      <ProjectDetail
-        videoSrc="/videos/video-portfolio-email.mp4"
-        multipleCol={false}
-      >
-        <ProjectText>Ask my AI to email for you!</ProjectText>
-      </ProjectDetail>
-      <ProjectDetail
-        videoSrc="/videos/video-portfolio-scroll.mp4"
-        multipleCol={false}
-      >
-        <ProjectText>Navigation for visitors</ProjectText>
+      <ProjectDetail videoSrc="/videos/video-portfolio-scroll.mp4" multipleCol>
+        <ProjectText>Action Execution</ProjectText>
+        <LinkPreview
+          url="./projects/personal-ai"
+          className="text-xl lg:text-3xl font-bold"
+        >
+          Learn More
+        </LinkPreview>
       </ProjectDetail>
     </div>
   );

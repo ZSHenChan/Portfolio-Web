@@ -1,23 +1,51 @@
 import { FunctionDeclaration, Type } from "@google/genai";
 
-const controlLightDeclaration: FunctionDeclaration = {
-  name: "controlLight",
+export const functionCallDict = new Map<string, string>();
+functionCallDict.set(
+  "navigateSection",
+  "The user is about to see the content themselves. Do not provide information about the contents in the section."
+);
+functionCallDict.set(
+  "sendEmail",
+  "Notify the user that is email is about to be sent."
+);
+functionCallDict.set(
+  "navigateProjects",
+  "The user is about to see the project themselves. Do not provide information about the project."
+);
+functionCallDict.set(
+  "addNewReminder",
+  "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
+);
+
+const addNewReminderDeclaration: FunctionDeclaration = {
+  name: "addNewReminder",
   parameters: {
     type: Type.OBJECT,
-    description: "Set the brightness and color temperature of a room light.",
+    description: "Adding a new reminder for Zi Shen.",
     properties: {
-      brightness: {
-        type: Type.NUMBER,
-        description:
-          "Light level from 0 to 100. Zero is off and 100 is full brightness.",
-      },
-      colorTemperature: {
+      title: {
         type: Type.STRING,
         description:
-          "Color temperature of the light fixture which can be `daylight`, `cool`, or `warm`.",
+          "The title for the reminder. Keep this as short as possible, and use the rest details as description.",
+      },
+      dueDate: {
+        type: Type.STRING,
+        description:
+          "The due date for the new reminder. Must be in YYYY-MM-DD format. Optional",
+      },
+      description: {
+        type: Type.STRING,
+        description: "The description for the reminder. Optional",
+      },
+      reminderType: {
+        type: Type.STRING,
+        description:
+          "The reminder type. Select from the options based on the conversation history.",
+        enum: ["Work", "Personal"],
       },
     },
-    required: ["brightness", "colorTemperature"],
+    required: ["title", "reminderType"],
   },
 };
 
@@ -31,10 +59,27 @@ const navigateSectionDeclaration: FunctionDeclaration = {
       section: {
         type: Type.STRING,
         description: "The target section to navigate to.",
-        enum: ["projects", "contact", "hero", "techstack"],
+        enum: ["contact", "hero", "techstack", "projects"],
       },
     },
     required: ["section"],
+  },
+};
+
+const navigateProjectsDeclaration: FunctionDeclaration = {
+  name: "navigateProjects",
+  parameters: {
+    type: Type.OBJECT,
+    description: "navigate user to a specific project.",
+    properties: {
+      project: {
+        type: Type.STRING,
+        description:
+          "The target project to navigate to. Do not return anything if the user does not specify which project.",
+        enum: ["xcuisite", "sccc", "personal-assistant", "automation-manager"],
+      },
+    },
+    required: ["project"],
   },
 };
 
@@ -60,15 +105,16 @@ const sendEmailDeclaration: FunctionDeclaration = {
       description: {
         type: Type.STRING,
         description:
-          "email description. This is the message that will be sent to zi shen. If no description is given, write a short message to zi shen.",
+          "email description. This is the message that will be sent to zi shen. If no description is given, write a short message to zi shen based on the conversation history.",
       },
     },
-    required: ["name", "email"],
+    required: ["name", "email", "title"],
   },
 };
 
 export {
-  controlLightDeclaration,
   sendEmailDeclaration,
+  navigateProjectsDeclaration,
   navigateSectionDeclaration,
+  addNewReminderDeclaration,
 };

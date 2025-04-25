@@ -145,22 +145,6 @@ export const ModalBody = ({
   );
 };
 
-export const ModalContent = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cn("h-full flex flex-col-reverse flex-1 px-4 pb-4", className)}
-    >
-      {children}
-    </div>
-  );
-};
-
 const Overlay = ({ className }: { className?: string }) => {
   return (
     <motion.div
