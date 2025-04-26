@@ -14,3 +14,7 @@ export const reportErrorMessage = (
   if (!errorMessage) console.error(errorMessage);
   toast.error(toastMessage);
 };
+
+export const reportSuccess = (message: string) => {
+  toast.success(message);
+};

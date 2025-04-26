@@ -1,22 +1,22 @@
 "use client";
 import { SectionHeading } from "../Headings/SectionHeading";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/Timeline";
 import { PersonalAIProject } from "./Project/PersonalAI";
 import { AutomtionManagerProject } from "./Project/AutomationManager";
 import { XcuisiteProject } from "./Project/Xcuisite";
 import { ScccProject } from "./Project/Sccc";
 import { ReminderApiProject } from "./Project/ReminderApi";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "../layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function SectionProjects() {
   const [isClient, setIsClient] = useState(false);
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const sectionId = "projects";
+  useScrollTargetRegistration(sectionId);
   useEffect(() => {
-    registerRef("projects", sectionRef.current);
     setIsClient(true);
-  }, [registerRef, sectionRef]);
+  }, []);
 
   const data = [
     {
@@ -46,14 +46,14 @@ export function SectionProjects() {
     },
   ];
   return (
-    <div
-      ref={sectionRef}
+    <ScrollableSection
+      id={sectionId}
       className="w-full relative text-center bg-transparent"
     >
       <SectionHeading className="pt-[10rem] mb-[10rem] lg:mb-[5rem]">
         Projects
       </SectionHeading>
       <Timeline data={data} onUpdateHeight={isClient} />
-    </div>
+    </ScrollableSection>
   );
 }

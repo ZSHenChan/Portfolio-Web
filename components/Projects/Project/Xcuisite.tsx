@@ -2,17 +2,15 @@ import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ProjectDetail } from "../ProjectDetail";
-import { useEffect, useRef } from "react";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function XcuisiteProject() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("xcuisite", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "xcuisite";
+  useScrollTargetRegistration(sectionId);
+
   return (
-    <div ref={sectionRef}>
+    <ScrollableSection id={sectionId}>
       <ProjectHeading>XCuisite Ecommerce Website</ProjectHeading>
       <ProjectDetail videoSrc="/videos/video-xcuisite-1.mp4" multipleCol>
         <ProjectText>Doughnut e-commerce website</ProjectText>
@@ -31,6 +29,6 @@ export function XcuisiteProject() {
           Authentication and Payment Gateway Integration
         </ProjectText>
       </ProjectDetail>
-    </div>
+    </ScrollableSection>
   );
 }

@@ -2,18 +2,16 @@
 import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
-import { useEffect, useRef } from "react";
-import { useRefs } from "@/app/context/RefsContext";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 function PersonalAIProject() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("personal-assistant", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "personal-assistant";
+  useScrollTargetRegistration(sectionId);
+
   return (
-    <div ref={sectionRef}>
+    <ScrollableSection id={sectionId}>
       <ProjectHeading>Personal AI Assistant</ProjectHeading>
       <ProjectDetail videoSrc="/videos/video-portfolio-short.mp4" multipleCol>
         <ProjectText className="max-w-[33ch]">
@@ -29,7 +27,7 @@ function PersonalAIProject() {
           Learn More
         </LinkPreview>
       </ProjectDetail>
-    </div>
+    </ScrollableSection>
   );
 }
 

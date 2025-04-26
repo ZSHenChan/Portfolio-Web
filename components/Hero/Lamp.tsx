@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
 import { ResumeButton } from "./ResumeButton";
 import { FadeUpInView } from "../ui/FadeUpInView";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "../layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function Lamp() {
   return (
@@ -28,15 +29,12 @@ export const LampContainer = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("hero", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "hero";
+  useScrollTargetRegistration(sectionId);
 
   return (
-    <div
-      ref={sectionRef}
+    <ScrollableSection
+      id={sectionId}
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
         className
@@ -105,6 +103,6 @@ export const LampContainer = ({
       <div className="relative z-50 flex -translate-y-[130%] lg:-translate-y-[80%] flex-col items-center px-5">
         {children}
       </div>
-    </div>
+    </ScrollableSection>
   );
 };

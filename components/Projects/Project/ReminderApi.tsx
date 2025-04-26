@@ -2,19 +2,16 @@
 import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
-import { useEffect, useRef } from "react";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 function ReminderApiProject() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("personal-assistant", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "reminder-api";
+  useScrollTargetRegistration(sectionId);
 
   return (
-    <div ref={sectionRef}>
+    <ScrollableSection id={sectionId}>
       <ProjectHeading>Reminder API</ProjectHeading>
       <ProjectDetail videoSrc="/videos/reminder-api.mp4" multipleCol>
         <ProjectText className="max-w-[33ch]">Effective Storage</ProjectText>
@@ -37,7 +34,7 @@ function ReminderApiProject() {
           Playground
         </LinkPreview>
       </ProjectDetail>
-    </div>
+    </ScrollableSection>
   );
 }
 

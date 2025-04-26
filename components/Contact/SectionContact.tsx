@@ -1,21 +1,17 @@
 "use client";
-import { useRef } from "react";
 import { LinkPreview } from "./LinkPreview";
 import { Form } from "./Form";
 import { SectionHeading } from "@/components/Headings/SectionHeading";
 import { EmailCopy } from "./EmailCopy";
-import { useRefs } from "@/app/context/RefsContext";
-import { useEffect } from "react";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function SectionContact() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("contact", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "contact";
+  useScrollTargetRegistration(sectionId);
 
   return (
-    <div ref={sectionRef} className="w-full mt-[8rem]" id="contact-section">
+    <ScrollableSection id={sectionId} className="w-full mt-[8rem]">
       <SectionHeading>Contact Me</SectionHeading>
       <div className="flex flex-col md:flex-row align-center place-items-center justify-center gap-[10dvw] mb-[15rem]">
         <div className="text-xl md:text-3xl flex flex-row md:flex-col justify-around items-center gap-[10dvw]">
@@ -39,6 +35,6 @@ export function SectionContact() {
           <Form />
         </div>
       </div>
-    </div>
+    </ScrollableSection>
   );
 }

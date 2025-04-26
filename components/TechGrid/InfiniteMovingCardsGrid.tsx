@@ -1,18 +1,16 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { InfiniteMovingCards } from "./InfiniteCard";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function InfiniteMovingCardsGrid() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("techstack", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "tech-stack";
+  useScrollTargetRegistration(sectionId);
 
   return (
-    <div className="mb-[10rem]" ref={sectionRef}>
+    <ScrollableSection className="mb-[10rem]" id={sectionId}>
       <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}
@@ -27,7 +25,7 @@ export function InfiniteMovingCardsGrid() {
           speed="slow"
         />
       </div>
-    </div>
+    </ScrollableSection>
   );
 }
 const iconList = [

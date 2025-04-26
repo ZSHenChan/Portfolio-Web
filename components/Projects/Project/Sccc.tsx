@@ -1,21 +1,19 @@
 import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
-import { useEffect, useRef } from "react";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function ScccProject() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("sccc", sectionRef.current);
-  }, [registerRef, sectionRef]);
+  const sectionId = "reminder-api";
+  useScrollTargetRegistration(sectionId);
+
   return (
-    <div ref={sectionRef}>
+    <ScrollableSection id={sectionId}>
       <ProjectHeading>SCCC Articulatory Accent Database</ProjectHeading>
       <ProjectDetail videoSrc="/videos/video-sccc.mp4">
         <ProjectText>Collection of Recorded Audios</ProjectText>
       </ProjectDetail>
-    </div>
+    </ScrollableSection>
   );
 }
