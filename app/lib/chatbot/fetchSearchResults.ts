@@ -1,7 +1,7 @@
 "use server";
 
 import { envServer } from "@/app/env/server";
-import { getErrorMessage } from "@/app/utils/handleErrorMsg";
+import { getErrorMessage } from "@/app/utils/handleReport";
 import { GoogleGenAI } from "@google/genai";
 
 export async function fetchSearchQueryPrompt(

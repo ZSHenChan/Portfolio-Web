@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { Reminder } from "../interfaces/Reminder";
 import { Email } from "../interfaces/Email";
 import { addReminders } from "../api/reminderApi";
-import { reportErrorMessage, reportSuccess } from "../utils/handleErrorMsg";
+import { reportErrorMessage, reportSuccess } from "../utils/handleReport";
 import { sendEmail } from "../api/sendEmail";
 
 interface AppActionsContextProps {

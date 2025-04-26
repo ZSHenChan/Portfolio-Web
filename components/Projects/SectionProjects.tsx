@@ -8,12 +8,9 @@ import { XcuisiteProject } from "./Project/Xcuisite";
 import { ScccProject } from "./Project/Sccc";
 import { ReminderApiProject } from "./Project/ReminderApi";
 import { ScrollableSection } from "../layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function SectionProjects() {
   const [isClient, setIsClient] = useState(false);
-  const sectionId = "projects";
-  useScrollTargetRegistration(sectionId);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -47,7 +44,7 @@ export function SectionProjects() {
   ];
   return (
     <ScrollableSection
-      id={sectionId}
+      id="projects"
       className="w-full relative text-center bg-transparent"
     >
       <SectionHeading className="pt-[10rem] mb-[10rem] lg:mb-[5rem]">

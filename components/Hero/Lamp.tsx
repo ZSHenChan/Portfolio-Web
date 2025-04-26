@@ -5,7 +5,6 @@ import { cn } from "@/app/utils/cn";
 import { ResumeButton } from "./ResumeButton";
 import { FadeUpInView } from "../ui/FadeUpInView";
 import { ScrollableSection } from "../layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function Lamp() {
   return (
@@ -29,12 +28,9 @@ export const LampContainer = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const sectionId = "hero";
-  useScrollTargetRegistration(sectionId);
-
   return (
     <ScrollableSection
-      id={sectionId}
+      id="hero"
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
         className

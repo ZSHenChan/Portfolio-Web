@@ -1,4 +1,5 @@
 import React from "react";
+import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 interface ScrollableSectionProps {
   id: string;
@@ -11,6 +12,8 @@ export const ScrollableSection = ({
   children,
   className,
 }: ScrollableSectionProps) => {
+  useScrollTargetRegistration(id);
+
   return (
     <section id={id} className={className}>
       {children}

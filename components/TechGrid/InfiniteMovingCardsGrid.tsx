@@ -3,14 +3,10 @@
 import React from "react";
 import { InfiniteMovingCards } from "./InfiniteCard";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function InfiniteMovingCardsGrid() {
-  const sectionId = "tech-stack";
-  useScrollTargetRegistration(sectionId);
-
   return (
-    <ScrollableSection className="mb-[10rem]" id={sectionId}>
+    <ScrollableSection className="mb-[10rem]" id="techstack">
       <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}

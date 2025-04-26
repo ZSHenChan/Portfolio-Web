@@ -2,10 +2,7 @@ import { FunctionCall } from "@google/genai";
 import { functionRegistry } from "./functionHandlers";
 import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";
-import {
-  getErrorMessage,
-  reportErrorMessage,
-} from "@/app/utils/handleErrorMsg";
+import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
 
 const executeFunctionCall = (
   functionCall: FunctionCall | undefined,

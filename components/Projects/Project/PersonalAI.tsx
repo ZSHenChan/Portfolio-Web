@@ -4,14 +4,10 @@ import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 function PersonalAIProject() {
-  const sectionId = "personal-assistant";
-  useScrollTargetRegistration(sectionId);
-
   return (
-    <ScrollableSection id={sectionId}>
+    <ScrollableSection id="personal-assistant">
       <ProjectHeading>Personal AI Assistant</ProjectHeading>
       <ProjectDetail videoSrc="/videos/video-portfolio-short.mp4" multipleCol>
         <ProjectText className="max-w-[33ch]">

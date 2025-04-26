@@ -3,14 +3,10 @@ import { ProjectText } from "../ProjectText";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ProjectDetail } from "../ProjectDetail";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 export function XcuisiteProject() {
-  const sectionId = "xcuisite";
-  useScrollTargetRegistration(sectionId);
-
   return (
-    <ScrollableSection id={sectionId}>
+    <ScrollableSection id="xcuisite">
       <ProjectHeading>XCuisite Ecommerce Website</ProjectHeading>
       <ProjectDetail videoSrc="/videos/video-xcuisite-1.mp4" multipleCol>
         <ProjectText>Doughnut e-commerce website</ProjectText>

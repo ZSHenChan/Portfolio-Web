@@ -8,10 +8,7 @@ import {
   ReminderType,
   PriorityType,
 } from "@/app/enums/ReminderEnums";
-import {
-  getErrorMessage,
-  reportErrorMessage,
-} from "@/app/utils/handleErrorMsg";
+import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
 
 const BASE_URL = env.NEXT_PUBLIC_REMINDER_API_URL;
 const REMINDER_URL = `${BASE_URL}/reminder`;

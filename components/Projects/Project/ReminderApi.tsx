@@ -4,14 +4,10 @@ import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
-import { useScrollTargetRegistration } from "@/app/context/UIStateContext";
 
 function ReminderApiProject() {
-  const sectionId = "reminder-api";
-  useScrollTargetRegistration(sectionId);
-
   return (
-    <ScrollableSection id={sectionId}>
+    <ScrollableSection id="reminder-api">
       <ProjectHeading>Reminder API</ProjectHeading>
       <ProjectDetail videoSrc="/videos/reminder-api.mp4" multipleCol>
         <ProjectText className="max-w-[33ch]">Effective Storage</ProjectText>
