@@ -58,8 +58,6 @@ const handleAddReminder = async (
     priority: PriorityType.Low,
   } as Reminder;
 
-  console.log(newReminder);
-
   await appActions.addReminderAction(newReminder);
 };
 
