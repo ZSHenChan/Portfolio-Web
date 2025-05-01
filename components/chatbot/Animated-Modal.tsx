@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { ChatInstance, CHAT_HISTORY } from "./demoChatHistory";
+import { useUIState } from "@/app/context/UIStateContext";
 
 interface ModalContextType {
   open: boolean;
@@ -22,12 +23,17 @@ interface ModalContextType {
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [open, setOpen] = useState(false);
+  const { isChatOpen, setChatOpen } = useUIState();
   const [chatHistory, setChatHistory] = useState<ChatInstance[]>(CHAT_HISTORY);
 
   return (
     <ModalContext.Provider
-      value={{ open, setOpen, chatHistory, setChatHistory }}
+      value={{
+        open: isChatOpen,
+        setOpen: setChatOpen,
+        chatHistory,
+        setChatHistory,
+      }}
     >
       {children}
     </ModalContext.Provider>

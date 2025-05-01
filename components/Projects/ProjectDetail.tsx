@@ -23,6 +23,7 @@ export function ProjectDetail({
   width?: number;
   className?: string;
 }) {
+  const imgHeght = parseInt(height.replace("px", ""));
   return (
     <div
       className={`grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
@@ -33,7 +34,7 @@ export function ProjectDetail({
       {imgSrc && (
         <Image
           src={imgSrc}
-          height={300}
+          height={imgHeght}
           width={width}
           alt={alt || "Default image placeholder"}
           loading="lazy"

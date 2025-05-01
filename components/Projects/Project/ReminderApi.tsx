@@ -2,42 +2,47 @@
 import { ProjectHeading } from "../ProjectHeading";
 import { ProjectText } from "../ProjectText";
 import { ProjectDetail } from "../ProjectDetail";
-import { useEffect, useRef } from "react";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
-import { useRefs } from "@/app/context/RefsContext";
+import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
 function ReminderApiProject() {
-  const { registerRef } = useRefs();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    registerRef("personal-assistant", sectionRef.current);
-  }, [registerRef, sectionRef]);
-
   return (
-    <div ref={sectionRef}>
+    <ScrollableSection id="reminder-api">
       <ProjectHeading>Reminder API</ProjectHeading>
-      <ProjectDetail videoSrc="/videos/reminder-api.mp4" multipleCol>
-        <ProjectText className="max-w-[33ch]">Effective Storage</ProjectText>
+      <ProjectDetail
+        videoSrc="/videos/reminder-api.mp4"
+        height="300px"
+        multipleCol
+      >
+        <ProjectText className="max-w-[33ch]">Boosted by Redis</ProjectText>
         <LinkPreview
-          url="./reminders"
+          url="https://reminder-demo-app.vercel.app/"
           className="text-xl lg:text-3xl font-bold"
         >
           Demo
         </LinkPreview>
       </ProjectDetail>
-      <ProjectDetail videoSrc="/videos/reminder-api-auth.mp4" multipleCol>
-        <ProjectText>Authentication</ProjectText>
+      <ProjectDetail
+        videoSrc="/videos/reminder-api-auth.mp4"
+        height="300px"
+        multipleCol
+      >
+        <ProjectText>Secured by Authentication</ProjectText>
       </ProjectDetail>
-      <ProjectDetail videoSrc="/videos/reminder-api-auth.mp4" multipleCol>
+      <ProjectDetail
+        videoSrc="/videos/reminder-api-interaction.mp4"
+        multipleCol
+        height="300px"
+      >
         <ProjectText>AI Interaction</ProjectText>
         <LinkPreview
-          url="./reminders"
+          url="zishenchan/app/reminders"
           className="text-xl lg:text-3xl font-bold"
         >
           Playground
         </LinkPreview>
       </ProjectDetail>
-    </div>
+    </ScrollableSection>
   );
 }
 

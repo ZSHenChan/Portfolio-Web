@@ -4,12 +4,10 @@ import { InfiniteMovingCardsGrid } from "@/components/TechGrid/InfiniteMovingCar
 import { SectionProjects } from "@/components/Projects/SectionProjects";
 import { DottedBackground } from "@/components/ui/DottedBackground";
 import { SectionContact } from "@/components/Contact/SectionContact";
-import { CustomToaster } from "./utils/Toaster";
 
 export default function Home() {
   return (
     <>
-      <CustomToaster />
       <Lamp></Lamp>
       <SectionTransition />
       <InfiniteMovingCardsGrid />
