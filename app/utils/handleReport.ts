@@ -8,9 +8,13 @@ export const getErrorMessage = (err: unknown): string => {
 };
 
 export const reportErrorMessage = (
-  toastMessage: string,
+  toastMessage?: string,
   errorMessage?: string
 ) => {
-  if (!errorMessage) console.error(errorMessage);
-  toast.error(toastMessage);
+  if (errorMessage) console.error(errorMessage);
+  if (toastMessage) toast.error(toastMessage);
+};
+
+export const reportSuccess = (message: string) => {
+  toast.success(message);
 };

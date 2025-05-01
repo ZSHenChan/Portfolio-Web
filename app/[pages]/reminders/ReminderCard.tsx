@@ -1,6 +1,5 @@
 export function ReminderCard({
   title,
-  description,
   date,
   type = "work",
 }: {

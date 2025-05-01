@@ -27,8 +27,11 @@ export async function generatePrompt(
     ? functionCallDict.get(functionCall.name)
     : "";
 
+  const date = Date();
+
   const prompt = `
       Instruction:
+      ${`Today is ${date}`}
       ${`${instructions}\n`}
       ${`Conversation History:
         ${conversationHistoryString}`}

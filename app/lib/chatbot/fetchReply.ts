@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import { ChatInstance } from "@/components/chatbot/demoChatHistory";
 import { FunctionCall } from "@google/genai";
-import { getErrorMessage } from "@/app/utils/handleErrorMsg";
+import { getErrorMessage } from "@/app/utils/handleReport";
 import { Conversation } from "@/app/hooks/useConversation";
 import { chatToConversation } from "@/app/utils/ChatToConversation";
 import { generatePrompt } from "./generatePrompt";
@@ -77,7 +77,6 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       conversationHistory[conversationHistory.length - 1].content
     );
     const searchResults = await fetchSearchResults(searchQuery);
-
     const functionCallResponse: fetchFunctionCallResponse =
       await fetchFunctionCalls(conversationHistoryString);
 

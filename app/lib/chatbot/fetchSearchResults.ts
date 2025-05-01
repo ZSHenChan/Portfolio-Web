@@ -1,7 +1,7 @@
 "use server";
 
 import { envServer } from "@/app/env/server";
-import { getErrorMessage } from "@/app/utils/handleErrorMsg";
+import { getErrorMessage } from "@/app/utils/handleReport";
 import { GoogleGenAI } from "@google/genai";
 
 export async function fetchSearchQueryPrompt(
@@ -33,19 +33,17 @@ export async function fetchSearchQueryPrompt(
 export async function fetchSearchResults(query: string, limit: number = 1) {
   try {
     const res = await fetch(
-      `${envServer.TXTAI_BASE_URL}/api/search?limit=${limit}&query=${query}`
+      `${envServer.TXTAI_BASE_URL}&limit=${limit}&query=${query}`
     );
-    const body = await res.json();
-    if (body.error) {
+    if (!res.ok) {
       console.error("No search result found");
       return [];
     }
-    for (const result of body.results) {
+    const body = await res.json();
+    for (const result of body) {
       console.log(`Search Result ${result.score}: ${result.answer}`);
     }
-    return [
-      ...body?.results.map((result: { "answer": string }) => result.answer),
-    ];
+    return [...body?.map((result: { "answer": string }) => result.answer)];
   } catch (err) {
     const errMsg = getErrorMessage(err);
     console.error(`Error while fetching search results: ${errMsg}`);

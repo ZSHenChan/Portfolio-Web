@@ -7,8 +7,9 @@ import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
 import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
 import { v4 as uuidv4 } from "uuid";
 import { useModal } from "./Animated-Modal";
-import { useRefs } from "@/app/context/RefsContext";
 import { ChatbotInput } from "./ChatbotInput";
+import { useAppActions } from "@/app/context/AppActionsContext";
+import { useUIState } from "@/app/context/UIStateContext";
 
 const AnimationToggleButton = ({
   isOn,
@@ -55,8 +56,9 @@ const AnimationToggleButton = ({
 export const ModalFooter = () => {
   const [activeAnimation, setActiveAnimation] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
-  const { setChatHistory, setOpen, chatHistory } = useModal();
-  const { scrollToSection } = useRefs();
+  const { setChatHistory, chatHistory } = useModal();
+  const appActions = useAppActions();
+  const uiState = useUIState();
 
   const handleSubmit = async (textInput: string) => {
     const updatedChatHistory = [
@@ -90,7 +92,7 @@ export const ModalFooter = () => {
         })
     );
     setTimeout(
-      () => executeFunctionCall(reply.functionCall, scrollToSection, setOpen),
+      () => executeFunctionCall(reply.functionCall, appActions, uiState),
       500
     );
   };

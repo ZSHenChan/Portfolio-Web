@@ -8,18 +8,16 @@ import {
   ReminderType,
   PriorityType,
 } from "@/app/enums/ReminderEnums";
-import {
-  getErrorMessage,
-  reportErrorMessage,
-} from "@/app/utils/handleErrorMsg";
+import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
 
-const BASE_URL = env.NEXT_PUBLIC_REMINDER_API_URL;
+// const BASE_URL = env.NEXT_PUBLIC_REMINDER_API_URL;
+const BASE_URL = env.NEXT_PUBLIC_AZURE_REMINDER_API_URL;
 const REMINDER_URL = `${BASE_URL}/reminder`;
 
 interface GetRemindersResponse {
   error: boolean;
   message: string;
-  reminders: Reminder[];
+  reminders: Reminder[] | null;
 }
 
 export interface AddReminderResponse {
@@ -69,7 +67,6 @@ async function deleteReminder(id: number) {
 
 async function addReminders(reminder: Reminder): Promise<AddReminderResponse> {
   const token = envServer.REMINDER_API_TOKEN;
-  console.log(token);
 
   try {
     const response = await fetch(`${REMINDER_URL}/add`, {
@@ -147,13 +144,13 @@ async function fetchReminders(
       message: "Fetched reminders successfully",
       reminders: result,
     };
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
-    const message = getErrorMessage(err);
-    reportErrorMessage(message);
     return {
       error: true,
-      message: "Something went wrong",
-      reminders: [],
+      message: "Failed to fetch reminders.",
+      reminders: null,
     };
   }
 }

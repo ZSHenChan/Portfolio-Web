@@ -15,6 +15,8 @@ export interface fetchFunctionCallResponse {
   error: boolean;
 }
 
+const dateString = new Date().toISOString().split("T")[0];
+
 const instructions = `
 You are a helpful bot that can use functions to perform specific actions. Your primary job is to identify function calls provided, *NOT* to answer user question.
 You will receive a conversation between you and a user. Your task is to identify if a function call is necessary.
@@ -23,7 +25,7 @@ If the user is showing strong intention to send email to Zi Shen but is missing 
 
 Otherwise, *DO NOT* return any response. Simply return empty message.
 
-for 'addNewReminder' funciton, return function when user ask to remind Zi Shen something.
+for 'addNewReminder' funciton, return function when user ask to remind Zi Shen something. Default date is ${dateString}. 
 for 'sendEmail' function, only return the function call if the requirements are all met. Otherwise, wait for the user provide needed content.
 for 'navigateSection' and 'navigateProject' function, only return the function call if the user explicitly ask to navigate with keywords like 'bring me to' and 'show me'. Otherwise, wait for confirmation from the user with the chatbot.
 `;

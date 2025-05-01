@@ -7,7 +7,7 @@ import Image from "next/image";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import Link from "next/link";
 
-export default function ProjectPage() {
+export default function PersonalAiPage() {
   return (
     <DottedBackground>
       <div className="w-full items-center justify-center flex flex-col lg:px-[10dvw]">
@@ -36,7 +36,7 @@ export default function ProjectPage() {
           </ProjectText>
 
           <ProjectDetail
-            videoSrc="/videos/video-portfolio-scroll.mp4"
+            videoSrc="/videos/portfolio-scroll.mp4"
             multipleCol
             height="300px"
             className="place-items-center mb-[10dvh]"
@@ -44,15 +44,16 @@ export default function ProjectPage() {
             <ProjectHeading className="lg:text-start">
               Navigation
             </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
               - Scrolling to target section upon request.
-              <br />- How? simply input &quot;bring me to projects section&quot;
-              !
+            </ProjectText>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+              - Simply tell my AI &quot;bring me to projects section&quot; !
             </ProjectText>
           </ProjectDetail>
 
           <ProjectDetail
-            videoSrc="/videos/video-portfolio-email.mp4"
+            videoSrc="/videos/portfolio-email.mp4"
             multipleCol
             height="300px"
             className="place-items-center mb-[10dvh]"
@@ -60,11 +61,32 @@ export default function ProjectPage() {
             <ProjectHeading className="lg:text-start">
               Email Sending
             </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - Send an email on behalf of visitor.
-              <br />- It is always better to have someone to do the job for you.
-              !
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+              - It is always better to have someone to do the job for you. !
             </ProjectText>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+              - Ask my AI &quot;Send an email to Zi Shen&quot; and he will guide
+              you through!
+            </ProjectText>
+          </ProjectDetail>
+
+          <ProjectDetail
+            videoSrc="/videos/reminder-api-interaction.mp4"
+            multipleCol
+            height="300px"
+            className="place-items-center mb-[10dvh]"
+          >
+            <ProjectHeading className="lg:text-start">
+              Remind Me Later
+            </ProjectHeading>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+              - Adding a reminder for the host, not yourself!
+            </ProjectText>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+              - &quot;Remind Zi Shen to bring his notes for meeting happening
+              this afternoon at 3pm.&quot;
+            </ProjectText>
+            <LinkPreview url="zishenchan/app/reminders">Hands On</LinkPreview>
           </ProjectDetail>
 
           <ProjectText>More Coming Soon...</ProjectText>
@@ -94,10 +116,12 @@ export default function ProjectPage() {
           <ProjectHeading className="lg:text-start">
             RAG Semantic Searching
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
             - Create embeddings, indexing data and perform meaningful search to
             extract needed information.
-            <br />- Use LLMs to generate responses based on the retrieved data.
+          </ProjectText>
+          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+            - Use LLMs to generate responses based on the retrieved data.
           </ProjectText>
           {/* <p className="text-start mb-12">image source: txtai</p> */}
           <LinkPreview
@@ -117,9 +141,12 @@ export default function ProjectPage() {
           <ProjectHeading className="lg:text-start">
             Function Calling
           </ProjectHeading>
+          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb4">
+            - Predefined functions to handle specific task.
+          </ProjectText>
           <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-            - Predefined functions to handle specific tasks.
-            <br />- Receive parameter values from Function Calling Model.
+            - Receive parameter values from Function Calling Model, passing
+            relevant information to LLM and execute.
           </ProjectText>
           <LinkPreview
             className="text-xl lg:text-2xl font-bold"

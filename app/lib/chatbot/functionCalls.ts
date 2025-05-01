@@ -32,7 +32,12 @@ const addNewReminderDeclaration: FunctionDeclaration = {
       dueDate: {
         type: Type.STRING,
         description:
-          "The due date for the new reminder. Must be in YYYY-MM-DD format. Optional",
+          "The due date for the new reminder. Must be either undefined or in YYYY-MM-DD format.",
+      },
+      time: {
+        type: Type.STRING,
+        description:
+          "The due time for the new reminder. Must be in undefined or in hh:mm:ss format. return undefined if user did not suggest. CANNOT exist without due date.",
       },
       description: {
         type: Type.STRING,
@@ -45,7 +50,7 @@ const addNewReminderDeclaration: FunctionDeclaration = {
         enum: ["Work", "Personal"],
       },
     },
-    required: ["title", "reminderType"],
+    required: ["title", "dueDate", "reminderType"],
   },
 };
 
