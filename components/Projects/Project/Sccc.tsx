@@ -7,7 +7,7 @@ export function ScccProject() {
   return (
     <ScrollableSection id="sccc">
       <ProjectHeading>SCCC Articulatory Accent Database</ProjectHeading>
-      <ProjectDetail videoSrc="/videos/video-sccc.mp4">
+      <ProjectDetail videoSrc="/videos/sccc.mp4">
         <ProjectText>Collection of Recorded Audios</ProjectText>
       </ProjectDetail>
     </ScrollableSection>

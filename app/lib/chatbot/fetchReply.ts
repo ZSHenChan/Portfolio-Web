@@ -77,7 +77,6 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       conversationHistory[conversationHistory.length - 1].content
     );
     const searchResults = await fetchSearchResults(searchQuery);
-
     const functionCallResponse: fetchFunctionCallResponse =
       await fetchFunctionCalls(conversationHistoryString);
 

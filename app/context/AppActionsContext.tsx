@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Reminder } from "../interfaces/Reminder";
 import { Email } from "../interfaces/Email";
@@ -8,6 +8,7 @@ import { sendEmail } from "../api/sendEmail";
 
 interface AppActionsContextProps {
   router: ReturnType<typeof useRouter> | null;
+  reminderCounter: number;
   addReminderAction: (reminder: Reminder) => Promise<void>;
   sendEmailAction: (email: Email) => void;
 }
@@ -20,6 +21,7 @@ export const AppActionsContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const router = useRouter();
+  const [reminderCounter, setReminderCounter] = useState(0);
 
   // - Implement Actions
   const addReminderAction: (reminder: Reminder) => Promise<void> = useCallback(
@@ -28,6 +30,7 @@ export const AppActionsContextProvider: React.FC<{
       if (response.error) {
         reportErrorMessage(response.message);
       } else {
+        setReminderCounter((prev) => prev + 1);
         reportSuccess("Reminder added successfully");
       }
     },
@@ -40,6 +43,7 @@ export const AppActionsContextProvider: React.FC<{
 
   const AppActionsContextValue: AppActionsContextProps = {
     router,
+    reminderCounter,
     addReminderAction,
     sendEmailAction,
   };

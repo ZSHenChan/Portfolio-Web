@@ -9,6 +9,7 @@ export const env = createEnv({
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: z.string(),
     NEXT_PUBLIC_REMINDER_API_URL: z.string(),
+    NEXT_PUBLIC_AZURE_REMINDER_API_URL: z.string(),
     NEXT_PUBLIC_REMINDER_TOKEN: z.string(),
   },
   experimental__runtimeEnv: {
@@ -18,6 +19,8 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
     NEXT_PUBLIC_REMINDER_API_URL: process.env.NEXT_PUBLIC_REMINDER_API_URL,
+    NEXT_PUBLIC_AZURE_REMINDER_API_URL:
+      process.env.NEXT_PUBLIC_AZURE_REMINDER_API_URL,
     NEXT_PUBLIC_REMINDER_TOKEN: process.env.NEXT_PUBLIC_REMINDER_TOKEN,
   },
 });

@@ -42,7 +42,7 @@ const handleSendEmail = (
   appActions.sendEmailAction(email);
 };
 
-const handleAddReminder = (
+const handleAddReminder = async (
   args: Record<string, unknown> | undefined,
   appActions: ReturnType<typeof useAppActions>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -51,13 +51,16 @@ const handleAddReminder = (
   const newReminder = {
     title: args?.title || "No title",
     dueDate: args?.dueDate || "2020-10-01",
+    dueTime: args?.time,
     description: args?.description || "",
     status: ReminderStatus.Pending,
     reminderType: args?.reminderType || ReminderType.Work,
     priority: PriorityType.Low,
   } as Reminder;
 
-  appActions.addReminderAction(newReminder);
+  console.log(newReminder);
+
+  await appActions.addReminderAction(newReminder);
 };
 
 export const functionRegistry = {

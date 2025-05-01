@@ -7,7 +7,7 @@ import Image from "next/image";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import Link from "next/link";
 
-export default function ProjectPage() {
+export default function PersonalAiPage() {
   return (
     <DottedBackground>
       <div className="w-full items-center justify-center flex flex-col lg:px-[10dvw]">
@@ -36,7 +36,7 @@ export default function ProjectPage() {
           </ProjectText>
 
           <ProjectDetail
-            videoSrc="/videos/video-portfolio-scroll.mp4"
+            videoSrc="/videos/portfolio-scroll.mp4"
             multipleCol
             height="300px"
             className="place-items-center mb-[10dvh]"
@@ -52,7 +52,7 @@ export default function ProjectPage() {
           </ProjectDetail>
 
           <ProjectDetail
-            videoSrc="/videos/video-portfolio-email.mp4"
+            videoSrc="/videos/portfolio-email.mp4"
             multipleCol
             height="300px"
             className="place-items-center mb-[10dvh]"

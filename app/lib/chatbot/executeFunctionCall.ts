@@ -4,11 +4,12 @@ import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";
 import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
 
-const executeFunctionCall = (
+const executeFunctionCall = async (
   functionCall: FunctionCall | undefined,
   appActions: ReturnType<typeof useAppActions>,
   uiState: ReturnType<typeof useUIState>
 ) => {
+  if (!functionCall) return;
   const functionName = functionCall?.name;
   const functionArgs = functionCall?.args;
 
@@ -17,7 +18,7 @@ const executeFunctionCall = (
 
   if (handler) {
     try {
-      handler(functionArgs, appActions, uiState);
+      await handler(functionArgs, appActions, uiState);
     } catch (err) {
       const errMsg = getErrorMessage(err);
       reportError(errMsg);

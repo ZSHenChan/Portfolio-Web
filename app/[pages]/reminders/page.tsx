@@ -7,10 +7,10 @@ import {
 import { SectionHeading } from "@/components/Headings/SectionHeading";
 import { ProjectText } from "@/components/Projects/ProjectText";
 
-import { ReminderProvider } from "../context/ReminderProvider";
+import { ReminderProvider } from "@/app/context/ReminderContext";
 import { ReminderGrid } from "./ReminderGrid";
 
-export default function Reminders() {
+export default function RemindersPage() {
   return (
     <ReminderProvider>
       <DottedBackground>

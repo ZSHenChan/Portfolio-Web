@@ -7,7 +7,7 @@ export function AutomtionManagerProject() {
   return (
     <ScrollableSection id="automation-manager">
       <ProjectHeading>Automation Manager</ProjectHeading>
-      <ProjectDetail videoSrc="/videos/video-portfolio-short.mp4" multipleCol>
+      <ProjectDetail videoSrc="/videos/portfolio-short.mp4" multipleCol>
         <ProjectText>Automated device signal testing</ProjectText>
         <ProjectText>Demo video coming soon!</ProjectText>
       </ProjectDetail>
