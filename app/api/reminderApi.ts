@@ -9,6 +9,10 @@ import {
   PriorityType,
 } from "@/app/enums/ReminderEnums";
 import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
+import {
+  fetchWithRetry,
+  fetchWithRetryResponse,
+} from "../utils/fetchWithRetry";
 
 // const BASE_URL = env.NEXT_PUBLIC_REMINDER_API_URL;
 const BASE_URL = env.NEXT_PUBLIC_AZURE_REMINDER_API_URL;
@@ -115,23 +119,26 @@ async function fetchReminders(
     .join("&");
 
   try {
-    const response = await fetch(`${REMINDER_URL}/all?${queryString}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
+    const response = (await fetchWithRetry(
+      `${REMINDER_URL}/all?${queryString}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      }
+    )) as fetchWithRetryResponse;
+    if (!response.response) {
       return {
         error: true,
         message: "Could not fetch reminders",
         reminders: [],
       };
     }
-    const data = await response.json();
-    const result: Reminder[] = data.map((reminder: Reminder) => ({
+    const resJson = response.response;
+
+    const result: Reminder[] = resJson.map((reminder: Reminder) => ({
       ...reminder,
       reminderType:
         ReminderType[reminder.reminderType as keyof typeof ReminderType],

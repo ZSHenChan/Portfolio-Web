@@ -3,6 +3,10 @@
 import { envServer } from "@/app/env/server";
 import { getErrorMessage } from "@/app/utils/handleReport";
 import { GoogleGenAI } from "@google/genai";
+import {
+  fetchWithRetry,
+  fetchWithRetryResponse,
+} from "@/app/utils/fetchWithRetry";
 
 export async function fetchSearchQueryPrompt(
   conversationHistoryString: string,
@@ -32,18 +36,18 @@ export async function fetchSearchQueryPrompt(
 
 export async function fetchSearchResults(query: string, limit: number = 1) {
   try {
-    const res = await fetch(
+    const res = (await fetchWithRetry(
       `${envServer.TXTAI_BASE_URL}&limit=${limit}&query=${query}`
-    );
-    if (!res.ok) {
-      console.error("No search result found");
+    )) as fetchWithRetryResponse;
+    if (!res.response) {
+      console.error(res.errMsg);
       return [];
     }
-    const body = await res.json();
-    for (const result of body) {
+    const resJson = res.response;
+    for (const result of resJson) {
       console.log(`Search Result ${result.score}: ${result.answer}`);
     }
-    return [...body?.map((result: { "answer": string }) => result.answer)];
+    return [...resJson?.map((result: { "answer": string }) => result.answer)];
   } catch (err) {
     const errMsg = getErrorMessage(err);
     console.error(`Error while fetching search results: ${errMsg}`);

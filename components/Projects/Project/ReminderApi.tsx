@@ -38,6 +38,8 @@ function ReminderApiProject() {
         <LinkPreview
           url="./app/reminders"
           className="text-xl lg:text-3xl font-bold"
+          isStatic={true}
+          imageSrc="/image/preview-reminder-api.png"
         >
           Playground
         </LinkPreview>

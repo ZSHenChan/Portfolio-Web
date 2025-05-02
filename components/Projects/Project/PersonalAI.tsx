@@ -19,6 +19,8 @@ function PersonalAIProject() {
         <LinkPreview
           url="./projects/personal-ai"
           className="text-xl lg:text-3xl font-bold"
+          isStatic
+          imageSrc="/image/preview-personal-ai.png"
         >
           Learn More
         </LinkPreview>

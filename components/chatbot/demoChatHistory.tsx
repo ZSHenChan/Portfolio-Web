@@ -6,6 +6,12 @@ export interface ChatInstance {
 
 export const CHAT_HISTORY: ChatInstance[] = [
   {
+    id: "0",
+    message:
+      "[ Note from Zi Shen: the first reply may take longer than usual due to cold start on server. Have fun with my AI!]",
+    isBot: true,
+  },
+  {
     id: "1",
     message: "Hey there, I am Zi Shen. How can I help you?",
     isBot: true,

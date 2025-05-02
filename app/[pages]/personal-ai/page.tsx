@@ -18,6 +18,7 @@ export default function PersonalAiPage() {
           videoSrc="/videos/meet-my-personal-assistant.mp4"
           multipleCol={false}
           height="500px"
+          width={750}
           className="mb-[20dvh]"
         >
           <LinkPreview
@@ -66,7 +67,7 @@ export default function PersonalAiPage() {
             </ProjectText>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
               - Ask my AI &quot;Send an email to Zi Shen&quot; and he will guide
-              you through!
+              you through the process!
             </ProjectText>
           </ProjectDetail>
 
@@ -80,16 +81,23 @@ export default function PersonalAiPage() {
               Remind Me Later
             </ProjectHeading>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - Adding a reminder for the host, not yourself!
+              - Creating a reminder for the host, not yourself!
             </ProjectText>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
               - &quot;Remind Zi Shen to bring his notes for meeting happening
               this afternoon at 3pm.&quot;
             </ProjectText>
-            <LinkPreview url="zishenchan/app/reminders">Hands On</LinkPreview>
+            <LinkPreview
+              url="zishenchan/app/reminders"
+              className="text-xl lg:text-2xl font-bold"
+              isStatic
+              imageSrc="/image/preview-reminder-api.png"
+            >
+              Learn More
+            </LinkPreview>
           </ProjectDetail>
 
-          <ProjectText>More Coming Soon...</ProjectText>
+          <ProjectText>And More...</ProjectText>
         </div>
 
         <div className="mb-[15dvh] place-items-center">

@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Lamp></Lamp>
       <SectionTransition />
-      <InfiniteMovingCardsGrid />
+      {/* <InfiniteMovingCardsGrid /> */}
       <DottedBackground>
         <SectionProjects />
         <SectionContact />

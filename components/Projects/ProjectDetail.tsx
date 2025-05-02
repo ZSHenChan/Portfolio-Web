@@ -11,7 +11,7 @@ export function ProjectDetail({
   multipleCol = false,
   children,
   height = "300px",
-  width = 600,
+  width = 400,
   className,
 }: {
   videoSrc?: string;
@@ -30,7 +30,9 @@ export function ProjectDetail({
         multipleCol ? "lg:grid-cols-[5fr_3fr] gap-x-8 gap-y-8" : ""
       }`}
     >
-      {videoSrc && <VideoWrapper src={videoSrc} height={height} />}
+      {videoSrc && (
+        <VideoWrapper src={videoSrc} height={height} width={`${width}px`} />
+      )}
       {imgSrc && (
         <Image
           src={imgSrc}

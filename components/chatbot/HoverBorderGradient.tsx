@@ -54,7 +54,7 @@ export function HoverBorderGradient({
       }, duration * 1000);
       return () => clearInterval(interval);
     }
-  }, [hovered, duration, rotateDirection]);
+  }, [hovered, duration]);
   return (
     <Tag
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
