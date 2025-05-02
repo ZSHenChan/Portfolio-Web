@@ -17,7 +17,7 @@ function PersonalAIProject() {
       <ProjectDetail videoSrc="/videos/portfolio-scroll.mp4" multipleCol>
         <ProjectText>Action Execution</ProjectText>
         <LinkPreview
-          url="zishenchan/projects/personal-ai"
+          url="./projects/personal-ai"
           className="text-xl lg:text-3xl font-bold"
         >
           Learn More

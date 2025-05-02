@@ -36,7 +36,7 @@ function ReminderApiProject() {
       >
         <ProjectText>AI Interaction</ProjectText>
         <LinkPreview
-          url="zishenchan/app/reminders"
+          url="./app/reminders"
           className="text-xl lg:text-3xl font-bold"
         >
           Playground
