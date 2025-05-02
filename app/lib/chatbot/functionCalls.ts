@@ -64,7 +64,7 @@ const navigateSectionDeclaration: FunctionDeclaration = {
       section: {
         type: Type.STRING,
         description: "The target section to navigate to.",
-        enum: ["contact", "hero", "techstack", "projects"],
+        enum: ["contact", "hero", "techstack"],
       },
     },
     required: ["section"],
@@ -80,8 +80,15 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
       project: {
         type: Type.STRING,
         description:
-          "The target project to navigate to. Do not return anything if the user does not specify which project.",
-        enum: ["xcuisite", "sccc", "personal-assistant", "automation-manager"],
+          "The target project to navigate to. Do not return anything if the user does not specify which project. default value to 'projects' if user did not specify which project to nagivate to.",
+        enum: [
+          "projects",
+          "reminder-api",
+          "xcuisite",
+          "sccc",
+          "personal-assistant",
+          "automation-manager",
+        ],
       },
     },
     required: ["project"],

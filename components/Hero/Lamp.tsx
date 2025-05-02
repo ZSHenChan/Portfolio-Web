@@ -10,7 +10,7 @@ export function Lamp() {
   return (
     <LampContainer>
       <FadeUpInView className="text-center">
-        <h1 className="bg-gradient-to-br text-transparent from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight lg:text-7xl mb-4">
+        <h1 className="bg-gradient-to-br text-transparent from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-5xl lg:text-7xl mb-4">
           My name is Zi Shen <br />
           <br />
           Im a Software Developer

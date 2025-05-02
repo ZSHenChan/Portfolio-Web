@@ -6,14 +6,15 @@ import { ProjectHeading } from "@/components/Projects/ProjectHeading";
 import Image from "next/image";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import Link from "next/link";
+import { SpotlightHero } from "./SpotlightHero";
 
 export default function PersonalAiPage() {
   return (
     <DottedBackground>
       <div className="w-full items-center justify-center flex flex-col lg:px-[10dvw]">
-        <SectionHeading className="md:text-5xl">
-          Meet My Personal AI Assistant
-        </SectionHeading>
+        <SpotlightHero />
+
+        <SectionHeading>Why It Matters</SectionHeading>
         <ProjectDetail
           videoSrc="/videos/meet-my-personal-assistant.mp4"
           multipleCol={false}
@@ -21,6 +22,9 @@ export default function PersonalAiPage() {
           width={750}
           className="mb-[20dvh]"
         >
+          <ProjectText className="tracking-wider">
+            Can&apos;t fit all the FAQs in a website? Let AI handle them!
+          </ProjectText>
           <LinkPreview
             className="text-xl lg:text-3xl font-bold py-0"
             url="https://github.com/ZSHenChan/Portfolio-Web"
@@ -37,6 +41,24 @@ export default function PersonalAiPage() {
           </ProjectText>
 
           <ProjectDetail
+            videoSrc="/videos/portfolio-short.mp4"
+            multipleCol
+            height="300px"
+            className="place-items-center mb-[10dvh]"
+          >
+            <ProjectHeading className="lg:text-start">
+              Trustworthy Answers
+            </ProjectHeading>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+              - Information Retrieval from RAG architecture ensures user got the
+              updated answer.
+            </ProjectText>
+            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+              - Accuracy. Accessibility.
+            </ProjectText>
+          </ProjectDetail>
+
+          <ProjectDetail
             videoSrc="/videos/portfolio-scroll.mp4"
             multipleCol
             height="300px"
@@ -49,7 +71,7 @@ export default function PersonalAiPage() {
               - Scrolling to target section upon request.
             </ProjectText>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - Simply tell my AI &quot;bring me to projects section&quot; !
+              - &quot;show me your projects section !&quot;
             </ProjectText>
           </ProjectDetail>
 
@@ -63,11 +85,10 @@ export default function PersonalAiPage() {
               Email Sending
             </ProjectHeading>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - It is always better to have someone to do the job for you. !
+              - It is always better to have someone to do the job for you!
             </ProjectText>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - Ask my AI &quot;Send an email to Zi Shen&quot; and he will guide
-              you through the process!
+              - Say &quot;Send an email to Zi Shen&quot;. He knows what to do.
             </ProjectText>
           </ProjectDetail>
 
@@ -78,10 +99,10 @@ export default function PersonalAiPage() {
             className="place-items-center mb-[10dvh]"
           >
             <ProjectHeading className="lg:text-start">
-              Remind Me Later
+              Important Reminders
             </ProjectHeading>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - Creating a reminder for the host, not yourself!
+              - No more missed out emails.
             </ProjectText>
             <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
               - &quot;Remind Zi Shen to bring his notes for meeting happening
@@ -93,15 +114,16 @@ export default function PersonalAiPage() {
               isStatic
               imageSrc="/image/preview-reminder-api.png"
             >
-              Learn More
+              Try It Out
             </LinkPreview>
           </ProjectDetail>
 
-          <ProjectText>And More...</ProjectText>
+          <ProjectText>And So Much More...</ProjectText>
         </div>
 
-        <div className="mb-[15dvh] place-items-center">
+        <div className="mb-[18dvh] place-items-center">
           <SectionHeading className="md:text-3xl">Workflows</SectionHeading>
+
           <Image
             width={600}
             height={300}
@@ -116,6 +138,10 @@ export default function PersonalAiPage() {
           </ProjectText>
         </div>
 
+        <SectionHeading className="md:text-3xl mb-0">
+          Beyond The Veil
+        </SectionHeading>
+        <ProjectText className="mb-16">Where magic happens</ProjectText>
         <ProjectDetail
           imgSrc="/image/semantic-search.png"
           multipleCol

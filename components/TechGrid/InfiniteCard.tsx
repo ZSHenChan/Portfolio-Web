@@ -22,7 +22,6 @@ export const InfiniteMovingCards = ({
   direction = "left",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   speed = "fast",
-  pauseOnHover = true,
   className,
 }: InfiniteCardInterface) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -58,8 +57,7 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         className={`${cn(
-          " flex min-w-full shrink-0 gap-4 py-1 w-max flex-nowrap",
-          pauseOnHover && "hover:[animation-play-state:paused]"
+          " flex min-w-full shrink-0 gap-4 py-1 w-max flex-nowrap hover:[animation-play-state:paused]"
         )} ${start && "animate-scroll"}`}
         style={{
           animation: `scroll 40s ${

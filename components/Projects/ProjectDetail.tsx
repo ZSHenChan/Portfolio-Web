@@ -35,6 +35,7 @@ export function ProjectDetail({
       )}
       {imgSrc && (
         <Image
+          className="place-self-center rounded-2xl"
           src={imgSrc}
           height={imgHeght}
           width={width}

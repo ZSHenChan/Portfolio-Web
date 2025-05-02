@@ -5,7 +5,7 @@ import { ProjectDetail } from "../ProjectDetail";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
-function ReminderApiProject() {
+function RemainderApiProject() {
   return (
     <ScrollableSection id="reminder-api">
       <ProjectHeading>Reminder API</ProjectHeading>
@@ -28,6 +28,12 @@ function ReminderApiProject() {
         multipleCol
       >
         <ProjectText>Secured by Authentication</ProjectText>
+        <LinkPreview
+          url="./projects/reminder-api"
+          className="text-xl lg:text-3xl font-bold"
+        >
+          Learn More
+        </LinkPreview>
       </ProjectDetail>
       <ProjectDetail
         videoSrc="/videos/reminder-api-interaction.mp4"
@@ -36,7 +42,7 @@ function ReminderApiProject() {
       >
         <ProjectText>AI Interaction</ProjectText>
         <LinkPreview
-          url="./app/reminders"
+          url="./projects/reminders"
           className="text-xl lg:text-3xl font-bold"
           isStatic={true}
           imageSrc="/image/preview-reminder-api.png"
@@ -48,4 +54,4 @@ function ReminderApiProject() {
   );
 }
 
-export { ReminderApiProject };
+export { RemainderApiProject };

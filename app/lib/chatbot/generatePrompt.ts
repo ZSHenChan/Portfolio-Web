@@ -46,6 +46,5 @@ export async function generatePrompt(
         searchResults.length > 0 &&
         `Available Information: \n${searchResults.join("\n")}`
       }`;
-  // console.log(prompt);
   return prompt;
 }

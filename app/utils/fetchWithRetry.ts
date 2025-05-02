@@ -14,10 +14,12 @@ export const fetchWithRetry = async (
   delay: number = 1000
 ) => {
   let attempt = 0;
+  console.log(`Attempt ${attempt + 1}`);
   while (attempt < maxRetries) {
     try {
       const response = await fetch(url, requestInit);
-      if (!response.ok) {
+      console.error(response);
+      if (!response.ok && attempt >= maxRetries) {
         return {
           response: null,
           errMsg: `HTTP error: status ${response.status}`,

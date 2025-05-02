@@ -7,14 +7,14 @@ import { ScrollableSection } from "@/components/layout/ScrollableSection";
 export function InfiniteMovingCardsGrid() {
   return (
     <ScrollableSection className="mb-[10rem]" id="techstack">
-      <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
+      <div className="h-[128px] lg:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}
           direction="right"
           speed="slow"
         />
       </div>
-      <div className="h-[128px] md:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
+      <div className="h-[128px] lg:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials2}
           direction="left"
