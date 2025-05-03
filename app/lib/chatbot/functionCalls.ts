@@ -64,7 +64,7 @@ const navigateSectionDeclaration: FunctionDeclaration = {
       section: {
         type: Type.STRING,
         description: "The target section to navigate to.",
-        enum: ["contact", "hero", "techstack"],
+        enum: ["contact", "hero", "techstack", "about"],
       },
     },
     required: ["section"],

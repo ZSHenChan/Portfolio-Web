@@ -5,7 +5,7 @@ import { ProjectDetail } from "@/components/Projects/ProjectDetail";
 import { ProjectText } from "@/components/Projects/ProjectText";
 import { ProjectHeading } from "@/components/Projects/ProjectHeading";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
-import { CodeDetail } from "@/components/Projects/CodeDetail";
+import { CodeDetail } from "@/components/layout/CodeDetail";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
 export function Implementations({ id }: { id: string }) {

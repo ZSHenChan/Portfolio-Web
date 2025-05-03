@@ -47,9 +47,8 @@ export function SectionProjects({ id }: { id: string }) {
       id={id}
       className="w-full relative text-center bg-transparent"
     >
-      <SectionHeading className="pt-[10rem] mb-[10rem] lg:mb-[5rem]">
-        Projects
-      </SectionHeading>
+      <div className="h-[8dvh]" />
+      <SectionHeading className="">Projects</SectionHeading>
       <Timeline data={data} onUpdateHeight={isClient} />
     </ScrollableSection>
   );

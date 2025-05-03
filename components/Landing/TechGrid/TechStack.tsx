@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { InfiniteMovingCards } from "./InfiniteCard";
+import { InfiniteMovingCards } from "@/components/ui/InfiniteCard";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 import { motion } from "framer-motion";
 
 export function TechStack({ id }: { id: string }) {
   return (
-    <ScrollableSection id={id}>
+    <ScrollableSection id={id} className="mb-[25dvh]">
+      <div className="h-[8dvh]" />
       <div className="h-[10rem]">
         <motion.h2
           initial={{ opacity: 0.5, y: 100 }}

@@ -6,7 +6,7 @@ import { ProjectHeading } from "@/components/Projects/ProjectHeading";
 import { ProjectText } from "@/components/Projects/ProjectText";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
-import { CodeDetail } from "@/components/Projects/CodeDetail";
+import { CodeDetail } from "@/components/layout/CodeDetail";
 
 export const BeyondTheVeil = ({ id }: { id: string }) => {
   return (

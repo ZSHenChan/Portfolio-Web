@@ -5,7 +5,7 @@ import { ProjectText } from "@/components/Projects/ProjectText";
 import {
   InfiniteCard,
   InfiniteCardInterface,
-} from "@/components/TechGrid/InfiniteCard";
+} from "@/components/ui/InfiniteCard";
 
 const iconList = ["dotnet-core", "postgres", "ef-core", "jwt", "rest"];
 const cardItemList = iconList.map((name: string) => {

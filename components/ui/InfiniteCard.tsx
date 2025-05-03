@@ -26,7 +26,7 @@ export interface InfiniteCardInterface {
 export const InfiniteCard = (item: InfiniteCardInterface) => {
   return (
     <li
-      className="w-[96px] h-[96px] max-w-full relative rounded-2xl border border-b-0 shrink-0 border-slate-700 px-8 py-6 md:h-[196px] md:w-[196px]"
+      className="w-[96px] h-[96px] max-w-full relative rounded-2xl border border-b-0 shrink-0 border-slate-700 px-8 py-6 lg:h-[196px] lg:w-[196px]"
       style={{
         background:
           "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
@@ -46,7 +46,7 @@ export const InfiniteCard = (item: InfiniteCardInterface) => {
             alt={`${item.name} icon`}
           />
         </div>
-        <div className="hidden md:block text-lg leading-[1.6] text-center text-gray-400 font-normal">
+        <div className="hidden lg:block text-lg leading-[1.6] text-center text-gray-400 font-normal">
           {item.name}
         </div>
       </div>

@@ -3,8 +3,8 @@ import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
 import { ResumeButton } from "./ResumeButton";
-import { FadeUpInView } from "../ui/FadeUpInView";
-import { ScrollableSection } from "../layout/ScrollableSection";
+import { FadeUpInView } from "../../ui/FadeUpInView";
+import { ScrollableSection } from "../../layout/ScrollableSection";
 
 export function Lamp() {
   return (

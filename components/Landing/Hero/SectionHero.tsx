@@ -1,4 +1,4 @@
-import { Lamp } from "@/components/Hero/Lamp";
+import { Lamp } from "@/components/Landing/Hero/Lamp";
 
 export function SectionHero({ id }: { id: string }) {
   return (

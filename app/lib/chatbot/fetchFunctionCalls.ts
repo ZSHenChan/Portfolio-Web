@@ -1,3 +1,5 @@
+"use server";
+
 import { FunctionCall, GoogleGenAI } from "@google/genai";
 import { envServer } from "@/app/env/server";
 import {
