@@ -1,9 +1,9 @@
 import { Lamp } from "@/components/Hero/Lamp";
 
-export function SectionHero() {
+export function SectionHero({ id }: { id: string }) {
   return (
-   <div>
-    <Lamp/>
+    <div id={id}>
+      <Lamp />
     </div>
   );
 }

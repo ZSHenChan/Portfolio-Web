@@ -2,6 +2,7 @@ export function ReminderCard({
   title,
   date,
   type = "work",
+  description,
 }: {
   title?: string;
   description?: string;
@@ -21,12 +22,12 @@ export function ReminderCard({
           <h3 className="text-lg lg:text-xl font-semibold text-slate-300">
             {title}
           </h3>
+          <p className="text-gray-600">{description}</p>
           {date && (
             <p className="text-sm text-slate-700 bg-slate-300 px-4 py-1 rounded-md font-bold self-end">
               {date}
             </p>
           )}
-          {/* <p className="text-gray-600">{description}</p> */}
         </div>
       </div>
     </div>

@@ -6,10 +6,10 @@ import { PersonalAIProject } from "./Project/PersonalAI";
 import { AutomtionManagerProject } from "./Project/AutomationManager";
 import { XcuisiteProject } from "./Project/Xcuisite";
 import { ScccProject } from "./Project/Sccc";
-import { RemainderApiProject } from "./Project/ReminderApi";
+import { RemainderApiProject } from "./Project/RemainderApi";
 import { ScrollableSection } from "../layout/ScrollableSection";
 
-export function SectionProjects() {
+export function SectionProjects({ id }: { id: string }) {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -44,7 +44,7 @@ export function SectionProjects() {
   ];
   return (
     <ScrollableSection
-      id="projects"
+      id={id}
       className="w-full relative text-center bg-transparent"
     >
       <SectionHeading className="pt-[10rem] mb-[10rem] lg:mb-[5rem]">

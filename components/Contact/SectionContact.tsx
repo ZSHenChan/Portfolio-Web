@@ -5,9 +5,9 @@ import { SectionHeading } from "@/components/Headings/SectionHeading";
 import { EmailCopy } from "./EmailCopy";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
-export function SectionContact() {
+export function SectionContact({ id }: { id: string }) {
   return (
-    <ScrollableSection id="contact" className="w-full mt-[8rem]">
+    <ScrollableSection id={id} className="w-full mt-[8rem]">
       <SectionHeading>Contact Me</SectionHeading>
       <div className="flex flex-col md:flex-row align-center place-items-center justify-center gap-[10dvw] mb-[15rem]">
         <div className="text-xl md:text-3xl flex flex-row md:flex-col justify-around items-center gap-[10dvw]">

@@ -3,10 +3,25 @@
 import React from "react";
 import { InfiniteMovingCards } from "./InfiniteCard";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
+import { motion } from "framer-motion";
 
-export function InfiniteMovingCardsGrid() {
+export function TechStack({ id }: { id: string }) {
   return (
-    <ScrollableSection className="mb-[10rem]" id="techstack">
+    <ScrollableSection id={id}>
+      <div className="h-[10rem]">
+        <motion.h2
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 50 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+          className="bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-4xl font-bold tracking-tight text-transparent md:text-5xl"
+        >
+          Explore My Tech Stack
+        </motion.h2>
+      </div>
       <div className="h-[128px] lg:h-[256px] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}
@@ -45,7 +60,7 @@ const testimonials = iconList
   .map((name: string) => {
     return {
       name: name.charAt(0).toUpperCase() + name.slice(1),
-      url: `/temp/${name}.png`,
+      url: `/tech/${name}.png`,
       svgName: name,
     };
   });
@@ -55,7 +70,7 @@ const testimonials2 = iconList
   .map((name: string) => {
     return {
       name: name.charAt(0).toUpperCase() + name.slice(1),
-      url: `/temp/${name}.png`,
+      url: `/tech/${name}.png`,
       svgName: name,
     };
   });

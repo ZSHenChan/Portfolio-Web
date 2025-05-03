@@ -26,6 +26,7 @@ html {
   min-height: 100dvh;
   width: 100dvw;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 
   ::-webkit-scrollbar {
     width: 12px; /* Width of the entire scrollbar */

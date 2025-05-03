@@ -1,200 +1,35 @@
 import { DottedBackground } from "@/components/ui/DottedBackground";
-import { SectionHeading } from "@/components/Headings/SectionHeading";
-import { ProjectDetail } from "@/components/Projects/ProjectDetail";
-import { ProjectText } from "@/components/Projects/ProjectText";
-import { ProjectHeading } from "@/components/Projects/ProjectHeading";
-import Image from "next/image";
-import { LinkPreview } from "@/components/Contact/LinkPreview";
-import Link from "next/link";
 import { SpotlightHero } from "./SpotlightHero";
+import { FloatingNav, navItemInterface } from "@/components/ui/floating-navbar";
+import { WhyItMatters } from "./WhyItMatters";
+import { Features } from "./Features";
+import { BeyondTheVeil } from "./BeyondTheVeil";
+import { Workflows } from "./Workflows";
+
+const navItems = [
+  { name: "Idea", link: "#hero" },
+  { name: "Why", link: "#why" },
+  // { name: "Tech", link: "#techstack" },
+  { name: "Features", link: "#features" },
+  { name: "Workflows", link: "#workflows" },
+  { name: "Beyond", link: "#beyond-the-veil" },
+] as navItemInterface[];
 
 export default function PersonalAiPage() {
   return (
     <DottedBackground>
+      <FloatingNav navItems={navItems} className="bg-black-80" />
       <div className="w-full items-center justify-center flex flex-col lg:px-[10dvw]">
-        <SpotlightHero />
+        <SpotlightHero id="hero" />
 
-        <SectionHeading>Why It Matters</SectionHeading>
-        <ProjectDetail
-          videoSrc="/videos/meet-my-personal-assistant.mp4"
-          multipleCol={false}
-          height="500px"
-          width={750}
-          className="mb-[20dvh]"
-        >
-          <ProjectText className="tracking-wider">
-            Can&apos;t fit all the FAQs in a website? Let AI handle them!
-          </ProjectText>
-          <LinkPreview
-            className="text-xl lg:text-3xl font-bold py-0"
-            url="https://github.com/ZSHenChan/Portfolio-Web"
-          >
-            Github
-          </LinkPreview>
-        </ProjectDetail>
+        <WhyItMatters id="why" />
 
-        <div className="mb-[15dvh] place-items-center">
-          <SectionHeading className="md:text-3xl">Features</SectionHeading>
-          <ProjectText className="text-center text-slate-400 mb-[10dvh]">
-            Thanks to function calling, my AI can now perform complex tasks
-            under text prompt.
-          </ProjectText>
+        {/*TODO : Links section */}
+        <Features id="features" />
 
-          <ProjectDetail
-            videoSrc="/videos/portfolio-short.mp4"
-            multipleCol
-            height="300px"
-            className="place-items-center mb-[10dvh]"
-          >
-            <ProjectHeading className="lg:text-start">
-              Trustworthy Answers
-            </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - Information Retrieval from RAG architecture ensures user got the
-              updated answer.
-            </ProjectText>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - Accuracy. Accessibility.
-            </ProjectText>
-          </ProjectDetail>
+        <Workflows id="workflows" />
 
-          <ProjectDetail
-            videoSrc="/videos/portfolio-scroll.mp4"
-            multipleCol
-            height="300px"
-            className="place-items-center mb-[10dvh]"
-          >
-            <ProjectHeading className="lg:text-start">
-              Navigation
-            </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - Scrolling to target section upon request.
-            </ProjectText>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - &quot;show me your projects section !&quot;
-            </ProjectText>
-          </ProjectDetail>
-
-          <ProjectDetail
-            videoSrc="/videos/portfolio-email.mp4"
-            multipleCol
-            height="300px"
-            className="place-items-center mb-[10dvh]"
-          >
-            <ProjectHeading className="lg:text-start">
-              Email Sending
-            </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - It is always better to have someone to do the job for you!
-            </ProjectText>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - Say &quot;Send an email to Zi Shen&quot;. He knows what to do.
-            </ProjectText>
-          </ProjectDetail>
-
-          <ProjectDetail
-            videoSrc="/videos/reminder-api-interaction.mp4"
-            multipleCol
-            height="300px"
-            className="place-items-center mb-[10dvh]"
-          >
-            <ProjectHeading className="lg:text-start">
-              Important Reminders
-            </ProjectHeading>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-              - No more missed out emails.
-            </ProjectText>
-            <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-              - &quot;Remind Zi Shen to bring his notes for meeting happening
-              this afternoon at 3pm.&quot;
-            </ProjectText>
-            <LinkPreview
-              url="zishenchan/app/reminders"
-              className="text-xl lg:text-2xl font-bold"
-              isStatic
-              imageSrc="/image/preview-reminder-api.png"
-            >
-              Try It Out
-            </LinkPreview>
-          </ProjectDetail>
-
-          <ProjectText>And So Much More...</ProjectText>
-        </div>
-
-        <div className="mb-[18dvh] place-items-center">
-          <SectionHeading className="md:text-3xl">Workflows</SectionHeading>
-
-          <Image
-            width={600}
-            height={300}
-            src="/image/workflow.png"
-            alt="Workflow Demo diagram"
-            className="mb-12"
-          ></Image>
-          <ProjectText className="text-center max-w-[70ch]">
-            Beyond Basic Prompts: Pipeline combining semantic context retrieval
-            and function execution allows LLMs to handle complex requests and
-            provide reliable answers.
-          </ProjectText>
-        </div>
-
-        <SectionHeading className="md:text-3xl mb-0">
-          Beyond The Veil
-        </SectionHeading>
-        <ProjectText className="mb-16">Where magic happens</ProjectText>
-        <ProjectDetail
-          imgSrc="/image/semantic-search.png"
-          multipleCol
-          className="place-items-center mb-[10dvh]"
-        >
-          <ProjectHeading className="lg:text-start">
-            RAG Semantic Searching
-          </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
-            - Create embeddings, indexing data and perform meaningful search to
-            extract needed information.
-          </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-            - Use LLMs to generate responses based on the retrieved data.
-          </ProjectText>
-          {/* <p className="text-start mb-12">image source: txtai</p> */}
-          <LinkPreview
-            className="text-xl lg:text-2xl font-bold"
-            url="https://github.com/neuml/txtai"
-          >
-            txtai
-          </LinkPreview>
-        </ProjectDetail>
-
-        <ProjectDetail
-          imgSrc="/image/function-call.png"
-          width={700}
-          multipleCol
-          className="place-items-center"
-        >
-          <ProjectHeading className="lg:text-start">
-            Function Calling
-          </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb4">
-            - Predefined functions to handle specific task.
-          </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-            - Receive parameter values from Function Calling Model, passing
-            relevant information to LLM and execute.
-          </ProjectText>
-          <LinkPreview
-            className="text-xl lg:text-2xl font-bold"
-            url="https://ai.google.dev/gemini-api/docs/function-calling?example=meeting"
-          >
-            Gemini Ai
-          </LinkPreview>
-        </ProjectDetail>
-        <Link
-          href="/"
-          className="text-center lg:text-start text-lg lg:text-3xl font-bold w-full lg:ml-[12dvw] mt-12 underline"
-        >
-          Back
-        </Link>
+        <BeyondTheVeil id="beyond-the-veil" />
       </div>
 
       <div className="h-50"></div>

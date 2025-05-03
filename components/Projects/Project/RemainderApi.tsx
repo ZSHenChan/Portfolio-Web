@@ -29,8 +29,10 @@ function RemainderApiProject() {
       >
         <ProjectText>Secured by Authentication</ProjectText>
         <LinkPreview
-          url="./projects/reminder-api"
+          url="./projects/remainder-api"
           className="text-xl lg:text-3xl font-bold"
+          isStatic
+          imageSrc="/image/preview-remainder-api.png"
         >
           Learn More
         </LinkPreview>
@@ -44,8 +46,8 @@ function RemainderApiProject() {
         <LinkPreview
           url="./projects/reminders"
           className="text-xl lg:text-3xl font-bold"
-          isStatic={true}
-          imageSrc="/image/preview-reminder-api.png"
+          isStatic
+          imageSrc="/image/preview-remainder-playground.png"
         >
           Playground
         </LinkPreview>

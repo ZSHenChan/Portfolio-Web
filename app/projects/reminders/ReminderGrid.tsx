@@ -6,7 +6,7 @@ import {
   useReminderDispatch,
   useReminders,
 } from "@/app/context/ReminderContext";
-import { fetchReminders, QueryObject } from "@/app/api/reminderApi";
+// import { fetchReminders, QueryObject } from "@/app/api/reminderApi";
 import { Reminder } from "@/app/interfaces/Reminder";
 import { ProjectHeading } from "@/components/Projects/ProjectHeading";
 import { useAppActions } from "@/app/context/AppActionsContext";
@@ -20,19 +20,19 @@ export function ReminderGrid() {
   useEffect(() => {
     const fetchRemindersAsync = async () => {
       const fetchReminderId = toast.loading("Loading Reminders...");
-      const response = await fetchReminders({} as QueryObject);
-      if (response.error) {
-        toast.error(response.message, { id: fetchReminderId });
-        return;
-      }
+      toast.success("Load reminders successfully.", { id: fetchReminderId });
+      // const response = await fetchReminders({} as QueryObject);
+      // if (response.error) {
+      //   toast.error(response.message, { id: fetchReminderId });
+      //   return;
+      // }
 
-      if (dispatch != null) {
-        toast.success("Load reminders successfully.", { id: fetchReminderId });
-        dispatch({
-          type: "fetch",
-          reminders: response.reminders as Reminder[],
-        });
-      }
+      // if (dispatch != null) {
+      //   dispatch({
+      //     type: "fetch",
+      //     reminders: response.reminders as Reminder[],
+      //   });
+      // }
     };
     fetchRemindersAsync();
   }, [dispatch, reminderCounter]);
