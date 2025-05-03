@@ -24,7 +24,7 @@ export async function fetchSearchQueryPrompt(
       conversation: 
       ${conversationHistoryString}`,
     });
-    console.log(`Search Query: ${response.text}`);
+    // console.log(`Search Query: ${response.text}`);
 
     return response.text ?? fallbackQuery;
   } catch (err) {
