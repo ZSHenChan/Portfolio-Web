@@ -73,7 +73,7 @@ export const ModalTrigger = ({
       <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="dark:bg-black bg-slate-100 text-black dark:text-slate-100 flex items-center px-8 cursor-pointer"
+        className="bg-black/90 text-slate-100 flex items-center px-8 cursor-pointer"
       >
         {children}
       </HoverBorderGradient>

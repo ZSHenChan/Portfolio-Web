@@ -9,7 +9,7 @@ export const WhyItMatters = ({ id }: { id: string }) => {
   return (
     <ScrollableSection
       id={id}
-      className="px-[2rem] md:px-0 text-sm md:text-lg mb-[15dvh] place-items-center"
+      className="px-[2rem] md:px-0 text-sm md:text-lg mb-[18dvh] place-items-center"
     >
       <SectionHeading>Why It Matters</SectionHeading>
       <TextGenerateEffect

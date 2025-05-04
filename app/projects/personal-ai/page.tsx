@@ -5,6 +5,7 @@ import { WhyItMatters } from "./WhyItMatters";
 import { Features } from "./Features";
 import { BeyondTheVeil } from "./BeyondTheVeil";
 import { Workflows } from "./Workflows";
+import { PersonalAITechStack } from "./TechStack";
 
 const navItems = [
   { name: "Idea", link: "#hero" },
@@ -25,6 +26,7 @@ export default function PersonalAiPage() {
         <WhyItMatters id="why" />
 
         {/*TODO : Links section */}
+        <PersonalAITechStack id="techstack" />
         <Features id="features" />
 
         <Workflows id="workflows" />

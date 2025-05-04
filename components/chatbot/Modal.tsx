@@ -36,7 +36,7 @@ export function AnimatedModal() {
           onOpen={scrollToBottom}
           className="fixed bottom-[30px] right-[30px] z-5 cursor-pointer"
         >
-          <span className="text-center">Start a Chat</span>
+          <span className="text-center">Initiate AI</span>
         </ModalTrigger>
         <ModalBody>
           <ModalContent />

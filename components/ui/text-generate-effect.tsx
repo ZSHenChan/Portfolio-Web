@@ -6,12 +6,14 @@ import { cn } from "@/app/utils/cn";
 export const TextGenerateEffect = ({
   words,
   className,
+  textContainerClass,
   filter = true,
   duration = 0.5,
   delay = 0,
 }: {
   words: string;
   className?: string;
+  textContainerClass?: string;
   filter?: boolean;
   duration?: number;
   delay?: number;
@@ -43,12 +45,15 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className="opacity-0"
+              className={`opacity-0 ${
+                word.startsWith("<b>") ? "font-normal" : ""
+              }`}
               style={{
                 filter: filter ? "blur(10px)" : "none",
+                //
               }}
             >
-              {word}{" "}
+              {word.replace("<b>", "")}{" "}
             </motion.span>
           );
         })}
@@ -59,7 +64,9 @@ export const TextGenerateEffect = ({
   return (
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
-        <div className="leading-snug tracking-wide">{renderWords()}</div>
+        <div className={`leading-snug tracking-wide ${textContainerClass}`}>
+          {renderWords()}
+        </div>
       </div>
     </div>
   );
