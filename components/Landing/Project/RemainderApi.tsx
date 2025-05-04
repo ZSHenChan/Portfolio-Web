@@ -23,21 +23,6 @@ function RemainderApiProject() {
         </LinkPreview>
       </ProjectDetail>
       <ProjectDetail
-        videoSrc="/videos/reminder-api-auth.mp4"
-        height="300px"
-        multipleCol
-      >
-        <ProjectText>Secured by Authentication</ProjectText>
-        <LinkPreview
-          url="./projects/remainder-api"
-          className="text-xl lg:text-3xl font-bold"
-          isStatic
-          imageSrc="/image/preview-remainder-api.png"
-        >
-          Learn More
-        </LinkPreview>
-      </ProjectDetail>
-      <ProjectDetail
         videoSrc="/videos/reminder-api-interaction.mp4"
         multipleCol
         height="300px"
@@ -50,6 +35,21 @@ function RemainderApiProject() {
           imageSrc="/image/preview-remainder-playground.png"
         >
           Playground
+        </LinkPreview>
+      </ProjectDetail>
+      <ProjectDetail
+        videoSrc="/videos/reminder-api-auth.mp4"
+        height="300px"
+        multipleCol
+      >
+        <ProjectText>Secured by Authentication</ProjectText>
+        <LinkPreview
+          url="./projects/remainder-api"
+          className="text-xl lg:text-3xl font-bold"
+          isStatic
+          imageSrc="/image/preview-remainder-api.png"
+        >
+          Learn More
         </LinkPreview>
       </ProjectDetail>
     </ScrollableSection>

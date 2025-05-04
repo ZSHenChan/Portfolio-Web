@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { AnimatedModal } from "@/components/chatbot/Modal";
 import { CustomToaster } from "./utils/Toaster";
+import { Footer } from "@/components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +45,7 @@ export default function RootLayout({
             <CustomToaster />
             {children}
             <AnimatedModal />
+            <Footer />
           </main>
         </Providers>
       </body>

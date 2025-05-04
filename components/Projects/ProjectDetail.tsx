@@ -26,7 +26,7 @@ export function ProjectDetail({
   const imgHeght = parseInt(height.replace("px", ""));
   return (
     <div
-      className={`grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
+      className={`w-full grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
         multipleCol ? "lg:grid-cols-[5fr_3fr] gap-x-8 gap-y-8" : ""
       }`}
     >

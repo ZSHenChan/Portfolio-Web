@@ -13,6 +13,12 @@ function PersonalAIProject() {
         <ProjectText className="max-w-[33ch]">
           Fine-tuned AI to handle queries.
         </ProjectText>
+        <LinkPreview
+          url="https://github.com/ZSHenChan/Portfolio-Web"
+          className="text-xl lg:text-3xl font-bold"
+        >
+          Github
+        </LinkPreview>
       </ProjectDetail>
       <ProjectDetail videoSrc="/videos/portfolio-scroll.mp4" multipleCol>
         <ProjectText>Action Execution</ProjectText>

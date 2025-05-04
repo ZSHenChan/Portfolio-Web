@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   motion,
   AnimatePresence,
@@ -15,14 +16,15 @@ export interface navItemInterface {
 
 export const FloatingNav = ({
   navItems,
-
   className,
+  showHome = true,
 }: {
   navItems: {
     name: string;
     link: string;
   }[];
   className?: string;
+  showHome?: boolean;
 }) => {
   const { scrollYProgress } = useScroll();
 
@@ -61,11 +63,17 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "hidden sm:flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full bg-black-80 backdrop-blur-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-8 py-2  items-center justify-center space-x-4 lg:space-x-8",
+          "hidden sm:flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full bg-black-80 backdrop-blur-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-2 py-2  items-center justify-center space-x-4 lg:space-x-8",
           className,
-          hidden ? "sm:hidden" : ""
+          hidden ? "sm:hidden" : "",
+          showHome ? "" : "pl-8"
         )}
       >
+        {showHome && (
+          <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full  cursor-pointer">
+            <Link href="/">Home</Link>
+          </button>
+        )}
         {navItems.map((navItem: navItemInterface, idx: number) => (
           <a
             key={`link=${idx}`}
