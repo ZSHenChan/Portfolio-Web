@@ -37,7 +37,7 @@ export const InfiniteCard = (item: InfiniteCardInterface) => {
         aria-hidden="true"
         className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
       ></div>
-      <div className="h-full grid place-items-center items-center z-20">
+      <div className="h-full grid place-items-center items-center z-5">
         <div className="align-self-end">
           <Image
             src={item.url}
@@ -88,7 +88,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-5  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >

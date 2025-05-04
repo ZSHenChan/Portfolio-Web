@@ -13,7 +13,7 @@ export function Features({ id }: { id: string }) {
       <SectionHeading className="md:text-3xl">Features</SectionHeading>
 
       <ProjectDetail
-        videoSrc="/videos/reminder-api-auth.mp4"
+        videoSrc="/videos/remainderApi/auth.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"
@@ -34,7 +34,7 @@ export function Features({ id }: { id: string }) {
       </ProjectDetail>
 
       <ProjectDetail
-        videoSrc="/videos/reminder-api-interaction.mp4"
+        videoSrc="/videos/remainderApi/interaction.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"

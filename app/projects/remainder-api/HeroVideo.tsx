@@ -15,7 +15,7 @@ export function HeroVideo({ id }: { id: string }) {
         or web services.
       </ProjectText>
       <ProjectDetail
-        videoSrc="/videos/reminder-api.mp4"
+        videoSrc="/videos/remainderApi/main.mp4"
         multipleCol={false}
         height="500px"
         width={750}

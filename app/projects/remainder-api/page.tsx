@@ -6,7 +6,7 @@ import { Implementations } from "./Implementations";
 import { RemaindersTechStack } from "./RemainderTechStack";
 import { FloatingNav, navItemInterface } from "@/components/ui/floating-navbar";
 
-// TODO - Challenges, Arvhitecture overview, Tehc Stack
+// TODO - Challenges, Arvhitecture overview
 
 const navItems = [
   { name: "Idea", link: "#hero" },

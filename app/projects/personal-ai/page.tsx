@@ -8,9 +8,9 @@ import { Workflows } from "./Workflows";
 import { PersonalAITechStack } from "./TechStack";
 
 const navItems = [
-  { name: "Idea", link: "#hero" },
+  { name: "Resume", link: "#hero" },
   { name: "Why", link: "#why" },
-  // { name: "Tech", link: "#techstack" },
+  { name: "Tech", link: "#techstack" },
   { name: "Features", link: "#features" },
   { name: "Workflows", link: "#workflows" },
   { name: "Beyond", link: "#beyond-the-veil" },

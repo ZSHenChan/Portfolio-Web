@@ -13,7 +13,7 @@ export const Features = ({ id }: { id: string }) => {
       <SectionHeading className="md:text-3xl">Features</SectionHeading>
 
       <ProjectDetail
-        videoSrc="/videos/portfolio-short.mp4"
+        videoSrc="/videos/portfolio/conversation.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"
@@ -40,7 +40,7 @@ export const Features = ({ id }: { id: string }) => {
       </ProjectText>
 
       <ProjectDetail
-        videoSrc="/videos/portfolio-scroll.mp4"
+        videoSrc="/videos/portfolio/scroll.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"
@@ -58,7 +58,7 @@ export const Features = ({ id }: { id: string }) => {
       </ProjectDetail>
 
       <ProjectDetail
-        videoSrc="/videos/portfolio-email.mp4"
+        videoSrc="/videos/portfolio/email.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"
@@ -73,7 +73,7 @@ export const Features = ({ id }: { id: string }) => {
       </ProjectDetail>
 
       <ProjectDetail
-        videoSrc="/videos/reminder-api-interaction.mp4"
+        videoSrc="/videos/remainderApi/interaction.mp4"
         multipleCol
         height="300px"
         className="place-items-center mb-[10dvh]"

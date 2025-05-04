@@ -86,7 +86,7 @@ export const FloatingNav = ({
           </a>
         ))}
         <button
-          className="border-x text-sm font-medium relative text-neutral-200 hover:text-neutral-400 border-white/[0.2] px-4 py-2 rounded-full cursor-pointer"
+          className="border-y text-sm font-medium relative text-neutral-200 hover:text-neutral-400 border-white/[0.2] px-4 py-2 rounded-full cursor-pointer"
           onClick={() => {
             setVisible(false);
             setTimeout(() => setHidden(true), 1000);

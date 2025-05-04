@@ -8,7 +8,7 @@ export function XcuisiteProject() {
   return (
     <ScrollableSection id="xcuisite">
       <ProjectHeading>XCuisite Ecommerce Website</ProjectHeading>
-      <ProjectDetail videoSrc="/videos/xcuisite-main.mp4" multipleCol>
+      <ProjectDetail videoSrc="/videos/xcuisite/main-preview.mp4" multipleCol>
         <ProjectText>Doughnut e-commerce website</ProjectText>
         <LinkPreview
           className="text-xl lg:text-3xl font-bold"
@@ -17,10 +17,13 @@ export function XcuisiteProject() {
           Link
         </LinkPreview>
       </ProjectDetail>
-      <ProjectDetail videoSrc="/videos/xcuisite-cart.mp4" multipleCol>
+      <ProjectDetail videoSrc="/videos/xcuisite/cart-preview.mp4" multipleCol>
         <ProjectText>Effective Cart System With Animations</ProjectText>
       </ProjectDetail>
-      <ProjectDetail videoSrc="/videos/xcuisite-payment.mp4" multipleCol>
+      <ProjectDetail
+        videoSrc="/videos/xcuisite/payment-preview.mp4"
+        multipleCol
+      >
         <ProjectText>
           Authentication and Payment Gateway Integration
         </ProjectText>

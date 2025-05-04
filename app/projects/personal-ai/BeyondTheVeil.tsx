@@ -143,13 +143,6 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           </ProjectText>
         </ProjectDetail>
 
-        <LinkPreview
-          className="w-full place-self-center text-xl lg:text-3xl font-bold py-0"
-          url="https://github.com/ZSHenChan/Portfolio-Web"
-        >
-          Github
-        </LinkPreview>
-
         <SectionHeading className="md:text-3xl mb-0">
           Deeper Into the Forest
         </SectionHeading>
