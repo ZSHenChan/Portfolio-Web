@@ -1,14 +1,14 @@
 "use client";
-import { ProjectHeading } from "../ProjectHeading";
-import { ProjectText } from "../ProjectText";
-import { ProjectDetail } from "../ProjectDetail";
+import { ProjectHeading } from "../../Projects/ProjectHeading";
+import { ProjectText } from "../../Projects/ProjectText";
+import { ProjectDetail } from "../../Projects/ProjectDetail";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
 function RemainderApiProject() {
   return (
     <ScrollableSection id="reminder-api">
-      <ProjectHeading>Reminder API</ProjectHeading>
+      <ProjectHeading>Remainder API</ProjectHeading>
       <ProjectDetail
         videoSrc="/videos/reminder-api.mp4"
         height="300px"

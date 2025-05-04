@@ -1,7 +1,7 @@
-import { ProjectHeading } from "../ProjectHeading";
-import { ProjectText } from "../ProjectText";
+import { ProjectHeading } from "../../Projects/ProjectHeading";
+import { ProjectText } from "../../Projects/ProjectText";
 import { LinkPreview } from "@/components/Contact/LinkPreview";
-import { ProjectDetail } from "../ProjectDetail";
+import { ProjectDetail } from "../../Projects/ProjectDetail";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
 export function XcuisiteProject() {

@@ -2,11 +2,9 @@
 import { SectionHeading } from "../Headings/SectionHeading";
 import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/Timeline";
-import { PersonalAIProject } from "./Project/PersonalAI";
-import { AutomtionManagerProject } from "./Project/AutomationManager";
-import { XcuisiteProject } from "./Project/Xcuisite";
-import { ScccProject } from "./Project/Sccc";
-import { RemainderApiProject } from "./Project/RemainderApi";
+import { PersonalAIProject } from "../Landing/Project/PersonalAI";
+import { XcuisiteProject } from "../Landing/Project/Xcuisite";
+import { RemainderApiProject } from "../Landing/Project/RemainderApi";
 import { ScrollableSection } from "../layout/ScrollableSection";
 
 export function SectionProjects({ id }: { id: string }) {
@@ -18,34 +16,21 @@ export function SectionProjects({ id }: { id: string }) {
   const data = [
     {
       title: "2025",
-      content: (
-        <div className="grid grid-cols-1 gap-32">
-          <RemainderApiProject />
-        </div>
-      ),
+      content: <RemainderApiProject />,
     },
     {
       title: "Early 2025",
-      content: (
-        <div className="grid grid-cols-1 gap-32">
-          <PersonalAIProject />
-          <AutomtionManagerProject />
-        </div>
-      ),
+      content: <PersonalAIProject />,
     },
     {
       title: "2024",
       content: <XcuisiteProject />,
     },
-    {
-      title: "Early 2024",
-      content: <ScccProject />,
-    },
   ];
   return (
     <ScrollableSection
       id={id}
-      className="w-full relative text-center bg-transparent"
+      className="w-full relative text-center bg-transparent mb-[25dvh]"
     >
       <div className="h-[8dvh]" />
       <SectionHeading className="">Projects</SectionHeading>

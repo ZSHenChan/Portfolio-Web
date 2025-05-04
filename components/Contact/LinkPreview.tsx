@@ -22,6 +22,7 @@ type LinkPreviewProps = {
   height?: number;
   quality?: number;
   layout?: string;
+  fadeIn?: boolean;
 } & (
   | { isStatic: true; imageSrc: string }
   | { isStatic?: false; imageSrc?: never }
@@ -36,6 +37,7 @@ export const LinkPreview = ({
   quality = 50,
   isStatic = false,
   imageSrc = "",
+  fadeIn = false,
 }: LinkPreviewProps) => {
   let src;
   if (!isStatic) {
@@ -98,7 +100,20 @@ export const LinkPreview = ({
           setOpen(open);
         }}
       >
-        <FadeUpInView className="cursor-pointer">
+        {fadeIn ? (
+          <FadeUpInView className="cursor-pointer">
+            <HoverCardPrimitive.Trigger
+              onMouseMove={handleMouseMove}
+              className={cn(
+                "text-transparent bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text",
+                className
+              )}
+              href={url}
+            >
+              {children}
+            </HoverCardPrimitive.Trigger>
+          </FadeUpInView>
+        ) : (
           <HoverCardPrimitive.Trigger
             onMouseMove={handleMouseMove}
             className={cn(
@@ -109,7 +124,7 @@ export const LinkPreview = ({
           >
             {children}
           </HoverCardPrimitive.Trigger>
-        </FadeUpInView>
+        )}
 
         <HoverCardPrimitive.Content
           className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
