@@ -13,9 +13,9 @@ export const fetchWithRetry = async (
   maxRetries: number = 3,
   delay: number = 1000
 ) => {
-  let attempt = 0;
+  let lastError: Error | null = null;
   // console.log(`Attempt ${attempt + 1}`);
-  while (attempt < maxRetries) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       const response = await fetch(url, requestInit);
       if (!response.ok) {
@@ -24,14 +24,16 @@ export const fetchWithRetry = async (
       const resJson = await response.json();
       return { response: resJson, errMsg: null } as fetchWithRetryResponse;
     } catch (err) {
-      attempt++;
-      const msg = getErrorMessage(err);
-      if (attempt >= maxRetries) {
+      lastError = err as Error;
+      const errorMsg = getErrorMessage(lastError);
+      if (attempt === maxRetries - 1) {
+        console.error(`Failed to fetch after ${maxRetries} attempts`);
         return {
           response: null,
-          errMsg: `Fetch failed: ${msg}`,
+          errMsg: `Fetch failed: ${errorMsg}`,
         } as fetchWithRetryResponse;
       }
+      console.log(`Retrying in ${delay / 1000}s...`);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
