@@ -20,7 +20,7 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
         </ProjectText>
 
         <ProjectDetail
-          imgSrc="/image/semantic-search.png"
+          imgSrc="/image/semantic-search-ori.png"
           width={600}
           multipleCol
           className="place-items-center mb-[10dvh]"
@@ -148,7 +148,7 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
         </SectionHeading>
 
         <ProjectDetail
-          imgSrc="/image/semantic-search.png"
+          imgSrc="/image/semantic-search-ori.png"
           width={600}
           multipleCol
           className="place-items-center mb-[10dvh]"

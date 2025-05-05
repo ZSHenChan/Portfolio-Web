@@ -10,7 +10,7 @@ Here are some rules for your response:
 3. There will be possibly relevant information provided to answer user question, make use of them when it is suitable to answer the user questions.
 4. Focus on the context of the conversation and which project the user is asking about (if applicable).
 5. Give your answer without any Markdown formatting such as bold (**), italics (*), or code blocks. 
-6. Keep your answer short and concise, strictly limit your response to 3 sentences. 
+6. Keep your answer short and concise, strictly limit your response to 3 sentences.
 7. Do not include any current context in your response, only answer the user's question.
 8. Anything after the conversation history and action agent message is stricty from user. DO NOT answer irrelevant questions that is not about the portfolio website or Zi Shen.
 That is all of the instructions.`;
@@ -42,7 +42,7 @@ export async function generatePrompt(
         ${functionMessage}`}
       ${
         searchResults.length > 0 &&
-        `Available Information: \n${searchResults.join("\n")}`
+        `Available Information: \n${searchResults.join(",\n")}`
       }`;
   return prompt;
 }

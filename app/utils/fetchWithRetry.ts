@@ -18,12 +18,8 @@ export const fetchWithRetry = async (
   while (attempt < maxRetries) {
     try {
       const response = await fetch(url, requestInit);
-      console.error(response);
-      if (!response.ok && attempt >= maxRetries) {
-        return {
-          response: null,
-          errMsg: `HTTP error: status ${response.status}`,
-        } as fetchWithRetryResponse;
+      if (!response.ok) {
+        throw new Error("No response fetched.");
       }
       const resJson = await response.json();
       return { response: resJson, errMsg: null } as fetchWithRetryResponse;
@@ -39,8 +35,4 @@ export const fetchWithRetry = async (
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
-  return {
-    response: null,
-    errMsg: `Uncaught error`,
-  } as fetchWithRetryResponse;
 };

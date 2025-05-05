@@ -86,6 +86,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       functionCallResponse.functionCall,
       functionCallResponse.functionMessage
     );
+
     const result = await chatSession.sendMessage(prompt);
     const replyText = result.response.text();
     return {
