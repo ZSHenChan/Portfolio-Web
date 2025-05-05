@@ -44,9 +44,9 @@ export async function fetchSearchResults(query: string, limit: number = 1) {
       return [];
     }
     const resJson = res.response;
-    for (const result of resJson) {
-      console.log(`Search Result ${result.score}: ${result.answer}`);
-    }
+    // for (const result of resJson) {
+    //   console.log(`Search Result ${result.score}: ${result.answer}`);
+    // }
     return [...resJson?.map((result: { "answer": string }) => result.answer)];
   } catch (err) {
     const errMsg = getErrorMessage(err);

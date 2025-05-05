@@ -95,7 +95,6 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     };
   } catch (err) {
     const errMsg = getErrorMessage(err);
-    console.error(err);
     console.error(errMsg);
     return {
       message:
