@@ -73,28 +73,24 @@ async function addReminders(reminder: Reminder): Promise<AddReminderResponse> {
   const token = envServer.REMINDER_API_TOKEN;
 
   try {
-    const response = await fetch(`${REMINDER_URL}/add`, {
+    const response = (await fetchWithRetry(`${REMINDER_URL}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify([reminder]),
-    });
+    })) as fetchWithRetryResponse;
 
-    const responseJson = await response.json();
+    const responseJson = response.response;
 
-    console.log(`Response: ${responseJson}`);
-
-    if (!response.ok) {
-      const errorMessage = Object.values(responseJson.errors).join(",\n");
-      console.error(errorMessage);
+    if (!responseJson) {
       return {
         error: true,
         message: "Unable to add reminder",
       };
     }
-
+    console.log(`Response: ${responseJson}`);
     return {
       error: false,
       message: "Reminder added successfully",

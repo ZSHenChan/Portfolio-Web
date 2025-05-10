@@ -19,6 +19,14 @@ export const fetchWithRetry = async (
     try {
       const response = await fetch(url, requestInit);
       if (!response.ok) {
+        console.error(response);
+        if (response.status == 400 || response.status == 401) {
+          console.error(response);
+          return {
+            response: null,
+            errMsg: `Bad Request`,
+          };
+        }
         throw new Error("No response fetched.");
       }
       const resJson = await response.json();
