@@ -6,9 +6,12 @@ import { AutomtionManagerProject } from "../Landing/Project/AutomationManager";
 import { ScccProject } from "../Landing/Project/Sccc";
 import { ScrollableSection } from "../layout/ScrollableSection";
 import { HologramProject } from "./Project/Hologram";
+import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { TimelineMobile } from "../ui/TimelineMobile";
 
 export function SectionExperience({ id }: { id: string }) {
   const [isClient, setIsClient] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -30,11 +33,15 @@ export function SectionExperience({ id }: { id: string }) {
   return (
     <ScrollableSection
       id={id}
-      className="w-full relative text-center bg-transparent mb-[25dvh]"
+      className="w-full relative bg-transparent lg:mb-[25dvh]"
     >
       <div className="h-[8dvh]" />
       <SectionHeading className="">Experiences</SectionHeading>
-      <Timeline data={data} onUpdateHeight={isClient} />
+      {isMobile ? (
+        <TimelineMobile data={data} />
+      ) : (
+        <Timeline data={data} onUpdateHeight={isClient} />
+      )}
     </ScrollableSection>
   );
 }

@@ -13,8 +13,9 @@ function RemainderApiProject() {
         videoSrc="/videos/remainderApi/main.mp4"
         height="300px"
         multipleCol
+        className="sm:text-center"
       >
-        <ProjectText className="max-w-[33ch]">Boosted by Redis</ProjectText>
+        <ProjectText>Boosted by Redis</ProjectText>
         <LinkPreview
           url="https://reminder-demo-app.vercel.app/"
           className="text-xl lg:text-3xl font-bold"
@@ -26,6 +27,7 @@ function RemainderApiProject() {
         videoSrc="/videos/remainderApi/interaction.mp4"
         multipleCol
         height="300px"
+        className="sm:text-center"
       >
         <ProjectText>AI Interaction</ProjectText>
         <LinkPreview
@@ -41,6 +43,7 @@ function RemainderApiProject() {
         videoSrc="/videos/remainderApi/auth.mp4"
         height="300px"
         multipleCol
+        className="sm:text-center"
       >
         <ProjectText>Secured by Authentication</ProjectText>
         <LinkPreview

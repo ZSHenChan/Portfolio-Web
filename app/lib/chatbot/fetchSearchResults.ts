@@ -44,9 +44,10 @@ export async function fetchSearchResults(query: string, limit: number = 3) {
       return [];
     }
     const resJson = res.response;
-    for (const result of resJson) {
-      console.log(`Search Result ${result.score}: ${result.answer}`);
-    }
+    console.log(`Search Result: ${resJson.length}`);
+    // for (const result of resJson) {
+    //   console.log(`Search Result ${result.score}: ${result.answer}`);
+    // }
     return [...resJson?.map((result: { "answer": string }) => result.answer)];
   } catch (err) {
     const errMsg = getErrorMessage(err);

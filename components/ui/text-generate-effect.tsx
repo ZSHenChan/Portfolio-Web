@@ -46,7 +46,9 @@ export const TextGenerateEffect = ({
             <motion.span
               key={word + idx}
               className={`opacity-0 ${
-                word.startsWith("<b>") ? "font-normal" : ""
+                word.startsWith("<b>")
+                  ? "font-normal text-4xl tracking-normal"
+                  : ""
               }`}
               style={{
                 filter: filter ? "blur(10px)" : "none",

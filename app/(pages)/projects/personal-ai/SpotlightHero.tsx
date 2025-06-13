@@ -27,7 +27,7 @@ export function SpotlightHero({ id }: { id: string }) {
           className="block mx-auto max-w-lg text-center text-base font-bold underline text-neutral-300"
           href="#why"
         >
-          Explore
+          Start Exploring
         </a>
       </div>
     </ScrollableSection>

@@ -24,8 +24,8 @@ export const WhyItMatters = ({ id }: { id: string }) => {
       />
       <ProjectText className="max-w-[70ch] text-center mb-24  text-slate-200">
         This project showcases practical application of working with Large
-        Language Models (LLMs), implementing robust function calling, developing
-        the necessary secure backend APIs, and crafting an interactive frontend.
+        Language Models (LLMs) to solve complex problems by implementing robust
+        function calling.
       </ProjectText>
       <ProjectText className="text-center max-w-[60ch] text-slate-500 ">
         “Robots will not only replace existing jobs but also create new fields

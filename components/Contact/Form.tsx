@@ -15,7 +15,7 @@ export function Form() {
     }
   };
   return (
-    <div className="shadow-input w-full max-w-full md:max-w-lg rounded-non p-4 md:rounded-2xl md:p-8 bg-zinc-800/85 backdrop-blur-md">
+    <div className="shadow-input w-full max-w-full md:max-w-lg p-4 rounded-2xl md:p-8 bg-zinc-800/85 backdrop-blur-md">
       <form className="my-8" onSubmit={handleSubmit} ref={form}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="name">Name*</Label>
