@@ -1,6 +1,5 @@
 "use client";
 import { SectionHeading } from "../Headings/SectionHeading";
-import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/Timeline";
 import { PersonalAIProject } from "../Landing/Project/PersonalAI";
 import { XcuisiteProject } from "../Landing/Project/Xcuisite";
@@ -10,11 +9,7 @@ import { TimelineMobile } from "@/components/ui/TimelineMobile";
 import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 
 export function SectionProjects({ id }: { id: string }) {
-  const [isClient, setIsClient] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const data = [
     {
@@ -37,11 +32,7 @@ export function SectionProjects({ id }: { id: string }) {
     >
       <div className="h-[8dvh]" />
       <SectionHeading>Projects</SectionHeading>
-      {isMobile ? (
-        <TimelineMobile data={data} />
-      ) : (
-        <Timeline data={data} onUpdateHeight={isClient} />
-      )}
+      {isMobile ? <TimelineMobile data={data} /> : <Timeline data={data} />}
     </ScrollableSection>
   );
 }

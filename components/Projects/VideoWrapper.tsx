@@ -26,6 +26,7 @@ export function VideoWrapper({
       className={cn(
         `w-full lg:w-[${width}] h-auto lg:h-[${height}] bg-gray-800 animate-pulse`
       )}
+      style={{ height }}
     />
   );
 
