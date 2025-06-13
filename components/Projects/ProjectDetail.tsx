@@ -3,6 +3,9 @@
 import { ReactNode } from "react";
 import { VideoWrapper } from "./VideoWrapper";
 import Image from "next/image";
+import { ProjectTextBox } from "./ProjectTextBox";
+import { ProjectGrid } from "./ProjectGrid";
+import { cn } from "@/app/utils/cn";
 
 export function ProjectDetail({
   videoSrc,
@@ -25,11 +28,7 @@ export function ProjectDetail({
 }) {
   const imgHeght = parseInt(height.replace("px", ""));
   return (
-    <div
-      className={`w-full grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
-        multipleCol ? "lg:grid-cols-[5fr_3fr] gap-x-8 gap-y-8" : ""
-      }`}
-    >
+    <ProjectGrid className={className} multipleCol={multipleCol}>
       {videoSrc && (
         <VideoWrapper src={videoSrc} height={height} width={`${width}px`} />
       )}
@@ -43,7 +42,11 @@ export function ProjectDetail({
           loading="lazy"
         />
       )}
-      <div className="h-full place-content-center text-center">{children}</div>
-    </div>
+      <ProjectTextBox
+        className={cn(multipleCol && "max-w-[70ch] lg:max-w-[50ch]")}
+      >
+        {children}
+      </ProjectTextBox>
+    </ProjectGrid>
   );
 }

@@ -9,10 +9,12 @@ function PersonalAIProject() {
   return (
     <ScrollableSection id="personal-assistant">
       <ProjectHeading>Personal AI Assistant</ProjectHeading>
-      <ProjectDetail videoSrc="/videos/portfolio/conversation.mp4" multipleCol>
-        <ProjectText className="max-w-[33ch]">
-          Fine-tuned AI to handle queries.
-        </ProjectText>
+      <ProjectDetail
+        className="sm:text-center"
+        videoSrc="/videos/portfolio/conversation.mp4"
+        multipleCol
+      >
+        <ProjectText>Fine-tuned AI to handle queries.</ProjectText>
         <LinkPreview
           url="https://github.com/ZSHenChan/Portfolio-Web"
           className="text-xl lg:text-3xl font-bold"
@@ -20,7 +22,11 @@ function PersonalAIProject() {
           Github
         </LinkPreview>
       </ProjectDetail>
-      <ProjectDetail videoSrc="/videos/portfolio/scroll.mp4" multipleCol>
+      <ProjectDetail
+        className="sm:text-center"
+        videoSrc="/videos/portfolio/scroll.mp4"
+        multipleCol
+      >
         <ProjectText>Action Execution</ProjectText>
         <LinkPreview
           url="./projects/personal-ai"

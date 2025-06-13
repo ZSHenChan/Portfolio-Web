@@ -105,7 +105,7 @@ export const LinkPreview = ({
             <HoverCardPrimitive.Trigger
               onMouseMove={handleMouseMove}
               className={cn(
-                "text-transparent bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text",
+                "text-transparent bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-xl lg:text-2xl font-bold align-self-center flex justify-center mx-auto",
                 className
               )}
               href={url}
@@ -117,7 +117,7 @@ export const LinkPreview = ({
           <HoverCardPrimitive.Trigger
             onMouseMove={handleMouseMove}
             className={cn(
-              "text-transparent bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text",
+              "text-transparent bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-xl lg:text-2xl font-bold align-self-center flex justify-center mx-auto",
               className
             )}
             href={url}

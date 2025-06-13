@@ -8,7 +8,11 @@ export function AutomtionManagerProject() {
   return (
     <ScrollableSection id="automation-manager">
       <ProjectHeading>Internship - Rohde &amp; Schwarz</ProjectHeading>
-      <ProjectDetail imgSrc="/image/am.jpeg" width={600}>
+      <ProjectDetail
+        className="sm:text-center"
+        imgSrc="/image/am.jpeg"
+        width={600}
+      >
         <ProjectHeading className="lg:text-2xl font-bold">
           Automation Manager
         </ProjectHeading>

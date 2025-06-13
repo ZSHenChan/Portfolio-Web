@@ -2,6 +2,8 @@
 
 import { ReactNode } from "react";
 import { Compare } from "@/components/ui/Compare";
+import { ProjectTextBox } from "@/components/Projects/ProjectTextBox";
+import { ProjectGrid } from "@/components/Projects/ProjectGrid";
 
 export function CompareDetail({
   firstImage,
@@ -19,11 +21,7 @@ export function CompareDetail({
   className?: string;
 }) {
   return (
-    <div
-      className={`w-full grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
-        multipleCol ? "lg:grid-cols-[5fr_3fr] gap-x-8 gap-y-8" : ""
-      }`}
-    >
+    <ProjectGrid className={className} multipleCol={multipleCol}>
       <Compare
         firstImage={firstImage}
         secondImage={secondImage}
@@ -33,7 +31,7 @@ export function CompareDetail({
         slideMode={slideMode}
       />
 
-      <div className="h-full place-content-center text-center">{children}</div>
-    </div>
+      <ProjectTextBox>{children}</ProjectTextBox>
+    </ProjectGrid>
   );
 }

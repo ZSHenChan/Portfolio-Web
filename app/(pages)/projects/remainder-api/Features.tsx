@@ -21,13 +21,13 @@ export function Features({ id }: { id: string }) {
         <ProjectHeading className="lg:text-start">
           Secured Access
         </ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - Utilizes ASP.NET Core Identity to keep track of current users.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - Employs Password authentication for simplified login process.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText className="">
           - Uses encrypted Jwt tokens for secured transactions and access to
           database.
         </ProjectText>
@@ -42,15 +42,15 @@ export function Features({ id }: { id: string }) {
         <ProjectHeading className="lg:text-start">
           Seamless AI Integration
         </ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className=" sm:mb-4">
           - Secure JWT authentication (persistent tokens) enables seamless
           integration with external services, including AI, for reminder
           modification.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className=" sm:mb-4">
           - Designed to support features like automatic task prioritization
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText className="max-w-[70ch] lg:max-w-[50ch]">
           - Effortless integration with scheduling tools or AI agents for
           managing meeting reminders for attendees.
         </ProjectText>
@@ -65,14 +65,14 @@ export function Features({ id }: { id: string }) {
         <ProjectHeading className="lg:text-start">
           Data Validation
         </ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - Validation is performed before modifying data.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - The ModelState filter detects malformed data and invalid input
           fields.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText className="">
           - Always return detailed response to simplify debugging process.
         </ProjectText>
       </CompareDetail>

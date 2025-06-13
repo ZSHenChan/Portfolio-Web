@@ -5,7 +5,7 @@ import { ScrollableSection } from "../layout/ScrollableSection";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 const words =
-  "I'm a software engineer specializing in building fullstack web applications using <b>React and <b>.NET. I love building efficient APIs and web services that make life easier by cutting out repetitive tasks and helping people focus on what matters. I love exploring new ways <b>AI can intersect with practical software development, while ensuring <b>intuitive usage.";
+  "I bridge the gap between AI and <b>software, developing intelligent applications that solve real-world business challenges and streamline repetitive operations. I'm passionate about discovering how <b>AI can intersect with practical software development to create genuinely <b>intuitive solutions.";
 
 export const SectionAbout = ({ id }: { id: string }) => {
   return (
@@ -14,7 +14,7 @@ export const SectionAbout = ({ id }: { id: string }) => {
         <div className="h-[18dvh]"></div>
         <SectionHeading>About Me</SectionHeading>
         <TextGenerateEffect
-          className="text-center text-2xl gap-5"
+          className="text-center text-lg lg:text-2xl gap-5"
           textContainerClass="md:leading-[1.6]"
           delay={0}
           filter={false}

@@ -41,7 +41,7 @@ export const Footer = () => {
   return (
     <div className="relative min-h-[45dvh] bg-black-20 py-[10dvh] px-[10dvw] flex flex-col justify-between">
       <div className="absolute top-12 h-[0.5px] w-[60%] left-[50%] translate-x-[-50%] bg-slate-200/20" />
-      <ul className="flex justify-center gap-12">
+      <ul className="flex flex-col lg:flex-row justify-center text-center mb-8 gap-4 lg:gap-12">
         {footerLinks.map((item) => (
           <li key={item.name}>
             <Link
@@ -69,7 +69,8 @@ export const Footer = () => {
         ))}
       </ul>
       <p className="text-center text-slate-600">
-        &copy; {year} Zi Shen Chan. All Rights Reserved.
+        &copy; {year} Zi Shen Chan. All Rights Reserved. Last update: 13 June
+        2025
       </p>
     </div>
   );

@@ -56,7 +56,11 @@ export async function fetchFunctionCalls(conversation: string) {
     },
   });
   const funcCall = response.functionCalls ? response.functionCalls[0] : null;
-  console.log(`Function Call Text: ${response.text}`);
+  if (funcCall) {
+    console.log(`Function call found`);
+    console.log(funcCall);
+    console.log(`Function Call Text: ${response.text}`);
+  }
   return {
     functionCall: funcCall,
     functionMessage: response.text,

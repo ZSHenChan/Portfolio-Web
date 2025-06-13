@@ -10,7 +10,7 @@ export function HeroVideo({ id }: { id: string }) {
   return (
     <ScrollableSection id={id}>
       <SectionHeading>What Can It Do</SectionHeading>
-      <ProjectText className="text-center">
+      <ProjectText className="text-center px-[1rem] lg:px-0">
         Integrate into different parts of the ecosystem — like chatbots, apps,
         or web services.
       </ProjectText>
@@ -19,13 +19,13 @@ export function HeroVideo({ id }: { id: string }) {
         multipleCol={false}
         height="500px"
         width={750}
-        className="mb-[20dvh]"
+        className="mb-[20dvh] text-center"
       >
         <ProjectText className="tracking-wider">
           Access your reminders anywhere, anytime.
         </ProjectText>
         <LinkPreview
-          className="text-xl lg:text-3xl font-bold py-0"
+          className="text-xl lg:text-3xl font-bold py-0 block"
           url="https://github.com/ZSHenChan/reminderApi"
         >
           Github

@@ -9,7 +9,7 @@ export function ProjectHeading({
 }) {
   return (
     <h3
-      className={`text-zinc-300 text-xl md:text-3xl font-bold mb-8 ${className}`}
+      className={`text-zinc-300 text-center text-xl md:text-3xl font-bold mb-8 ${className}`}
     >
       {children}
     </h3>
