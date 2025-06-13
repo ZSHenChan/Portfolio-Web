@@ -16,20 +16,18 @@ export const Features = ({ id }: { id: string }) => {
         videoSrc="/videos/portfolio/conversation.mp4"
         multipleCol
         height="300px"
-        className="place-items-center mb-[10dvh]"
+        className="mb-[10dvh] text-start place-items-center"
       >
-        <ProjectHeading className="lg:text-start">
-          Trustworthy Answers
-        </ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectHeading>Trustworthy Answers</ProjectHeading>
+        <ProjectText className="sm:mb-4">
           - Information Retrieval from RAG architecture ensures users get the
           updated answer.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - Focused on delivering accurate answers grounded in my portfolio
           data, ensuring information is readily accessible.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText>
           - Can&apos;t fit all the FAQs in a website? Let AI handle them!
         </ProjectText>
       </ProjectDetail>
@@ -43,18 +41,16 @@ export const Features = ({ id }: { id: string }) => {
         videoSrc="/videos/portfolio/scroll.mp4"
         multipleCol
         height="300px"
-        className="place-items-center mb-[10dvh]"
+        className="mb-[10dvh] place-items-center"
       >
-        <ProjectHeading className="lg:text-start">Navigation</ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectHeading>Navigation</ProjectHeading>
+        <ProjectText className="sm:mb-4">
           - Scrolling to target section upon request.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectText className="sm:mb-4">
           - Offers help when needed.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
-          - &quot;show me your projects section!&quot;
-        </ProjectText>
+        <ProjectText>- &quot;show me your projects section!&quot;</ProjectText>
       </ProjectDetail>
 
       <ProjectDetail
@@ -63,11 +59,11 @@ export const Features = ({ id }: { id: string }) => {
         height="300px"
         className="place-items-center mb-[10dvh]"
       >
-        <ProjectHeading className="lg:text-start">Email Sending</ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectHeading>Email Sending</ProjectHeading>
+        <ProjectText className="sm:mb-4">
           - It is always better to have someone to do the job for you!
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText>
           - Say &quot;Send an email to Zi Shen&quot;. He knows what to do.
         </ProjectText>
       </ProjectDetail>
@@ -78,13 +74,11 @@ export const Features = ({ id }: { id: string }) => {
         height="300px"
         className="place-items-center mb-[10dvh]"
       >
-        <ProjectHeading className="lg:text-start">
-          Reminders Creation
-        </ProjectHeading>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+        <ProjectHeading>Reminders Creation</ProjectHeading>
+        <ProjectText className="sm:mb-4">
           - Allows visitors to leave actionable follow-up requests.
         </ProjectText>
-        <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+        <ProjectText>
           - &quot;Remind Zi Shen to reply to my invitation for meeting this
           after at 3pm.&quot;
         </ProjectText>

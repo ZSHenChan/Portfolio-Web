@@ -12,6 +12,7 @@ export const useMediaQuery = (query: string) => {
         setMatches(true);
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const listener = (event: any) => setMatches(event.matches);
       media.addEventListener("change", listener);
 

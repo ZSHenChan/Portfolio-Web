@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { cn } from "@/app/utils/cn";
 
 export function ProjectText({
   children,
@@ -8,7 +9,7 @@ export function ProjectText({
   className?: string;
 }) {
   return (
-    <p className={`text-neutral-200 text-sm lg:text-lg mb-8 ${className}`}>
+    <p className={cn("text-neutral-200 text-sm lg:text-lg mb-4", className)}>
       {children}
     </p>
   );

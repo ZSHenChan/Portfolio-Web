@@ -28,23 +28,21 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             Contextualization
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - User query and chat history are processed by a dedicated LLM
             (Summary Agent).
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - A refined query enriched with conversational context is returned
             to assist semantic searching and function retrieval.
           </ProjectText>
-          <span className="text-center">
-            image source:{" "}
-            <LinkPreview
-              className="text-xl lg:text-2xl font-bold"
-              url="https://github.com/neuml/txtai"
-            >
-              txtai
-            </LinkPreview>
-          </span>
+
+          <LinkPreview
+            className="text-xl lg:text-2xl font-bold"
+            url="https://github.com/neuml/txtai"
+          >
+            image source: txtai
+          </LinkPreview>
         </ProjectDetail>
 
         <ProjectDetail
@@ -56,14 +54,14 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             Parallel Processing: RAG
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Contextualized query is sent to Azure Function App for{" "}
             <strong>
               <u>semantic searching</u>
             </strong>
             .
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - Concurrently, the contextualized query is analyzed by another
             specialized LLM (Function Call Agent).
           </ProjectText>
@@ -104,11 +102,11 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             Parallel Processing: Function Intent
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Predefined functions with required parameters and context to
             handle specific tasks.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - The LLM determines when to use a function and extracts parameters
             from the user&apos;s prompt
           </ProjectText>
@@ -130,14 +128,14 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             Final Synthesis
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - All the necessary information is gathered and ready to be crafted
             into final prompt.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - A final api request is sent to obtain a conversational response.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - Executes function call retrieved earlier and simultaneously update
             chat window.
           </ProjectText>
@@ -156,22 +154,19 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             RAG Semantic Searching
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Create embeddings, indexing data and perform meaningful search to
             extract needed information.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - Use LLMs to generate responses based on the retrieved data.
           </ProjectText>
-          <span className="text-center">
-            image source:{" "}
-            <LinkPreview
-              className="text-xl lg:text-2xl font-bold"
-              url="https://github.com/neuml/txtai"
-            >
-              txtai
-            </LinkPreview>
-          </span>
+          <LinkPreview
+            className="text-xl lg:text-2xl font-bold"
+            url="https://github.com/neuml/txtai"
+          >
+            image source: txtai
+          </LinkPreview>
         </ProjectDetail>
 
         <ProjectDetail
@@ -183,14 +178,14 @@ export const BeyondTheVeil = ({ id }: { id: string }) => {
           <ProjectHeading className="lg:text-start">
             Data Indexing
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Transforms text data into{" "}
             <strong>
               <u>vector embeddings</u>
             </strong>{" "}
             using transformer model.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - Store vector embeddings in an efficient{" "}
             <strong>index structure</strong> (FAISS) for fast approximate
             nearest neighbour search.

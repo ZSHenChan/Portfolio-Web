@@ -15,7 +15,7 @@ export const ScrollableSection = ({
   useScrollTargetRegistration(id);
 
   return (
-    <section id={id} className={className}>
+    <section id={id} className={`mb-[10dvh] lg:mb-[25dvh] w-full ${className}`}>
       {children}
     </section>
   );

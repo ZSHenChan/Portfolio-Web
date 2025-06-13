@@ -2,6 +2,7 @@
 
 import { ProjectVideo } from "./ProjectVideo";
 import { useEffect, useState } from "react";
+import { cn } from "@/app/utils/cn";
 
 export function VideoWrapper({
   height = "300px",
@@ -22,8 +23,9 @@ export function VideoWrapper({
     <ProjectVideo src={src} height={height} />
   ) : (
     <div
-      className={`w-full bg-gray-800 animate-pulse`}
-      style={{ height, width }}
+      className={cn(
+        `w-full lg:w-[${width}] h-auto lg:h-[${height}] bg-gray-800 animate-pulse`
+      )}
     />
   );
 

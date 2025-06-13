@@ -73,11 +73,11 @@ catch (DbUpdateException ex)
           <ProjectHeading className="lg:text-start">
             Global Exception Handling
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Handles exception globally (even within controllers) - Reduced
             nested try blocks.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Returns relevant message to user when exceptions are triggered.
           </ProjectText>
         </CodeDetail>
@@ -111,22 +111,24 @@ app.UseAuthorization();`}
           <ProjectHeading className="lg:text-start">
             Access Control and Security Policies
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Configured CORS to manage cross-origin requests, enabling secure
             frontend integration.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - Authentication and Authorization.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch]">
+          <ProjectText>
             - Implemented rate limiting as a safety precaution.
           </ProjectText>
-          <LinkPreview
-            className="text-xl lg:text-2xl font-bold"
-            url="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0"
-          >
-            .NET Documentations
-          </LinkPreview>
+          <div className="text-center">
+            <LinkPreview
+              className="text-xl lg:text-2xl font-bold"
+              url="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0"
+            >
+              .NET Documentations
+            </LinkPreview>
+          </div>
         </CodeDetail>
 
         <ProjectDetail
@@ -138,11 +140,11 @@ app.UseAuthorization();`}
           <ProjectHeading className="lg:text-start">
             Request Routing &amp; Config.
           </ProjectHeading>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - UseHttpsRedirection - redirects http to https connection for more
             security.
           </ProjectText>
-          <ProjectText className="text-center lg:text-start max-w-[70ch] lg:max-w-[50ch] sm:mb-4">
+          <ProjectText className="sm:mb-4">
             - MapControllers routes incoming requests to the appropriate
             controller actions, enabling easy extension with new features.
           </ProjectText>

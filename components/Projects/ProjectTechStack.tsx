@@ -33,7 +33,7 @@ export const ProjectTechStack = ({
   return (
     <>
       <SectionHeading>{title}</SectionHeading>
-      <ul className="flex justify-center min-w-full shrink-0 gap-4 py-1 w-max flex-nowrap mb-8">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] align-items-center lg:flex px-8 justify-center min-w-full gap-4 py-1 w-max mb-8">
         {cardItemList.map((item: InfiniteCardInterface) => InfiniteCard(item))}
       </ul>
       <ProjectText className="text-center">{postTitle}</ProjectText>

@@ -86,6 +86,7 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
           "reminder-api",
           "xcuisite",
           "sccc",
+          "hologram",
           "personal-assistant",
           "automation-manager",
         ],

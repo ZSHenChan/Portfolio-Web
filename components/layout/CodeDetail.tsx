@@ -2,6 +2,8 @@
 
 import { ReactNode } from "react";
 import { CodeBlock } from "../ui/code-block";
+import { ProjectTextBox } from "../Projects/ProjectTextBox";
+import { ProjectGrid } from "../Projects/ProjectGrid";
 
 export function CodeDetail({
   language,
@@ -21,18 +23,14 @@ export function CodeDetail({
   className?: string;
 }) {
   return (
-    <div
-      className={`w-full grid grid-cols-1 gap-4 text-start mb-8 ${className} ${
-        multipleCol ? "lg:grid-cols-[5fr_3fr] gap-x-8 gap-y-8" : ""
-      }`}
-    >
+    <ProjectGrid multipleCol={multipleCol} className={className}>
       <CodeBlock
         language={language}
         filename={filename}
         code={code}
         highlightLines={highlightLines}
       />
-      <div className="h-full place-content-center text-center">{children}</div>
-    </div>
+      <ProjectTextBox>{children}</ProjectTextBox>
+    </ProjectGrid>
   );
 }
