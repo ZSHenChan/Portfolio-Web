@@ -5,9 +5,6 @@ import { ScrollableSection } from "../layout/ScrollableSection";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 const words =
-  "I'm a software engineer focused on integrating AI into <b>software, building applications that solve complex company problems and automate repetitive tasks. I'm passionate about discovering how <b>AI can intersect with practical software development to create genuinely <b>intuitive solutions.";
-
-const words2 =
   "I bridge the gap between AI and <b>software, developing intelligent applications that solve real-world business challenges and streamline repetitive operations. I'm passionate about discovering how <b>AI can intersect with practical software development to create genuinely <b>intuitive solutions.";
 
 export const SectionAbout = ({ id }: { id: string }) => {
@@ -21,7 +18,7 @@ export const SectionAbout = ({ id }: { id: string }) => {
           textContainerClass="md:leading-[1.6]"
           delay={0}
           filter={false}
-          words={words2}
+          words={words}
         />
       </ScrollableSection>
     </>
