@@ -14,7 +14,7 @@ import {
   fetchWithRetryResponse,
 } from "../utils/fetchWithRetry";
 
-// const BASE_URL = env.NEXT_PUBLIC_REMINDER_API_URL;
+// const BASE_URL = env.NEXT_PUBLIC_LOCAL_REMINDER_API_URL;
 const BASE_URL = env.NEXT_PUBLIC_AZURE_REMINDER_API_URL;
 const REMINDER_URL = `${BASE_URL}/reminder`;
 
@@ -27,6 +27,7 @@ interface GetRemindersResponse {
 export interface AddReminderResponse {
   error: boolean;
   message: string;
+  details: string | null;
 }
 
 export interface QueryObject {
@@ -88,12 +89,13 @@ async function addReminders(reminder: Reminder): Promise<AddReminderResponse> {
       return {
         error: true,
         message: "Unable to add reminder",
+        details: response.errMsg,
       };
     }
-    console.log(`Response: ${responseJson}`);
     return {
       error: false,
       message: "Reminder added successfully",
+      details: null,
     };
   } catch (err) {
     const message = getErrorMessage(err);
@@ -101,6 +103,7 @@ async function addReminders(reminder: Reminder): Promise<AddReminderResponse> {
     return {
       error: true,
       message: "Something went wrong",
+      details: message,
     };
   }
 }

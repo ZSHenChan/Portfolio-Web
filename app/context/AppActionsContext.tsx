@@ -28,6 +28,7 @@ export const AppActionsContextProvider: React.FC<{
     async (reminder: Reminder) => {
       const response = await addReminders(reminder);
       if (response.error) {
+        console.error(response.details);
         reportErrorMessage(response.message);
       } else {
         setReminderCounter((prev) => prev + 1);

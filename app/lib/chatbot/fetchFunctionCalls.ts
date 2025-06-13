@@ -8,11 +8,12 @@ import {
   navigateProjectsDeclaration,
   addNewReminderDeclaration,
 } from "./functionCalls";
+import { getErrorMessage } from "@/app/utils/handleReport";
 
 const GOOGLE_CONSOLE_API_KEY = envServer.GOOGLE_CONSOLE_API_KEY;
 
 export interface fetchFunctionCallResponse {
-  functionCall: FunctionCall;
+  functionCall: FunctionCall | undefined;
   functionMessage: string;
   error: boolean;
 }
@@ -34,36 +35,48 @@ for 'navigateSection' and 'navigateProject' function, only return the function c
 
 export async function fetchFunctionCalls(conversation: string) {
   // console.log(`Query: ${request.query}`);
-  const ai = new GoogleGenAI({ apiKey: GOOGLE_CONSOLE_API_KEY });
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash-001",
-    contents: `
+  try {
+    const ai = new GoogleGenAI({ apiKey: GOOGLE_CONSOLE_API_KEY });
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash-001",
+      contents: `
     instructions: 
     ${instructions}
     conversation: 
     ${conversation}`,
-    config: {
-      tools: [
-        {
-          functionDeclarations: [
-            navigateSectionDeclaration,
-            sendEmailDeclaration,
-            navigateProjectsDeclaration,
-            addNewReminderDeclaration,
-          ],
-        },
-      ],
-    },
-  });
-  const funcCall = response.functionCalls ? response.functionCalls[0] : null;
-  if (funcCall) {
-    console.log(`Function call found`);
-    console.log(funcCall);
-    console.log(`Function Call Text: ${response.text}`);
+      config: {
+        tools: [
+          {
+            functionDeclarations: [
+              navigateSectionDeclaration,
+              sendEmailDeclaration,
+              navigateProjectsDeclaration,
+              addNewReminderDeclaration,
+            ],
+          },
+        ],
+      },
+    });
+    const funcCall = response.functionCalls
+      ? response.functionCalls[0]
+      : undefined;
+    // if (funcCall) {
+    //   console.log(`Function call found`);
+    //   console.log(funcCall);
+    //   console.log(`Function Call Text: ${response.text}`);
+    // }
+    return {
+      functionCall: funcCall,
+      functionMessage: response.text,
+      error: false,
+    } as fetchFunctionCallResponse;
+  } catch (err) {
+    const errMsg = getErrorMessage(err);
+    console.error(errMsg);
+    return {
+      functionCall: undefined,
+      functionMessage: "Error fetching functions",
+      error: true,
+    } as fetchFunctionCallResponse;
   }
-  return {
-    functionCall: funcCall,
-    functionMessage: response.text,
-    error: false,
-  } as fetchFunctionCallResponse;
 }

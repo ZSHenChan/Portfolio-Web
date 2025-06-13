@@ -18,7 +18,7 @@ That is all of the instructions.`;
 export async function generatePrompt(
   conversationHistoryString: string,
   searchResults: string[] = [],
-  functionCall: FunctionCall | null,
+  functionCall: FunctionCall | undefined,
   functionMessage: string | null = ""
 ) {
   const functionCallInstruction = functionCall?.name

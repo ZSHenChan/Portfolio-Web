@@ -1,3 +1,5 @@
+"use client";
+
 import { env } from "@/app/env/client";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";

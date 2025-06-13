@@ -72,13 +72,16 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       .map((conv: Conversation) => conv.role + ": " + conv.content)
       .join("\n");
     // console.log(conversationHistory);
-    const searchQuery = await fetchSearchQueryPrompt(
-      conversationHistoryString,
-      conversationHistory[conversationHistory.length - 1].content
-    );
-    const searchResults = await fetchSearchResults(searchQuery);
     const functionCallResponse: fetchFunctionCallResponse =
       await fetchFunctionCalls(conversationHistoryString);
+    let searchResults = undefined;
+    if (!functionCallResponse.error && functionCallResponse.functionCall) {
+      const searchQuery = await fetchSearchQueryPrompt(
+        conversationHistoryString,
+        conversationHistory[conversationHistory.length - 1].content
+      );
+      searchResults = await fetchSearchResults(searchQuery);
+    }
 
     const prompt = await generatePrompt(
       conversationHistoryString,
