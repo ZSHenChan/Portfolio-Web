@@ -41,10 +41,10 @@ export function ReminderGrid() {
 
       const newReminder = {
         id: reminders.length + 1,
-        title: funcCall.args?.title || "No title",
-        description: funcCall.args?.description || "",
-        dueDate: funcCall.args?.dueDate || "2020-10-01",
-        reminderType: funcCall.args?.reminderType || ReminderType.Work,
+        title: funcCall?.args?.title || "No title",
+        description: funcCall?.args?.description || "",
+        dueDate: funcCall?.args?.dueDate || "2020-10-01",
+        reminderType: funcCall?.args?.reminderType || ReminderType.Work,
         status: ReminderStatus.Pending,
         priority: PriorityType.Low,
       } as Reminder;
