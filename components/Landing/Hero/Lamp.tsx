@@ -2,20 +2,13 @@
 import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
-import { ResumeButton } from "./ResumeButton";
 import { FadeUpInView } from "../../ui/FadeUpInView";
 import { ScrollableSection } from "../../layout/ScrollableSection";
 
-export function Lamp() {
+export function Lamp({ children }: { children: React.ReactNode }) {
   return (
     <LampContainer>
-      <FadeUpInView className="text-center">
-        <h1 className="bg-gradient-to-br text-transparent from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-5xl lg:text-7xl mb-4">
-          My name is Zi Shen <br />
-          <br />I bring AI to life
-        </h1>
-        <ResumeButton />
-      </FadeUpInView>
+      <FadeUpInView className="text-center">{children} </FadeUpInView>
     </LampContainer>
   );
 }
@@ -31,7 +24,7 @@ export const LampContainer = ({
     <ScrollableSection
       id="hero"
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
+        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0 mb-0 lg:mb-0",
         className
       )}
     >

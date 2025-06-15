@@ -11,6 +11,7 @@ interface AppActionsContextProps {
   reminderCounter: number;
   addReminderAction: (reminder: Reminder) => Promise<void>;
   sendEmailAction: (email: Email) => void;
+  showProjectDemo: (url: string) => void;
 }
 
 const AppActionsContext = createContext<AppActionsContextProps | undefined>(
@@ -42,11 +43,16 @@ export const AppActionsContextProvider: React.FC<{
     sendEmail(email);
   }, []);
 
+  const showProjectDemo: (url: string) => void = useCallback((url) => {
+    window.open(url);
+  }, []);
+
   const AppActionsContextValue: AppActionsContextProps = {
     router,
     reminderCounter,
     addReminderAction,
     sendEmailAction,
+    showProjectDemo,
   };
 
   return (

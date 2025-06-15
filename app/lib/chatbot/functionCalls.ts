@@ -17,6 +17,10 @@ functionCallDict.set(
   "addNewReminder",
   "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
 );
+functionCallDict.set(
+  "showProjectDemo",
+  "Notify the user a new tab will be open for the project demo."
+);
 
 const addNewReminderDeclaration: FunctionDeclaration = {
   name: "addNewReminder",
@@ -125,9 +129,26 @@ const sendEmailDeclaration: FunctionDeclaration = {
   },
 };
 
-export {
+const showProjectDemo: FunctionDeclaration = {
+  name: "showProjectDemo",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Show user the demo of a specific project.",
+    properties: {
+      name: {
+        type: Type.STRING,
+        description: "The name of project to show user.",
+        enum: ["reminder-api", "xcuisite", "personal-assistant"],
+      },
+    },
+    required: ["name"],
+  },
+};
+
+export const functionCallList = [
   sendEmailDeclaration,
   navigateProjectsDeclaration,
   navigateSectionDeclaration,
   addNewReminderDeclaration,
-};
+  showProjectDemo,
+];

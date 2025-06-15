@@ -5,7 +5,7 @@ import { ScrollableSection } from "../layout/ScrollableSection";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 const words =
-  "I bridge the gap between AI and <b>software, developing intelligent applications that solve real-world business challenges and streamline repetitive operations. I'm passionate about discovering how <b>AI can intersect with practical software development to create genuinely <b>intuitive solutions.";
+  "I bridge the gap between AI and <b>software by developing intelligent applications that solve real-world business challenges and streamline repetitive operations. I love discovering how <b>AI can intersect with practical software development to create genuinely <b>intuitive solutions.";
 
 export const SectionAbout = ({ id }: { id: string }) => {
   return (
