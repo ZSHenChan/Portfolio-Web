@@ -29,28 +29,31 @@ export async function fetchSearchQueryPrompt(
     return response.text ?? fallbackQuery;
   } catch (err) {
     const errMsg = getErrorMessage(err);
-    console.error(`Error while fetching search query: ${errMsg}`);
+    console.error(
+      `Error while fetching search query: ${errMsg}. Using user last message`
+    );
     return fallbackQuery;
   }
 }
 
 export async function fetchSearchResults(query: string, limit: number = 3) {
   try {
-    const res = (await fetchWithRetry(
-      `${envServer.TXTAI_BASE_URL}&limit=${limit}&query=${query}`
-    )) as fetchWithRetryResponse;
+    const res = (await fetchWithRetry(envServer.TXTAI_BASE_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        "query": query,
+        "limit": limit,
+      }) as BodyInit,
+    } as RequestInit)) as fetchWithRetryResponse;
     if (!res.response) {
       console.error(res.errMsg);
       return [];
     }
     const resJson = res.response;
-    console.log(`Search Result: ${resJson.length}`);
-    // for (const result of resJson) {
-    //   console.log(`Search Result ${result.score}: ${result.answer}`);
-    // }
     return [...resJson?.map((result: { "answer": string }) => result.answer)];
   } catch (err) {
     const errMsg = getErrorMessage(err);
+    console.error(err);
     console.error(`Error while fetching search results: ${errMsg}`);
     return [];
   }

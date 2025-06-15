@@ -62,6 +62,8 @@ function initiateChatSession() {
 
 const chatSession = initiateChatSession();
 
+const debugMode = false;
+
 export async function fetchChatbotReply(request: Request): Promise<Reply> {
   // console.log(request.chatHistory);
   try {
@@ -74,13 +76,29 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     // console.log(conversationHistory);
     const functionCallResponse: fetchFunctionCallResponse =
       await fetchFunctionCalls(conversationHistoryString);
+    if (debugMode) {
+      console.log("=== Fetch Function Call Pass ===");
+      if (functionCallResponse.functionCall) {
+        console.log(`Function call found`);
+        console.log(functionCallResponse.functionCall);
+        console.log(
+          `Function Call Text: ${functionCallResponse.functionMessage}`
+        );
+      }
+    }
     let searchResults = undefined;
-    if (!functionCallResponse.error && functionCallResponse.functionCall) {
+    if (!functionCallResponse.error && !functionCallResponse.functionCall) {
       const searchQuery = await fetchSearchQueryPrompt(
         conversationHistoryString,
         conversationHistory[conversationHistory.length - 1].content
       );
+      if (debugMode) console.log("=== Fetch Search Query Pass ===");
       searchResults = await fetchSearchResults(searchQuery);
+      if (debugMode) {
+        console.log("=== Fetch Search Results Pass ===");
+        console.log(`Found ${searchResults.length} search results`);
+        console.log(searchResults);
+      }
     }
 
     const prompt = await generatePrompt(
@@ -91,6 +109,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     );
 
     const result = await chatSession.sendMessage(prompt);
+    console.log("=== Fetch Chatbot Response Pass ===");
     const replyText = result.response.text();
     return {
       message: replyText,

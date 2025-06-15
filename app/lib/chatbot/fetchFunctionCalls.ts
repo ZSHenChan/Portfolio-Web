@@ -2,12 +2,7 @@
 
 import { FunctionCall, GoogleGenAI } from "@google/genai";
 import { envServer } from "@/app/env/server";
-import {
-  navigateSectionDeclaration,
-  sendEmailDeclaration,
-  navigateProjectsDeclaration,
-  addNewReminderDeclaration,
-} from "./functionCalls";
+import { functionCallList } from "./functionCalls";
 import { getErrorMessage } from "@/app/utils/handleReport";
 
 const GOOGLE_CONSOLE_API_KEY = envServer.GOOGLE_CONSOLE_API_KEY;
@@ -31,6 +26,7 @@ Otherwise, *DO NOT* return any response. Simply return empty message.
 for 'addNewReminder' funciton, return function when user ask to remind Zi Shen something. Default date is ${dateString}. 
 for 'sendEmail' function, only return the function call if the requirements are all met. Otherwise, wait for the user provide needed content.
 for 'navigateSection' and 'navigateProject' function, only return the function call if the user explicitly ask to navigate with keywords like 'bring me to' and 'show me'. Otherwise, wait for confirmation from the user with the chatbot.
+for 'showProjectDemo', only return the function call if the user explicitly ask to show them with keywords like 'show me the demo of this project'. Otherwise, wait for confirmation from the user with the chatbot.
 `;
 
 export async function fetchFunctionCalls(conversation: string) {
@@ -47,12 +43,7 @@ export async function fetchFunctionCalls(conversation: string) {
       config: {
         tools: [
           {
-            functionDeclarations: [
-              navigateSectionDeclaration,
-              sendEmailDeclaration,
-              navigateProjectsDeclaration,
-              addNewReminderDeclaration,
-            ],
+            functionDeclarations: [...functionCallList],
           },
         ],
       },
@@ -60,11 +51,6 @@ export async function fetchFunctionCalls(conversation: string) {
     const funcCall = response.functionCalls
       ? response.functionCalls[0]
       : undefined;
-    // if (funcCall) {
-    //   console.log(`Function call found`);
-    //   console.log(funcCall);
-    //   console.log(`Function Call Text: ${response.text}`);
-    // }
     return {
       functionCall: funcCall,
       functionMessage: response.text,

@@ -61,9 +61,27 @@ const handleAddReminder = async (
   await appActions.addReminderAction(newReminder);
 };
 
+const handleShowProjectDemo = async (
+  args: Record<string, unknown> | undefined,
+  appActions: ReturnType<typeof useAppActions>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  uiState: ReturnType<typeof useUIState>
+) => {
+  const urlDict = {
+    "remainder-api": "https://reminder-demo-app.vercel.app/",
+    "xcuisite": "https://www.xcuisite.store/",
+    "personal-assistant": "https://www.zishenchan.com/projects/personal-ai",
+  } as Record<string, string>;
+  console.log(args);
+  const name = typeof args?.name === "string" ? args.name : "no";
+  const url = urlDict[name];
+  appActions.showProjectDemo(url);
+};
+
 export const functionRegistry = {
   "navigateSection": handleNavigation,
   "navigateProjects": handleNavigation,
   "addNewReminder": handleAddReminder,
   "sendEmail": handleSendEmail,
+  "showProjectDemo": handleShowProjectDemo,
 };

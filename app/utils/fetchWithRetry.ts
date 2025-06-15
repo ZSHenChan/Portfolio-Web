@@ -1,4 +1,3 @@
-import { RequestInit } from "next/dist/server/web/spec-extension/request";
 import { getErrorMessage } from "./handleReport";
 
 export interface fetchWithRetryResponse {
