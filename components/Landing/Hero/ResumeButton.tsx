@@ -1,3 +1,4 @@
+"use client";
 import { saveAs } from "file-saver";
 
 export function ResumeButton() {

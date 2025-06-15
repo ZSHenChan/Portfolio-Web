@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+import { useEffect, useRef } from "react";
+import { motion, stagger, useAnimate, useInView } from "motion/react";
 import { cn } from "@/app/utils/cn";
 
 export const TextGenerateEffect = ({
@@ -20,22 +20,26 @@ export const TextGenerateEffect = ({
 }) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
   useEffect(() => {
-    setTimeout(
-      () =>
-        animate(
-          "span",
-          {
-            opacity: 1,
-            filter: filter ? "blur(0px)" : "none",
-          },
-          {
-            duration: duration ? duration : 1,
-            delay: stagger(0.2),
-          }
-        ),
-      delay * 1000
-    );
+    if (isInView) {
+      setTimeout(
+        () =>
+          animate(
+            "span",
+            {
+              opacity: 1,
+              filter: filter ? "blur(0px)" : "none",
+            },
+            {
+              duration: duration ? duration : 1,
+              delay: stagger(0.2),
+            }
+          ),
+        delay * 500
+      );
+    }
   }, [scope.current]);
 
   const renderWords = () => {
@@ -64,7 +68,7 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn("font-bold", className)}>
+    <div ref={ref} className={cn("font-bold", className)}>
       <div className="mt-4">
         <div className={`leading-snug tracking-wide ${textContainerClass}`}>
           {renderWords()}
