@@ -10,7 +10,7 @@ function StockAiProject() {
     <ScrollableSection id="stock-ai">
       <ProjectHeading>StockAI</ProjectHeading>
       <ProjectDetail
-        videoSrc="/videos/stockAi/main-preview.mp4"
+        videoSrc="/videos/stockAI/stockai-preview.mp4"
         className="sm:text-center"
       >
         <ProjectText className="mb-2">
