@@ -4,6 +4,8 @@ import { Timeline } from "@/components/ui/Timeline";
 import { PersonalAIProject } from "../Landing/Project/PersonalAI";
 import { XcuisiteProject } from "../Landing/Project/Xcuisite";
 import { RemainderApiProject } from "../Landing/Project/RemainderApi";
+import { StockAiProject } from "./Project/StockAi";
+import { ShortcutsCalendar } from "./Project/ShortcutsCalendar";
 import { ScrollableSection } from "../layout/ScrollableSection";
 import { TimelineMobile } from "@/components/ui/TimelineMobile";
 import { useMediaQuery } from "@/app/hooks/useMediaQuery";
@@ -13,7 +15,16 @@ export function SectionProjects({ id }: { id: string }) {
 
   const data = [
     {
-      title: "2025",
+      title: "Late 2025",
+      content: (
+        <>
+          <StockAiProject />
+          <ShortcutsCalendar />
+        </>
+      ),
+    },
+    {
+      title: "Mid 2025",
       content: <RemainderApiProject />,
     },
     {

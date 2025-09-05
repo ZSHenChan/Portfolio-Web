@@ -42,7 +42,7 @@ export function Form() {
           <Input
             name="title"
             id="title"
-            placeholder="Input your title"
+            placeholder="email title"
             required
             type="text"
           />
@@ -52,7 +52,7 @@ export function Form() {
           <Input
             name="content"
             id="content"
-            placeholder="Send some comments"
+            placeholder="send some thoughts"
             type="text"
           />
         </LabelInputContainer>

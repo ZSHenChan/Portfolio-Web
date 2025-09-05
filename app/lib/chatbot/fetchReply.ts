@@ -62,7 +62,7 @@ function initiateChatSession() {
 
 const chatSession = initiateChatSession();
 
-const debugMode = false;
+const debugMode = true;
 
 export async function fetchChatbotReply(request: Request): Promise<Reply> {
   // console.log(request.chatHistory);

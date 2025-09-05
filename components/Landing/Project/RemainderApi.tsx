@@ -8,7 +8,7 @@ import { ScrollableSection } from "@/components/layout/ScrollableSection";
 function RemainderApiProject() {
   return (
     <ScrollableSection id="reminder-api">
-      <ProjectHeading>Remainder API</ProjectHeading>
+      <ProjectHeading>RemAInder API</ProjectHeading>
       <ProjectDetail
         videoSrc="/videos/remainderApi/main.mp4"
         height="300px"
