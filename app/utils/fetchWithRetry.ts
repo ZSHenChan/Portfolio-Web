@@ -12,7 +12,7 @@ export const fetchWithRetry = async (
   url: string,
   requestInit: RequestInit | undefined = undefined,
   maxRetries: number = 3,
-  delay: number = 2000 // Increased delay for cold starts
+  delay: number = 2000
 ): Promise<fetchWithRetryResponse> => {
   // Added explicit return type promise
   let lastError: Error | null = null;
@@ -23,12 +23,15 @@ export const fetchWithRetry = async (
 
       // Success path
       if (response.ok) {
-        const resJson = await response.json();
-        return { response: resJson, errMsg: null };
+        try {
+          const resJson = await response.json();
+          return { response: resJson, errMsg: null };
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (jsonErr) {
+          throw new Error(`Failed to parse JSON: ${await response.text()}`);
+        }
       }
 
-      // Handle non-successful responses
-      // Don't retry on client errors (4xx), but do retry on server errors (5xx)
       if (response.status >= 400 && response.status < 500) {
         console.error(`Client Error: ${response.status}. Not retrying.`);
         return {
@@ -37,7 +40,6 @@ export const fetchWithRetry = async (
         };
       }
 
-      // For 5xx server errors or other issues, throw to trigger a retry
       throw new Error(
         `Server Error: ${response.status} ${response.statusText}`
       );

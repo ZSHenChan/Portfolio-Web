@@ -52,6 +52,13 @@ export async function fetchSearchResults(query: string, limit: number = 3) {
     return [];
   }
 
+  if (!Array.isArray(res.response)) {
+    console.error(
+      `Unexpected response format: ${JSON.stringify(res.response)}`
+    );
+    return [];
+  }
+
   // We can be confident res.response has our data
   const searchResults = res.response;
   return [
