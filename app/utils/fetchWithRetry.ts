@@ -1,5 +1,3 @@
-// file: fetchWithRetry.ts
-
 import { getErrorMessage } from "./handleReport";
 
 export interface fetchWithRetryResponse {
@@ -28,7 +26,7 @@ export const fetchWithRetry = async (
           return { response: resJson, errMsg: null };
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (jsonErr) {
-          throw new Error(`Failed to parse JSON: ${await response.text()}`);
+          return { response: null, errMsg: "Failed to parse JSON response." };
         }
       }
 
@@ -40,9 +38,29 @@ export const fetchWithRetry = async (
         };
       }
 
-      throw new Error(
-        `Server Error: ${response.status} ${response.statusText}`
-      );
+      if (response.status >= 500 && response.status < 600) {
+        lastError = new Error(
+          `Server Error: ${response.status} ${response.statusText}`
+        );
+        console.log(
+          `Attempt ${attempt + 1} failed: ${getErrorMessage(lastError)}`
+        );
+
+        if (attempt < maxRetries - 1) {
+          console.log(`Retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+      } else {
+        // Handle other non-ok status codes, like 3xx redirects (though fetch usually handles these)
+        // or a new class of errors. For simplicity, we can treat them as non-retriable.
+        console.error(
+          `Unexpected HTTP Status: ${response.status}. Not retrying.`
+        );
+        return {
+          response: null,
+          errMsg: `Unexpected Status: ${response.statusText}`,
+        };
+      }
     } catch (err) {
       lastError = err as Error;
       console.log(
