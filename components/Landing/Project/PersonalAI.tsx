@@ -12,7 +12,6 @@ function PersonalAIProject() {
       <ProjectDetail
         className="sm:text-center"
         videoSrc="/videos/portfolio/conversation.mp4"
-        multipleCol
       >
         <ProjectText>Fine-tuned AI to handle queries.</ProjectText>
         <LinkPreview

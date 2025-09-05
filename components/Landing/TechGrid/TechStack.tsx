@@ -5,7 +5,7 @@ import { InfiniteMovingCards } from "@/components/ui/InfiniteCard";
 import { ScrollableSection } from "@/components/layout/ScrollableSection";
 import { motion } from "framer-motion";
 
-export function TechStack({ id }: { id: string }) {
+export function TechGrid({ id }: { id: string }) {
   return (
     <ScrollableSection id={id} className="mb-[25dvh]">
       <div className="h-[8dvh]" />
@@ -55,6 +55,7 @@ const iconList = [
   "react",
   "rest",
   "sass",
+  "aws",
 ];
 const testimonials = iconList
   .slice(0, iconList.length / 2)

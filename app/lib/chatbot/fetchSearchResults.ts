@@ -3,10 +3,7 @@
 import { envServer } from "@/app/env/server";
 import { getErrorMessage } from "@/app/utils/handleReport";
 import { GoogleGenAI } from "@google/genai";
-import {
-  fetchWithRetry,
-  fetchWithRetryResponse,
-} from "@/app/utils/fetchWithRetry";
+import { fetchWithRetry } from "@/app/utils/fetchWithRetry";
 
 export async function fetchSearchQueryPrompt(
   conversationHistoryString: string,
@@ -37,24 +34,27 @@ export async function fetchSearchQueryPrompt(
 }
 
 export async function fetchSearchResults(query: string, limit: number = 3) {
-  try {
-    const res = (await fetchWithRetry(envServer.TXTAI_BASE_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        "query": query,
-        "limit": limit,
-      }) as BodyInit,
-    } as RequestInit)) as fetchWithRetryResponse;
-    if (!res.response) {
-      console.error(res.errMsg);
-      return [];
-    }
-    const resJson = res.response;
-    return [...resJson?.map((result: { "answer": string }) => result.answer)];
-  } catch (err) {
-    const errMsg = getErrorMessage(err);
-    console.error(err);
-    console.error(`Error while fetching search results: ${errMsg}`);
+  // No need for a try...catch here, as fetchWithRetry handles it.
+  const res = await fetchWithRetry(envServer.TXTAI_BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Added header for clarity
+    },
+    body: JSON.stringify({
+      "query": query,
+      "limit": limit,
+    }),
+  });
+
+  // Now we can safely check res and res.response
+  if (!res.response || res.errMsg) {
+    console.error(`Error while fetching search results: ${res.errMsg}`);
     return [];
   }
+
+  // We can be confident res.response has our data
+  const searchResults = res.response;
+  return [
+    ...searchResults?.map((result: { "answer": string }) => result.answer),
+  ];
 }

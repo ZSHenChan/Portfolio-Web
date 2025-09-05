@@ -1,4 +1,4 @@
-import { TechStack } from "@/components/Landing/TechGrid/TechStack";
+import { TechGrid } from "@/components/Landing/TechGrid/TechStack";
 import { SectionProjects } from "@/components/Landing/SectionProjects";
 import { DottedBackground } from "@/components/ui/DottedBackground";
 import { SectionContact } from "@/components/Contact/SectionContact";
@@ -22,10 +22,10 @@ export default function Home() {
       <SectionHero id="hero" />
       <div className="h-[10rem] bg-gradient-to-b from-slate-950 to-transparent" />
       <SectionAbout id="about" />
-      <TechStack id="techstack" />
+      <TechGrid id="techstack" />
       <DottedBackground>
-        <SectionExperience id="experience" />
         <SectionProjects id="projects" />
+        <SectionExperience id="experience" />
         <SectionContact id="contact" />
       </DottedBackground>
     </>
