@@ -10,14 +10,22 @@ export const fetchWithRetry = async (
   url: string,
   requestInit: RequestInit | undefined = undefined,
   maxRetries: number = 3,
-  delay: number = 2000
+  delay: number = 2000,
+  timeout: number = 5000
 ): Promise<fetchWithRetryResponse> => {
   // Added explicit return type promise
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
-      const response = await fetch(url, requestInit);
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
+      const response = await fetch(url, {
+        ...requestInit,
+        signal: controller.signal,
+      });
+
+      clearTimeout(id);
 
       // Success path
       if (response && response.ok) {

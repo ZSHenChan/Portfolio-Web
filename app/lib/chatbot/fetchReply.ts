@@ -86,7 +86,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
         );
       }
     }
-    let searchResults = undefined;
+    let searchResults: string[] = [];
     if (!functionCallResponse.error && !functionCallResponse.functionCall) {
       const searchQuery = await fetchSearchQueryPrompt(
         conversationHistoryString,

@@ -1,29 +1,30 @@
 import { FunctionDeclaration, Type } from "@google/genai";
+import { FunctionCallType } from "@/app/enums/functionCall";
 
 export const functionCallDict = new Map<string, string>();
 functionCallDict.set(
-  "navigateSection",
+  FunctionCallType.NavigateSection,
   "The user is about to see the content themselves. Do not provide information about the contents in the section."
 );
 functionCallDict.set(
-  "sendEmail",
+  FunctionCallType.SendEmail,
   "Notify the user that is email is about to be sent."
 );
 functionCallDict.set(
-  "navigateProjects",
+  FunctionCallType.NavigateProjects,
   "The user is about to see the project themselves. Do not provide information about the project."
 );
 functionCallDict.set(
-  "addNewReminder",
+  FunctionCallType.AddNewReminder,
   "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
 );
 functionCallDict.set(
-  "showProjectDemo",
+  FunctionCallType.ShowProjectDemo,
   "Notify the user a new tab will be open for the project demo."
 );
 
 const addNewReminderDeclaration: FunctionDeclaration = {
-  name: "addNewReminder",
+  name: FunctionCallType.AddNewReminder,
   parameters: {
     type: Type.OBJECT,
     description: "Adding a new reminder for Zi Shen.",
@@ -59,7 +60,7 @@ const addNewReminderDeclaration: FunctionDeclaration = {
 };
 
 const navigateSectionDeclaration: FunctionDeclaration = {
-  name: "navigateSection",
+  name: FunctionCallType.NavigateSection,
   parameters: {
     type: Type.OBJECT,
     description:
@@ -76,7 +77,7 @@ const navigateSectionDeclaration: FunctionDeclaration = {
 };
 
 const navigateProjectsDeclaration: FunctionDeclaration = {
-  name: "navigateProjects",
+  name: FunctionCallType.NavigateProjects,
   parameters: {
     type: Type.OBJECT,
     description: "navigate user to a specific project.",
@@ -101,7 +102,7 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
 };
 
 const sendEmailDeclaration: FunctionDeclaration = {
-  name: "sendEmail",
+  name: FunctionCallType.SendEmail,
   parameters: {
     type: Type.OBJECT,
     description: "Help the user to send an email to zi shen.",
@@ -130,7 +131,7 @@ const sendEmailDeclaration: FunctionDeclaration = {
 };
 
 const showProjectDemo: FunctionDeclaration = {
-  name: "showProjectDemo",
+  name: FunctionCallType.ShowProjectDemo,
   parameters: {
     type: Type.OBJECT,
     description: "Show user the demo of a specific project.",

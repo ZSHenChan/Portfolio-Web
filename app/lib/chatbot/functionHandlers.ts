@@ -7,6 +7,7 @@ import {
   PriorityType,
 } from "@/app/enums/ReminderEnums";
 import { Reminder } from "@/app/interfaces/Reminder";
+import { FunctionCallType } from "@/app/enums/functionCall";
 
 const handleNavigation = async (
   args: Record<string, unknown> | undefined,
@@ -79,9 +80,9 @@ const handleShowProjectDemo = async (
 };
 
 export const functionRegistry = {
-  "navigateSection": handleNavigation,
-  "navigateProjects": handleNavigation,
-  "addNewReminder": handleAddReminder,
-  "sendEmail": handleSendEmail,
-  "showProjectDemo": handleShowProjectDemo,
+  [FunctionCallType.NavigateSection]: handleNavigation,
+  [FunctionCallType.NavigateProjects]: handleNavigation,
+  [FunctionCallType.AddNewReminder]: handleAddReminder,
+  [FunctionCallType.SendEmail]: handleSendEmail,
+  [FunctionCallType.ShowProjectDemo]: handleShowProjectDemo,
 };
