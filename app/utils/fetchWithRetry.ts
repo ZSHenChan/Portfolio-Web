@@ -20,12 +20,11 @@ export const fetchWithRetry = async (
       const response = await fetch(url, requestInit);
 
       // Success path
-      if (response.ok) {
+      if (response && response.ok) {
         try {
           const resJson = await response.json();
           return { response: resJson, errMsg: null };
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (jsonErr) {
+        } catch {
           return { response: null, errMsg: "Failed to parse JSON response." };
         }
       }
