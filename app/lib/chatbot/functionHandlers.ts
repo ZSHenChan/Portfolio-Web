@@ -8,6 +8,8 @@ import {
 } from "@/app/enums/ReminderEnums";
 import { Reminder } from "@/app/interfaces/Reminder";
 import { FunctionCallType } from "@/app/enums/functionCall";
+import { FunctionCall } from "@google/genai";
+import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
 
 const handleNavigation = async (
   args: Record<string, unknown> | undefined,
@@ -85,4 +87,29 @@ export const functionRegistry = {
   [FunctionCallType.AddNewReminder]: handleAddReminder,
   [FunctionCallType.SendEmail]: handleSendEmail,
   [FunctionCallType.ShowProjectDemo]: handleShowProjectDemo,
+};
+
+export const executeFunctionCall = async (
+  functionCall: FunctionCall | undefined,
+  appActions: ReturnType<typeof useAppActions>,
+  uiState: ReturnType<typeof useUIState>
+) => {
+  if (!functionCall) return;
+  const functionName = functionCall?.name;
+  const functionArgs = functionCall?.args;
+
+  const handler =
+    functionRegistry[functionName as keyof typeof functionRegistry];
+
+  if (handler) {
+    try {
+      await handler(functionArgs, appActions, uiState);
+    } catch (err) {
+      const errMsg = getErrorMessage(err);
+      reportError(errMsg);
+    }
+  } else {
+    reportErrorMessage("Unknown Function Called");
+    console.error(handler);
+  }
 };

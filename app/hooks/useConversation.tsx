@@ -12,7 +12,7 @@ const useConversation = () => {
     (newChats: Conversation[]) => {
       setHistory((prevHistory: Conversation[]) => {
         const updatedHistory = [...prevHistory, ...newChats];
-        if (updatedHistory.length > 10) {
+        if (updatedHistory.length > 20) {
           return updatedHistory.slice(newChats.length);
         }
         return updatedHistory;

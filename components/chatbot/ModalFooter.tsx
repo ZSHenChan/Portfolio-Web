@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ChatInstance } from "./demoChatHistory";
 import { motion } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
-import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
+import { executeFunctionCall } from "@/app/lib/chatbot/functionHandlers";
 import { v4 as uuidv4 } from "uuid";
 import { useModal } from "./Animated-Modal";
 import { ChatbotInput } from "./ChatbotInput";
@@ -73,7 +73,7 @@ export const ModalFooter = () => {
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
           ...chatHistory,
-          { id: botId, message: "Thinking...", isBot: true },
+          { id: botId, message: "...", isBot: true },
         ]),
       500
     );

@@ -121,7 +121,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     console.error(errMsg);
     return {
       message:
-        "Oops, it seems that something is happening from my end. Maybe try again later?",
+        "Oops, it seems that something is happening from my end. Maybe refresh the page and try again later?",
       error: true,
     };
   }

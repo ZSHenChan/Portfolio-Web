@@ -64,7 +64,7 @@ const navigateSectionDeclaration: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "navigate to a section of the website. Only return function when keyword navigate is detected.",
+      "navigate to a section of the website. This function should only be triggered when the user explicitly asks to be taken to a specific page or section, or confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the contact section' or 'show me your internship experiences.' Confirmation from the user must be direct and intentional.",
     properties: {
       section: {
         type: Type.STRING,
@@ -80,12 +80,13 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
   name: FunctionCallType.NavigateProjects,
   parameters: {
     type: Type.OBJECT,
-    description: "navigate user to a specific project.",
+    description:
+      "Navigates the user to a specific section of the website. This function should only be triggered when the user explicitly asks to be taken to a specific page or section, or confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the projects section' or 'show me your project xxx.' Confirmation from the user must be direct and intentional.",
     properties: {
       project: {
         type: Type.STRING,
         description:
-          "The target project to navigate to. Do not return anything if the user does not specify which project. default value to 'projects' if user did not specify which project to nagivate to.",
+          "The target project to navigate to. the first option 'projects' is the project grid where all the projects will be displayed.",
         enum: [
           "projects",
           "reminder-api",
@@ -94,6 +95,8 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
           "hologram",
           "personal-assistant",
           "automation-manager",
+          "stock-ai",
+          "event-capture",
         ],
       },
     },
@@ -105,7 +108,8 @@ const sendEmailDeclaration: FunctionDeclaration = {
   name: FunctionCallType.SendEmail,
   parameters: {
     type: Type.OBJECT,
-    description: "Help the user to send an email to zi shen.",
+    description:
+      "Sends a contact email to the website administrator on behalf of the user. This function should only be called when the user explicitly requests to send a message, and after the assistant has gathered the required information: the user's name, their email address, and the title of the email. The email content can be extracted from the conversation but is optional.",
     properties: {
       email: {
         type: Type.STRING,
