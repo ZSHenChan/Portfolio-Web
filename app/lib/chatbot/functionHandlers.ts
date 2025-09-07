@@ -10,6 +10,7 @@ import { Reminder } from "@/app/interfaces/Reminder";
 import { FunctionCallType } from "@/app/enums/functionCall";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
+import { PROJECT_DEMO_URL_DICT } from "./config";
 
 const handleNavigation = async (
   args: Record<string, unknown> | undefined,
@@ -70,15 +71,14 @@ const handleShowProjectDemo = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   uiState: ReturnType<typeof useUIState>
 ) => {
-  const urlDict = {
-    "remainder-api": "https://reminder-demo-app.vercel.app/",
-    "xcuisite": "https://www.xcuisite.store/",
-    "personal-assistant": "https://www.zishenchan.com/projects/personal-ai",
-  } as Record<string, string>;
   console.log(args);
   const name = typeof args?.name === "string" ? args.name : "no";
-  const url = urlDict[name];
-  appActions.showProjectDemo(url);
+  const url = PROJECT_DEMO_URL_DICT[name];
+  if (url) {
+    appActions.showProjectDemo(url);
+  } else {
+    console.error(`Project Demo URL for ${name} not found`);
+  }
 };
 
 export const functionRegistry = {

@@ -1,22 +1,24 @@
 "use server";
-import { env } from "@/app/env/client";
+import { envClient } from "@/app/env/client";
 import { envServer } from "@/app/env/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import { ChatInstance } from "@/components/chatbot/demoChatHistory";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage } from "@/app/utils/handleReport";
-import { Conversation } from "@/app/hooks/useConversation";
-import { chatToConversation } from "@/app/utils/ChatToConversation";
 import { generatePrompt } from "./generatePrompt";
-import {
-  fetchFunctionCalls,
-  fetchFunctionCallResponse,
-} from "./fetchFunctionCalls";
+import { fetchFunctionCalls } from "./fetchFunctionCalls";
 import {
   fetchSearchResults,
   fetchSearchQueryPrompt,
+  ResultInstance,
 } from "./fetchSearchResults";
+import {
+  REPLY_ERROR_FALLBACK_MSG,
+  GEMINI_GENERATION_CONFIG,
+  INITIAL_CHAT_HISTORY,
+  QUERY_SEARCH_LIMIT,
+} from "./config";
 
 export interface Reply {
   message: string;
@@ -30,32 +32,15 @@ interface Request {
 
 function initiateChatSession() {
   const API_KEY = envServer.GEMINI_API_KEY;
-  const MODEL_NAME = env.NEXT_PUBLIC_GEMINI_MODEL_NAME;
+  const MODEL_NAME = envClient.NEXT_PUBLIC_GEMINI_MODEL_MAIN;
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({
     model: MODEL_NAME,
   });
 
-  const generationConfig = {
-    temperature: 0.25,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 120,
-    responseMimeType: "text/plain",
-  };
-
   const chatSession = model.startChat({
-    generationConfig,
-    history: [
-      {
-        role: "user",
-        parts: [{ text: "Hi" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: "Hi, I'm Zi Shen. How can I help you?" }],
-      },
-    ],
+    generationConfig: GEMINI_GENERATION_CONFIG,
+    history: INITIAL_CHAT_HISTORY,
   });
   return chatSession;
 }
@@ -65,17 +50,16 @@ const chatSession = initiateChatSession();
 const debugMode = true;
 
 export async function fetchChatbotReply(request: Request): Promise<Reply> {
-  // console.log(request.chatHistory);
   try {
-    const conversationHistory = request.chatHistory.map((chat: ChatInstance) =>
-      chatToConversation(chat)
-    ) as Conversation[];
-    const conversationHistoryString = conversationHistory
-      .map((conv: Conversation) => conv.role + ": " + conv.content)
-      .join("\n");
-    // console.log(conversationHistory);
-    const functionCallResponse: fetchFunctionCallResponse =
-      await fetchFunctionCalls(conversationHistoryString);
+    const conversationHistoryString = JSON.stringify(request.chatHistory);
+
+    const [functionCallResponse, searchQuery] = await Promise.all([
+      fetchFunctionCalls(conversationHistoryString),
+      fetchSearchQueryPrompt(
+        conversationHistoryString,
+        request.chatHistory[request.chatHistory.length - 1].message
+      ),
+    ]);
     if (debugMode) {
       console.log("=== Fetch Function Call Pass ===");
       if (functionCallResponse.functionCall) {
@@ -86,14 +70,11 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
         );
       }
     }
-    let searchResults: string[] = [];
+
+    let searchResults: ResultInstance[] = [];
     if (!functionCallResponse.error && !functionCallResponse.functionCall) {
-      const searchQuery = await fetchSearchQueryPrompt(
-        conversationHistoryString,
-        conversationHistory[conversationHistory.length - 1].content
-      );
       if (debugMode) console.log("=== Fetch Search Query Pass ===");
-      searchResults = await fetchSearchResults(searchQuery);
+      searchResults = await fetchSearchResults(searchQuery, QUERY_SEARCH_LIMIT);
       if (debugMode) {
         console.log("=== Fetch Search Results Pass ===");
         console.log(`Found ${searchResults.length} search results`);
@@ -120,8 +101,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     const errMsg = getErrorMessage(err);
     console.error(errMsg);
     return {
-      message:
-        "Oops, it seems that something is happening from my end. Maybe refresh the page and try again later?",
+      message: REPLY_ERROR_FALLBACK_MSG,
       error: true,
     };
   }

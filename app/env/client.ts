@@ -1,18 +1,20 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-export const env = createEnv({
+export const envClient = createEnv({
   emptyStringAsUndefined: true,
   client: {
-    NEXT_PUBLIC_GEMINI_MODEL_NAME: z.string(),
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: z.string(),
-    NEXT_PUBLIC_LOCAL_REMINDER_API_URL: z.string(),
     NEXT_PUBLIC_AZURE_REMINDER_API_URL: z.string(),
+    NEXT_PUBLIC_LOCAL_REMINDER_API_URL: z.string(),
+    // Chatbot
+    NEXT_PUBLIC_GEMINI_MODEL_MAIN: z.string(),
+    NEXT_PUBLIC_GEMINI_MODEL_QUERY: z.string(),
+    NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL: z.string(),
   },
   experimental__runtimeEnv: {
-    NEXT_PUBLIC_GEMINI_MODEL_NAME: process.env.NEXT_PUBLIC_GEMINI_MODEL_NAME,
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
@@ -21,5 +23,10 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_LOCAL_REMINDER_API_URL,
     NEXT_PUBLIC_AZURE_REMINDER_API_URL:
       process.env.NEXT_PUBLIC_AZURE_REMINDER_API_URL,
+    //Chatbot
+    NEXT_PUBLIC_GEMINI_MODEL_MAIN: process.env.NEXT_PUBLIC_GEMINI_MODEL_MAIN,
+    NEXT_PUBLIC_GEMINI_MODEL_QUERY: process.env.NEXT_PUBLIC_GEMINI_MODEL_QUERY,
+    NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL:
+      process.env.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL,
   },
 });

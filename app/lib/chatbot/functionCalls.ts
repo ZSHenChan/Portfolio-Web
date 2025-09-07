@@ -1,5 +1,6 @@
 import { FunctionDeclaration, Type } from "@google/genai";
 import { FunctionCallType } from "@/app/enums/functionCall";
+import { ProjectDemoType } from "@/app/enums/projectDemo";
 
 export const functionCallDict = new Map<string, string>();
 functionCallDict.set(
@@ -143,7 +144,7 @@ const showProjectDemo: FunctionDeclaration = {
       name: {
         type: Type.STRING,
         description: "The name of project to show user.",
-        enum: ["reminder-api", "xcuisite", "personal-assistant"],
+        enum: Object.values(ProjectDemoType),
       },
     },
     required: ["name"],

@@ -60,15 +60,23 @@ export const ModalFooter = () => {
   const appActions = useAppActions();
   const uiState = useUIState();
 
+  const generateRandomId = () => {
+    return uuidv4().slice(0, 8);
+  };
+
   const handleSubmit = async (textInput: string) => {
     const updatedChatHistory = [
       ...chatHistory,
-      { id: uuidv4(), message: textInput, isBot: false } as ChatInstance,
+      {
+        id: generateRandomId(),
+        message: textInput,
+        isBot: false,
+      } as ChatInstance,
     ];
     setChatHistory(updatedChatHistory);
 
     setIsThinking(true);
-    const botId = uuidv4().slice(0, 8);
+    const botId = generateRandomId();
     setTimeout(
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
@@ -79,14 +87,14 @@ export const ModalFooter = () => {
     );
 
     const reply = (await fetchChatbotReply({
-      chatHistory: updatedChatHistory.slice(-10),
+      chatHistory: updatedChatHistory.slice(-20),
     })) as Reply;
     setIsThinking(false);
     setChatHistory((prev) =>
       prev
         .filter((chat) => chat.id !== botId)
         .concat({
-          id: uuidv4().slice(0, 8),
+          id: generateRandomId(),
           message: reply.message,
           isBot: true,
         })
