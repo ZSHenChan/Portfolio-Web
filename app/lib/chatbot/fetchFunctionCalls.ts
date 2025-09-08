@@ -4,8 +4,12 @@ import { FunctionCall, GoogleGenAI } from "@google/genai";
 import { envServer } from "@/app/env/server";
 import { functionCallList } from "./functionCalls";
 import { getErrorMessage } from "@/app/utils/handleReport";
-import { FUNCTION_CALL_SYN_PROMPT } from "./config";
+import {
+  FETCH_FAIL_FALLBACK_MSG,
+  FUNCTION_CALL_SYS_INSTRUCTION,
+} from "./config";
 import { envClient } from "@/app/env/client";
+import { MAX_RETRY_COUNT } from "@/app/config/api";
 
 const GOOGLE_CONSOLE_API_KEY = envServer.GOOGLE_CONSOLE_API_KEY;
 
@@ -17,18 +21,14 @@ export interface fetchFunctionCallResponse {
 
 export async function fetchFunctionCalls(conversation: string) {
   // console.log(`Query: ${request.query}`);
-  const maxRetries = 3;
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
+  for (let attempt = 0; attempt < MAX_RETRY_COUNT; attempt++) {
     try {
       const ai = new GoogleGenAI({ apiKey: GOOGLE_CONSOLE_API_KEY });
       const response = await ai.models.generateContent({
         model: envClient.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL,
-        contents: `
-    instructions: 
-    ${FUNCTION_CALL_SYN_PROMPT}
-    conversation: 
-    ${conversation}`,
+        contents: conversation,
         config: {
+          systemInstruction: FUNCTION_CALL_SYS_INSTRUCTION,
           tools: [
             {
               functionDeclarations: [...functionCallList],
@@ -51,7 +51,7 @@ export async function fetchFunctionCalls(conversation: string) {
   }
   return {
     functionCall: undefined,
-    functionMessage: "Error happened when fetching functions",
+    functionMessage: FETCH_FAIL_FALLBACK_MSG,
     error: true,
   } as fetchFunctionCallResponse;
 }

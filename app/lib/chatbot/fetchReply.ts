@@ -10,14 +10,17 @@ import { generatePrompt } from "./generatePrompt";
 import { fetchFunctionCalls } from "./fetchFunctionCalls";
 import {
   fetchSearchResults,
-  fetchSearchQueryPrompt,
   ResultInstance,
+  fetchStructQueryPrompt,
 } from "./fetchSearchResults";
 import {
   REPLY_ERROR_FALLBACK_MSG,
   GEMINI_GENERATION_CONFIG,
   INITIAL_CHAT_HISTORY,
   QUERY_SEARCH_LIMIT,
+  DEBUG_MODE,
+  REPLY_SYS_INSTRUCTIONS,
+  REPLY_SYN_PROMPT,
 } from "./config";
 
 export interface Reply {
@@ -36,6 +39,7 @@ function initiateChatSession() {
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({
     model: MODEL_NAME,
+    systemInstruction: REPLY_SYN_PROMPT,
   });
 
   const chatSession = model.startChat({
@@ -47,23 +51,29 @@ function initiateChatSession() {
 
 const chatSession = initiateChatSession();
 
-const debugMode = true;
-
 export async function fetchChatbotReply(request: Request): Promise<Reply> {
   try {
     const conversationHistoryString = JSON.stringify(request.chatHistory);
 
+    // const [functionCallResponse, searchQuery] = await Promise.all([
+    //   fetchFunctionCalls(conversationHistoryString),
+    //   fetchSearchQueryPrompt(
+    //     conversationHistoryString,
+    //     request.chatHistory[request.chatHistory.length - 1].message
+    //   ),
+    // ]);
     const [functionCallResponse, searchQuery] = await Promise.all([
       fetchFunctionCalls(conversationHistoryString),
-      fetchSearchQueryPrompt(
+      fetchStructQueryPrompt(
         conversationHistoryString,
         request.chatHistory[request.chatHistory.length - 1].message
       ),
     ]);
-    if (debugMode) {
+    if (DEBUG_MODE) {
+      console.log(functionCallResponse);
+      console.log(searchQuery);
       console.log("=== Fetch Function Call Pass ===");
       if (functionCallResponse.functionCall) {
-        console.log(`Function call found`);
         console.log(functionCallResponse.functionCall);
         console.log(
           `Function Call Text: ${functionCallResponse.functionMessage}`
@@ -72,10 +82,13 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     }
 
     let searchResults: ResultInstance[] = [];
-    if (!functionCallResponse.error && !functionCallResponse.functionCall) {
-      if (debugMode) console.log("=== Fetch Search Query Pass ===");
-      searchResults = await fetchSearchResults(searchQuery, QUERY_SEARCH_LIMIT);
-      if (debugMode) {
+    if (searchQuery.needSearch && !functionCallResponse.functionCall) {
+      console.log("=== Search Query ===");
+      searchResults = await fetchSearchResults(
+        searchQuery.synthesisQuery,
+        QUERY_SEARCH_LIMIT
+      );
+      if (DEBUG_MODE) {
         console.log("=== Fetch Search Results Pass ===");
         console.log(`Found ${searchResults.length} search results`);
         console.log(searchResults);
@@ -89,9 +102,16 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       functionCallResponse.functionMessage
     );
 
+    console.log("PROMTPPP");
+    console.log(prompt);
+
     const result = await chatSession.sendMessage(prompt);
-    console.log("=== Fetch Chatbot Response Pass ===");
     const replyText = result.response.text();
+    if (DEBUG_MODE) {
+      console.log("=== Fetch Chatbot Response Pass ===");
+      console.log(replyText);
+      console.log("------------------------------------");
+    }
     return {
       message: replyText,
       error: false,

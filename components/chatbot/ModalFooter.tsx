@@ -10,6 +10,10 @@ import { useModal } from "./Animated-Modal";
 import { ChatbotInput } from "./ChatbotInput";
 import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";
+import {
+  CHATBOT_WAITING_PLAEHOLDER,
+  MAX_CHAT_HISTORY_INSTANCE,
+} from "@/app/lib/chatbot/config";
 
 const AnimationToggleButton = ({
   isOn,
@@ -81,13 +85,13 @@ export const ModalFooter = () => {
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
           ...chatHistory,
-          { id: botId, message: "...", isBot: true },
+          { id: botId, message: CHATBOT_WAITING_PLAEHOLDER, isBot: true },
         ]),
       500
     );
 
     const reply = (await fetchChatbotReply({
-      chatHistory: updatedChatHistory.slice(-20),
+      chatHistory: updatedChatHistory.slice(-MAX_CHAT_HISTORY_INSTANCE),
     })) as Reply;
     setIsThinking(false);
     setChatHistory((prev) =>

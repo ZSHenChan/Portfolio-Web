@@ -10,7 +10,11 @@ import { Reminder } from "@/app/interfaces/Reminder";
 import { FunctionCallType } from "@/app/enums/functionCall";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
-import { PROJECT_DEMO_URL_DICT } from "./config";
+import {
+  CLOSE_MODAL_DELAY_ON_FUNC_CALL_MS,
+  PROJECT_DEMO_URL_DICT,
+  SCROLL_DELAY_MS,
+} from "./config";
 
 const handleNavigation = async (
   args: Record<string, unknown> | undefined,
@@ -25,9 +29,12 @@ const handleNavigation = async (
 
   if (uiState.scrollTargetList.has(targetId)) {
     if (uiState.setChatOpen) {
-      setTimeout(() => uiState.setChatOpen(false), 300);
+      setTimeout(
+        () => uiState.setChatOpen(false),
+        CLOSE_MODAL_DELAY_ON_FUNC_CALL_MS
+      );
     }
-    setTimeout(() => uiState.scrollToSection(targetId), 500);
+    setTimeout(() => uiState.scrollToSection(targetId), SCROLL_DELAY_MS);
   }
 };
 
@@ -74,11 +81,11 @@ const handleShowProjectDemo = async (
   console.log(args);
   const name = typeof args?.name === "string" ? args.name : "no";
   const url = PROJECT_DEMO_URL_DICT[name];
-  if (url) {
-    appActions.showProjectDemo(url);
-  } else {
+  if (!url) {
     console.error(`Project Demo URL for ${name} not found`);
+    return;
   }
+  appActions.showProjectDemo(url);
 };
 
 export const functionRegistry = {

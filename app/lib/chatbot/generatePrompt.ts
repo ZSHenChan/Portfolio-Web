@@ -1,9 +1,9 @@
 "use server";
 
 import { ResultInstance } from "./fetchSearchResults";
-import { functionCallDict } from "./functionCalls";
+import { functionCallMsgDict } from "./functionCalls";
 import { FunctionCall } from "@google/genai";
-import { REPLY_SYN_PROMPT } from "./config";
+import { REPLY_SYS_INSTRUCTIONS } from "./config";
 
 export async function generatePrompt(
   conversationHistoryString: string,
@@ -12,29 +12,26 @@ export async function generatePrompt(
   functionMessage: string | null = ""
 ) {
   const functionCallInstruction = functionCall?.name
-    ? functionCallDict.get(functionCall.name)
+    ? functionCallMsgDict.get(functionCall.name)
     : "";
 
-  const date = Date();
+  const prompt = `[Conversation History]
+${conversationHistoryString}
+[Function Call Details]
+${
+  functionCall
+    ? `${functionCall}
+    ${functionCallInstruction}`
+    : "No Function Call\n"
+}
+[Function Agent Message]
+${functionMessage}
+[Available Information]
+${
+  searchResults.length > 0
+    ? JSON.stringify(searchResults)
+    : "No Available Information"
+}`;
 
-  const prompt = `
-      Instruction:
-      ${`Today is ${date}`}
-      ${REPLY_SYN_PROMPT}
-      ${`Conversation History:
-      ${conversationHistoryString}`}
-      ${
-        functionCall
-          ? `Action: ${functionCall.name}\nFunction Call Instruction: ${functionCallInstruction}\n`
-          : "No Action\n"
-      }
-      ${`Action Agent Message:
-        ${functionMessage}`}
-      ${
-        searchResults.length > 0 &&
-        `Available Information: \n${searchResults.join(",\n")}`
-      }`;
-
-  console.info(`function Message: ${functionMessage}`);
   return prompt;
 }

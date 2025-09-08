@@ -2,24 +2,24 @@ import { FunctionDeclaration, Type } from "@google/genai";
 import { FunctionCallType } from "@/app/enums/functionCall";
 import { ProjectDemoType } from "@/app/enums/projectDemo";
 
-export const functionCallDict = new Map<string, string>();
-functionCallDict.set(
+export const functionCallMsgDict = new Map<string, string>();
+functionCallMsgDict.set(
   FunctionCallType.NavigateSection,
   "The user is about to see the content themselves. Do not provide information about the contents in the section."
 );
-functionCallDict.set(
+functionCallMsgDict.set(
   FunctionCallType.SendEmail,
   "Notify the user that is email is about to be sent."
 );
-functionCallDict.set(
+functionCallMsgDict.set(
   FunctionCallType.NavigateProjects,
   "The user is about to see the project themselves. Do not provide information about the project."
 );
-functionCallDict.set(
+functionCallMsgDict.set(
   FunctionCallType.AddNewReminder,
   "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
 );
-functionCallDict.set(
+functionCallMsgDict.set(
   FunctionCallType.ShowProjectDemo,
   "Notify the user a new tab will be open for the project demo."
 );
@@ -82,7 +82,7 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "Navigates the user to a specific section of the website. This function should only be triggered when the user explicitly asks to be taken to a specific page or section, or confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the projects section' or 'show me your project xxx.' Confirmation from the user must be direct and intentional.",
+      "Navigates the user to a specific section of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the projects section' or 'show me your project xxx.' Confirmation from the user must be direct and intentional.",
     properties: {
       project: {
         type: Type.STRING,
@@ -110,25 +110,25 @@ const sendEmailDeclaration: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "Sends a contact email to the website administrator on behalf of the user. This function should only be called when the user explicitly requests to send a message, and after the assistant has gathered the required information: the user's name, their email address, and the title of the email. The email content can be extracted from the conversation but is optional.",
+      "Sends an email to the website administrator. This function should only be called after the bot has gathered the required information: the user's name, their email address, and the title of the email. Email title can be deduced from the conversation without provided by user. Email content is optional and can be deduced from the conversation.",
     properties: {
       email: {
         type: Type.STRING,
-        description: "user email. This field cannot be empty",
+        description: "user email. This field cannot be empty or unknown.",
       },
       name: {
         type: Type.STRING,
-        description: "user name. This field cannot be empty.",
+        description: "user name. This field cannot be empty or unknown.",
       },
       title: {
         type: Type.STRING,
         description:
-          "email title. Write a short title for the email, summarize the content if no title is given",
+          "A short title for the email. This field cannot be empty or unknown. This field can be read from the conversation by summarize.",
       },
       description: {
         type: Type.STRING,
         description:
-          "email description. This is the message that will be sent to zi shen. If no description is given, write a short message to zi shen based on the conversation history.",
+          "A brief email description. This field is optional and can be deduced from the conversation.",
       },
     },
     required: ["name", "email", "title"],
@@ -139,7 +139,8 @@ const showProjectDemo: FunctionDeclaration = {
   name: FunctionCallType.ShowProjectDemo,
   parameters: {
     type: Type.OBJECT,
-    description: "Show user the demo of a specific project.",
+    description:
+      "Show user the demo of a specific project. This function should only be called when the user accepting the assistant's offer to bring the visitor to see the demo.",
     properties: {
       name: {
         type: Type.STRING,
