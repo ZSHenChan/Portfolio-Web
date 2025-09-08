@@ -65,11 +65,11 @@ const navigateSectionDeclaration: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "navigate to a section of the website. This function should only be triggered when the user explicitly asks to be taken to a specific page or section, or confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the contact section' or 'show me your internship experiences.' Confirmation from the user must be direct and intentional.",
+      'Navigate the user to a specific section of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a specific section. Confirmation from the user must be direct and intentional. Examples will be [{"isBot": false, "message": "Where can I find Zi Shen\'s contact info?"}, {"isBot": true, "message": "It\'s nice to meet you, Alex. You can find his contact information on the contact page. I can take you there now if you\'d like."}, {"isBot": false, "message": "Yes please."}]',
     properties: {
       section: {
         type: Type.STRING,
-        description: "The target section to navigate to.",
+        description: "The specific section to navigate to.",
         enum: ["contact", "hero", "techstack", "about"],
       },
     },
@@ -82,12 +82,12 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "Navigates the user to a specific section of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a page. Examples of user requests include 'bring me to the projects section' or 'show me your project xxx.' Confirmation from the user must be direct and intentional.",
+      "Navigate the user to a specific project of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a project. Confirmation from the user must be direct and intentional. Examples of user requests include 'show me your projects' or 'can I see your Stock AI project?'",
     properties: {
       project: {
         type: Type.STRING,
         description:
-          "The target project to navigate to. the first option 'projects' is the project grid where all the projects will be displayed.",
+          "The target project to navigate to. The option 'projects' is only applicable only if the users ask to see all the projects.",
         enum: [
           "projects",
           "reminder-api",
