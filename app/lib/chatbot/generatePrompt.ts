@@ -1,31 +1,17 @@
 "use server";
 
 import { ResultInstance } from "./fetchSearchResults";
-import { functionCallMsgDict } from "./functionCalls";
 import { FunctionCall } from "@google/genai";
-import { REPLY_SYS_INSTRUCTIONS } from "./config";
 
 export async function generatePrompt(
   conversationHistoryString: string,
   searchResults: ResultInstance[] = [],
-  functionCall: FunctionCall | undefined,
-  functionMessage: string | null = ""
+  functionCall: FunctionCall | undefined
 ) {
-  const functionCallInstruction = functionCall?.name
-    ? functionCallMsgDict.get(functionCall.name)
-    : "";
-
   const prompt = `[Conversation History]
 ${conversationHistoryString}
 [Function Call Details]
-${
-  functionCall
-    ? `${functionCall}
-    ${functionCallInstruction}`
-    : "No Function Call\n"
-}
-[Function Agent Message]
-${functionMessage}
+${functionCall ? JSON.stringify(functionCall) : "No Function Call\n"}
 [Available Information]
 ${
   searchResults.length > 0

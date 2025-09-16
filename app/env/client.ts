@@ -4,6 +4,8 @@ import { z } from "zod";
 export const envClient = createEnv({
   emptyStringAsUndefined: true,
   client: {
+    NEXT_PUBLIC_DEV_MODE: z.string(),
+
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: z.string(),
     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: z.string(),
@@ -13,8 +15,11 @@ export const envClient = createEnv({
     NEXT_PUBLIC_GEMINI_MODEL_MAIN: z.string(),
     NEXT_PUBLIC_GEMINI_MODEL_QUERY: z.string(),
     NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL: z.string(),
+    NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER: z.string(),
   },
   experimental__runtimeEnv: {
+    NEXT_PUBLIC_DEV_MODE: process.env.NEXT_PUBLIC_DEV_MODE,
+
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
@@ -28,5 +33,7 @@ export const envClient = createEnv({
     NEXT_PUBLIC_GEMINI_MODEL_QUERY: process.env.NEXT_PUBLIC_GEMINI_MODEL_QUERY,
     NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL:
       process.env.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL,
+    NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER:
+      process.env.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER,
   },
 });

@@ -11,7 +11,7 @@ import { ChatbotInput } from "./ChatbotInput";
 import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";
 import {
-  CHATBOT_WAITING_PLAEHOLDER,
+  CHATBOT_WAITING_PLACEHOLDER,
   MAX_CHAT_HISTORY_INSTANCE,
 } from "@/app/lib/chatbot/config";
 
@@ -74,7 +74,7 @@ export const ModalFooter = () => {
       {
         id: generateRandomId(),
         message: textInput,
-        isBot: false,
+        role: "user",
       } as ChatInstance,
     ];
     setChatHistory(updatedChatHistory);
@@ -85,7 +85,7 @@ export const ModalFooter = () => {
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
           ...chatHistory,
-          { id: botId, message: CHATBOT_WAITING_PLAEHOLDER, isBot: true },
+          { id: botId, message: CHATBOT_WAITING_PLACEHOLDER, role: "bot" },
         ]),
       500
     );
@@ -97,12 +97,25 @@ export const ModalFooter = () => {
     setChatHistory((prev) =>
       prev
         .filter((chat) => chat.id !== botId)
-        .concat({
-          id: generateRandomId(),
-          message: reply.message,
-          isBot: true,
-        })
+        .concat([
+          {
+            id: generateRandomId(),
+            message: reply.message,
+            role: "bot",
+          },
+        ])
     );
+    if (reply.functionCall != null) {
+      setChatHistory((prev) =>
+        prev.concat([
+          {
+            id: generateRandomId(),
+            message: reply.funcSysMsg,
+            role: "system",
+          },
+        ])
+      );
+    }
     setTimeout(
       () => executeFunctionCall(reply.functionCall, appActions, uiState),
       500

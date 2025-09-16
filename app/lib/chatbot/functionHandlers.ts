@@ -89,11 +89,11 @@ const handleShowProjectDemo = async (
 };
 
 export const functionRegistry = {
-  [FunctionCallType.NavigateSection]: handleNavigation,
-  [FunctionCallType.NavigateProjects]: handleNavigation,
-  [FunctionCallType.AddNewReminder]: handleAddReminder,
-  [FunctionCallType.SendEmail]: handleSendEmail,
-  [FunctionCallType.ShowProjectDemo]: handleShowProjectDemo,
+  [FunctionCallType.NavigateSection.name]: handleNavigation,
+  [FunctionCallType.NavigateProjects.name]: handleNavigation,
+  [FunctionCallType.AddNewReminder.name]: handleAddReminder,
+  [FunctionCallType.SendEmail.name]: handleSendEmail,
+  [FunctionCallType.ShowProjectDemo.name]: handleShowProjectDemo,
 };
 
 export const executeFunctionCall = async (

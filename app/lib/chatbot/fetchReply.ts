@@ -8,6 +8,7 @@ import { FunctionCall } from "@google/genai";
 import { getErrorMessage } from "@/app/utils/handleReport";
 import { generatePrompt } from "./generatePrompt";
 import { fetchFunctionCalls } from "./fetchFunctionCalls";
+import { funcSysMsgDict } from "./functionCalls";
 import {
   fetchSearchResults,
   ResultInstance,
@@ -19,14 +20,16 @@ import {
   INITIAL_CHAT_HISTORY,
   QUERY_SEARCH_LIMIT,
   DEBUG_MODE,
-  REPLY_SYS_INSTRUCTIONS,
   REPLY_SYN_PROMPT,
 } from "./config";
+import { fetchExcDecisionStruct } from "./fetchFunctionApproval";
+import { FunctionCallType } from "@/app/enums/functionCall";
 
 export interface Reply {
   message: string;
   error: boolean;
   functionCall?: FunctionCall;
+  funcSysMsg?: string;
 }
 
 interface Request {
@@ -55,13 +58,6 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
   try {
     const conversationHistoryString = JSON.stringify(request.chatHistory);
 
-    // const [functionCallResponse, searchQuery] = await Promise.all([
-    //   fetchFunctionCalls(conversationHistoryString),
-    //   fetchSearchQueryPrompt(
-    //     conversationHistoryString,
-    //     request.chatHistory[request.chatHistory.length - 1].message
-    //   ),
-    // ]);
     const [functionCallResponse, searchQuery] = await Promise.all([
       fetchFunctionCalls(conversationHistoryString),
       fetchStructQueryPrompt(
@@ -69,53 +65,60 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
         request.chatHistory[request.chatHistory.length - 1].message
       ),
     ]);
+
     if (DEBUG_MODE) {
-      console.log(functionCallResponse);
-      console.log(searchQuery);
-      console.log("=== Fetch Function Call Pass ===");
-      if (functionCallResponse.functionCall) {
-        console.log(functionCallResponse.functionCall);
-        console.log(
-          `Function Call Text: ${functionCallResponse.functionMessage}`
-        );
+      console.log(`--- Function Call: ${JSON.stringify(functionCallResponse)}`);
+      console.log(`--- Struct query: ${JSON.stringify(searchQuery)}`);
+    }
+
+    let functionExecApproved = false;
+    if (functionCallResponse.functionCall) {
+      const functionType = Object.values(FunctionCallType).find(
+        (func) => func.name === functionCallResponse.functionCall?.name
+      );
+      const funcExecApproveObj = await fetchExcDecisionStruct(
+        conversationHistoryString,
+        functionCallResponse.functionCall,
+        functionType?.description ?? ""
+      );
+      functionExecApproved = funcExecApproveObj.approve;
+      if (DEBUG_MODE) {
+        console.log(`--- Func Approver: ${JSON.stringify(funcExecApproveObj)}`);
       }
     }
 
     let searchResults: ResultInstance[] = [];
-    if (searchQuery.needSearch && !functionCallResponse.functionCall) {
-      console.log("=== Search Query ===");
+    if (searchQuery.needSearch && !functionExecApproved) {
       searchResults = await fetchSearchResults(
         searchQuery.synthesisQuery,
         QUERY_SEARCH_LIMIT
       );
-      if (DEBUG_MODE) {
-        console.log("=== Fetch Search Results Pass ===");
-        console.log(`Found ${searchResults.length} search results`);
-        console.log(searchResults);
-      }
+      if (DEBUG_MODE)
+        console.log(
+          `--- Function Call: Found ${searchResults.length} search results`
+        );
     }
+
+    const funcSysMsg = functionCallResponse?.functionCall?.name
+      ? funcSysMsgDict.get(functionCallResponse?.functionCall?.name)
+      : "";
 
     const prompt = await generatePrompt(
       conversationHistoryString,
       searchResults,
-      functionCallResponse.functionCall,
-      functionCallResponse.functionMessage
+      functionExecApproved ? functionCallResponse.functionCall : undefined
     );
-
-    console.log("PROMTPPP");
-    console.log(prompt);
 
     const result = await chatSession.sendMessage(prompt);
     const replyText = result.response.text();
-    if (DEBUG_MODE) {
-      console.log("=== Fetch Chatbot Response Pass ===");
-      console.log(replyText);
-      console.log("------------------------------------");
-    }
+
     return {
       message: replyText,
       error: false,
-      functionCall: functionCallResponse.functionCall,
+      functionCall: functionExecApproved
+        ? functionCallResponse.functionCall
+        : undefined,
+      funcSysMsg: funcSysMsg,
     };
   } catch (err) {
     const errMsg = getErrorMessage(err);

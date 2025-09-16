@@ -1,6 +1,7 @@
 import { ProjectDemoType } from "@/app/enums/projectDemo";
+import { envClient } from "@/app/env/client";
 
-export const DEBUG_MODE = true;
+export const DEBUG_MODE = envClient.NEXT_PUBLIC_DEV_MODE ?? false;
 
 //* ChatModal
 export const CLOSE_MODAL_DELAY_ON_FUNC_CALL_MS = 300;
@@ -124,7 +125,7 @@ export const INITIAL_CHAT_HISTORY = [
 
 export const MAX_CHAT_HISTORY_INSTANCE = 20;
 
-export const CHATBOT_WAITING_PLAEHOLDER = "...";
+export const CHATBOT_WAITING_PLACEHOLDER = "...";
 
 //* Query Searching
 export const SEARCH_QUERY_SYN_PROMPT = `Given the following conversation history and the current user question, rewrite the user question to be a standalone question that includes all necessary context from the history. Only output the rewritten question. The available information to search for include Zi Shen's blibiography, internship experience, personal projects and technical skillset
@@ -153,6 +154,22 @@ You will receive a conversation between a bot and a user. There are only 4 scena
 2. A function call is likely to be called, with all required parameters found in conversation but missing optional parameters: return the function call.
 3. A function call is likely to be called but it is missing required (not optional) parameters: Do not use the function call but return a message indicating missing parameters. Example will be "the user is likely asking me to send email but im missing parameters "email".
 4. No function call is detected and likely to be called: return empty message.`;
+
+export const DECIDE_FUNCTION_CALL_SYS_INSTURCTION = `[Agent Role and Objective]
+Your primary objective is to act as a Function Call Validator. You'll review a function call suggested by another agent against the preceding user-bot conversation. Your decision to approve or deny the function call must be based on a clear determination of its relevance, safety, and necessity.
+[Input Data]
+You will receive the following data as input:
+A conversation history, which includes a series of user prompts, the bot's responses. This provides the full context of the interaction. In the conversation you will also see system message which indicates if a function is called, example: {role:'system', message:'User is navigated to the portfolio section.'}
+A proposed function call, which will include the function's name and its arguments. For example, {"name":"NavigateProjects","args":{"project":"stock-ai"}}.
+A function description which is crucial to understand what it does and the scenario to execute it.
+[Decision Criteria and Output]
+1. Your output must be a boolean value "true" or "false" and provide reasoning to do so. To reach this decision, follow these criteria in order:
+2. Relevance Check: Does the proposed function call directly address the user's explicit request or the current conversational goal and match the function description? For instance, the user is asking for more info about a project but a navigation function is proposed. In this scenario deny the call.
+3. Safety and Policy Check: Does the function call involve sensitive information or actions that could violate privacy or security policies? This includes functions that could access personal data without explicit consent, perform financial transactions, or delete content. If it poses a safety risk, deny the call.
+4. Argument Validation: Are all required arguments for the function present and valid within the conversation context? For example, if a function requires an email_address, did the user provide one? Is the provided data in the correct format (e.g., a valid date)? If the arguments are missing or invalid, deny the call.
+5. Redundancy Check: Has the same function call, with the same arguments, been executed or proposed recently in the conversation? Avoid redundant or repetitive actions. If it is a duplicate, deny the call.
+After passing all checks, and only then, you will approve/ reject the function call with a reason.
+`;
 
 export const PROJECT_DEMO_URL_DICT: Record<string, string> = {
   [ProjectDemoType.PersonalAI]:

@@ -20,7 +20,6 @@ export interface fetchFunctionCallResponse {
 }
 
 export async function fetchFunctionCalls(conversation: string) {
-  // console.log(`Query: ${request.query}`);
   for (let attempt = 0; attempt < MAX_RETRY_COUNT; attempt++) {
     try {
       const ai = new GoogleGenAI({ apiKey: GOOGLE_CONSOLE_API_KEY });

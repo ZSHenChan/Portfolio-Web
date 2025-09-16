@@ -83,8 +83,9 @@ export async function fetchSearchQueryPrompt(
   try {
     const response = await ai.models.generateContent({
       model: envClient.NEXT_PUBLIC_GEMINI_MODEL_QUERY,
-      contents: `instructions: ${instructions}
-      conversation: ${conversationHistoryString}`,
+      contents: `[conversation]
+${conversationHistoryString}`,
+      config: { systemInstruction: instructions },
     });
 
     return response.text ?? fallbackQuery;

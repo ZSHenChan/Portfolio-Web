@@ -1,34 +1,34 @@
 import { FunctionDeclaration, Type } from "@google/genai";
 import { FunctionCallType } from "@/app/enums/functionCall";
-import { ProjectDemoType } from "@/app/enums/projectDemo";
+// import { ProjectDemoType } from "@/app/enums/projectDemo";
 
-export const functionCallMsgDict = new Map<string, string>();
-functionCallMsgDict.set(
-  FunctionCallType.NavigateSection,
-  "The user is about to see the content themselves. Do not provide information about the contents in the section."
+export const funcSysMsgDict = new Map<string, string>();
+funcSysMsgDict.set(
+  FunctionCallType.NavigateSection.name,
+  "User is navigated to the portfolio section."
 );
-functionCallMsgDict.set(
-  FunctionCallType.SendEmail,
-  "Notify the user that is email is about to be sent."
+funcSysMsgDict.set(
+  FunctionCallType.SendEmail.name,
+  "An email is sent on behalf of user."
 );
-functionCallMsgDict.set(
-  FunctionCallType.NavigateProjects,
-  "The user is about to see the project themselves. Do not provide information about the project."
+funcSysMsgDict.set(
+  FunctionCallType.NavigateProjects.name,
+  "User is navigated to the target project section."
 );
-functionCallMsgDict.set(
-  FunctionCallType.AddNewReminder,
-  "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
+funcSysMsgDict.set(
+  FunctionCallType.AddNewReminder.name,
+  "New reminder is added."
 );
-functionCallMsgDict.set(
-  FunctionCallType.ShowProjectDemo,
-  "Notify the user a new tab will be open for the project demo."
+funcSysMsgDict.set(
+  FunctionCallType.ShowProjectDemo.name,
+  "A new tab is open for the project demo."
 );
 
 const addNewReminderDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.AddNewReminder,
+  name: FunctionCallType.AddNewReminder.name,
   parameters: {
     type: Type.OBJECT,
-    description: "Adding a new reminder for Zi Shen.",
+    description: FunctionCallType.AddNewReminder.description,
     properties: {
       title: {
         type: Type.STRING,
@@ -61,11 +61,10 @@ const addNewReminderDeclaration: FunctionDeclaration = {
 };
 
 const navigateSectionDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.NavigateSection,
+  name: FunctionCallType.NavigateSection.name,
   parameters: {
     type: Type.OBJECT,
-    description:
-      'Navigate the user to a specific section of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a specific section. Confirmation from the user must be direct and intentional. Examples will be [{"isBot": false, "message": "Where can I find Zi Shen\'s contact info?"}, {"isBot": true, "message": "It\'s nice to meet you, Alex. You can find his contact information on the contact page. I can take you there now if you\'d like."}, {"isBot": false, "message": "Yes please."}]',
+    description: FunctionCallType.NavigateSection.description,
     properties: {
       section: {
         type: Type.STRING,
@@ -78,11 +77,10 @@ const navigateSectionDeclaration: FunctionDeclaration = {
 };
 
 const navigateProjectsDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.NavigateProjects,
+  name: FunctionCallType.NavigateProjects.name,
   parameters: {
     type: Type.OBJECT,
-    description:
-      "Navigate the user to a specific project of the website. This function should only be triggered when the user confirms a suggestion from the assistant to navigate to a project. Confirmation from the user must be direct and intentional. Examples of user requests include 'show me your projects' or 'can I see your Stock AI project?'",
+    description: FunctionCallType.NavigateProjects.description,
     properties: {
       project: {
         type: Type.STRING,
@@ -106,11 +104,10 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
 };
 
 const sendEmailDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.SendEmail,
+  name: FunctionCallType.SendEmail.name,
   parameters: {
     type: Type.OBJECT,
-    description:
-      "Sends an email to the website administrator. This function should only be called after the bot has gathered the required information: the user's name, their email address, and the title of the email. Email title can be deduced from the conversation without provided by user. Email content is optional and can be deduced from the conversation.",
+    description: FunctionCallType.SendEmail.description,
     properties: {
       email: {
         type: Type.STRING,
@@ -135,27 +132,26 @@ const sendEmailDeclaration: FunctionDeclaration = {
   },
 };
 
-const showProjectDemo: FunctionDeclaration = {
-  name: FunctionCallType.ShowProjectDemo,
-  parameters: {
-    type: Type.OBJECT,
-    description:
-      "Show user the demo of a specific project. This function should only be called when the user accepting the assistant's offer to bring the visitor to see the demo.",
-    properties: {
-      name: {
-        type: Type.STRING,
-        description: "The name of project to show user.",
-        enum: Object.values(ProjectDemoType),
-      },
-    },
-    required: ["name"],
-  },
-};
+// const showProjectDemo: FunctionDeclaration = {
+//   name: FunctionCallType.ShowProjectDemo.name,
+//   parameters: {
+//     type: Type.OBJECT,
+//     description: FunctionCallType.ShowProjectDemo.description,
+//     properties: {
+//       name: {
+//         type: Type.STRING,
+//         description: "The name of project to show user.",
+//         enum: Object.values(ProjectDemoType),
+//       },
+//     },
+//     required: ["name"],
+//   },
+// };
 
 export const functionCallList = [
   sendEmailDeclaration,
   navigateProjectsDeclaration,
   navigateSectionDeclaration,
   addNewReminderDeclaration,
-  showProjectDemo,
+  // showProjectDemo,
 ];
