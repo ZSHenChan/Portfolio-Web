@@ -16,9 +16,11 @@ import {
 } from "@/app/lib/chatbot/config";
 
 const AnimationToggleButton = ({
+  text,
   isOn,
   setIsOn,
 }: {
+  text: string;
   isOn: boolean;
   setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -52,13 +54,14 @@ const AnimationToggleButton = ({
           }}
         />
       </motion.button>
-      <p className="text-xs text-slate-300">Animation</p>
+      <p className="text-xs text-slate-300">{text}</p>
     </div>
   );
 };
 
 export const ModalFooter = () => {
   const [activeAnimation, setActiveAnimation] = useState(false);
+  const [enableFuncall, setEnableFuncall] = useState(true);
   const [isThinking, setIsThinking] = useState(false);
   const { setChatHistory, chatHistory } = useModal();
   const appActions = useAppActions();
@@ -92,6 +95,7 @@ export const ModalFooter = () => {
 
     const reply = (await fetchChatbotReply({
       chatHistory: updatedChatHistory.slice(-MAX_CHAT_HISTORY_INSTANCE),
+      enableFunctionCalling: enableFuncall,
     })) as Reply;
     setIsThinking(false);
     setChatHistory((prev) =>
@@ -126,14 +130,17 @@ export const ModalFooter = () => {
     <div
       className={cn("flex justify-between p-4 backdrop-blur-md bg-slate-50/20")}
     >
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-4">
         <AnimationToggleButton
+          text="Animation"
           isOn={activeAnimation}
           setIsOn={setActiveAnimation}
         />
-        <span className="text-xs md:text-sm hidden md:block">
-          Double check information as LLM may make mistakes.
-        </span>
+        <AnimationToggleButton
+          text="Function Call"
+          isOn={enableFuncall}
+          setIsOn={setEnableFuncall}
+        />
       </div>
       <ChatbotInput
         onSubmit={handleSubmit}

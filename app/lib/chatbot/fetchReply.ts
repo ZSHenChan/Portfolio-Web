@@ -34,6 +34,7 @@ export interface Reply {
 
 interface Request {
   chatHistory: ChatInstance[];
+  enableFunctionCalling: boolean;
 }
 
 function initiateChatSession() {
@@ -72,7 +73,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     }
 
     let functionExecApproved = false;
-    if (functionCallResponse.functionCall) {
+    if (request.enableFunctionCalling && functionCallResponse.functionCall) {
       const functionType = Object.values(FunctionCallType).find(
         (func) => func.name === functionCallResponse.functionCall?.name
       );
