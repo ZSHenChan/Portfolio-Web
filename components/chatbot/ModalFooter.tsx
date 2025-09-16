@@ -102,7 +102,7 @@ export const ModalFooter = () => {
             id: generateRandomId(),
             message: reply.message,
             role: "bot",
-          },
+          } as ChatInstance,
         ])
     );
     if (reply.functionCall != null) {
@@ -112,7 +112,7 @@ export const ModalFooter = () => {
             id: generateRandomId(),
             message: reply.funcSysMsg,
             role: "system",
-          },
+          } as ChatInstance,
         ])
       );
     }
