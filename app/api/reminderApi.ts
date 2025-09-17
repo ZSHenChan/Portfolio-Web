@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "../env/client";
+import { envClient } from "../env/client";
 import { envServer } from "../env/server";
 import { Reminder } from "@/app/interfaces/Reminder";
 import {
@@ -15,7 +15,7 @@ import {
 } from "../utils/fetchWithRetry";
 
 // const BASE_URL = env.NEXT_PUBLIC_LOCAL_REMINDER_API_URL;
-const BASE_URL = env.NEXT_PUBLIC_AZURE_REMINDER_API_URL;
+const BASE_URL = envClient.NEXT_PUBLIC_AZURE_REMINDER_API_URL;
 const REMINDER_URL = `${BASE_URL}/reminder`;
 
 interface GetRemindersResponse {

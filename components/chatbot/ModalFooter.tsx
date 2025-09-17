@@ -4,17 +4,23 @@ import React, { useState } from "react";
 import { ChatInstance } from "./demoChatHistory";
 import { motion } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
-import { executeFunctionCall } from "@/app/lib/chatbot/executeFunctionCall";
+import { executeFunctionCall } from "@/app/lib/chatbot/functionHandlers";
 import { v4 as uuidv4 } from "uuid";
 import { useModal } from "./Animated-Modal";
 import { ChatbotInput } from "./ChatbotInput";
 import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";
+import {
+  CHATBOT_WAITING_PLACEHOLDER,
+  MAX_CHAT_HISTORY_INSTANCE,
+} from "@/app/lib/chatbot/config";
 
 const AnimationToggleButton = ({
+  text,
   isOn,
   setIsOn,
 }: {
+  text: string;
   isOn: boolean;
   setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -48,49 +54,72 @@ const AnimationToggleButton = ({
           }}
         />
       </motion.button>
-      <p className="text-xs text-slate-300">Animation</p>
+      <p className="text-xs text-slate-300">{text}</p>
     </div>
   );
 };
 
 export const ModalFooter = () => {
   const [activeAnimation, setActiveAnimation] = useState(false);
+  const [enableFuncall, setEnableFuncall] = useState(true);
   const [isThinking, setIsThinking] = useState(false);
   const { setChatHistory, chatHistory } = useModal();
   const appActions = useAppActions();
   const uiState = useUIState();
 
+  const generateRandomId = () => {
+    return uuidv4().slice(0, 8);
+  };
+
   const handleSubmit = async (textInput: string) => {
     const updatedChatHistory = [
       ...chatHistory,
-      { id: uuidv4(), message: textInput, isBot: false } as ChatInstance,
+      {
+        id: generateRandomId(),
+        message: textInput,
+        role: "user",
+      } as ChatInstance,
     ];
     setChatHistory(updatedChatHistory);
 
     setIsThinking(true);
-    const botId = uuidv4().slice(0, 8);
+    const botId = generateRandomId();
     setTimeout(
       () =>
         setChatHistory((chatHistory: ChatInstance[]) => [
           ...chatHistory,
-          { id: botId, message: "Thinking...", isBot: true },
+          { id: botId, message: CHATBOT_WAITING_PLACEHOLDER, role: "bot" },
         ]),
       500
     );
 
     const reply = (await fetchChatbotReply({
-      chatHistory: updatedChatHistory.slice(-10),
+      chatHistory: updatedChatHistory.slice(-MAX_CHAT_HISTORY_INSTANCE),
+      enableFunctionCalling: enableFuncall,
     })) as Reply;
     setIsThinking(false);
     setChatHistory((prev) =>
       prev
         .filter((chat) => chat.id !== botId)
-        .concat({
-          id: uuidv4().slice(0, 8),
-          message: reply.message,
-          isBot: true,
-        })
+        .concat([
+          {
+            id: generateRandomId(),
+            message: reply.message,
+            role: "bot",
+          } as ChatInstance,
+        ])
     );
+    if (reply.functionCall != null) {
+      setChatHistory((prev) =>
+        prev.concat([
+          {
+            id: generateRandomId(),
+            message: reply.funcSysMsg,
+            role: "system",
+          } as ChatInstance,
+        ])
+      );
+    }
     setTimeout(
       () => executeFunctionCall(reply.functionCall, appActions, uiState),
       500
@@ -101,14 +130,17 @@ export const ModalFooter = () => {
     <div
       className={cn("flex justify-between p-4 backdrop-blur-md bg-slate-50/20")}
     >
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-4">
         <AnimationToggleButton
+          text="Animation"
           isOn={activeAnimation}
           setIsOn={setActiveAnimation}
         />
-        <span className="text-xs md:text-sm hidden md:block">
-          Double check information as LLM may make mistakes.
-        </span>
+        <AnimationToggleButton
+          text="Function Call"
+          isOn={enableFuncall}
+          setIsOn={setEnableFuncall}
+        />
       </div>
       <ChatbotInput
         onSubmit={handleSubmit}

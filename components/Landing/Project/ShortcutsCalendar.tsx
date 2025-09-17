@@ -7,7 +7,7 @@ import { ScrollableSection } from "@/components/layout/ScrollableSection";
 
 function ShortcutsCalendar() {
   return (
-    <ScrollableSection id="shortcuts-calendar">
+    <ScrollableSection id="event-capture">
       <ProjectHeading>AI Event Capture</ProjectHeading>
       <ProjectDetail
         videoSrc="/videos/shortcuts/calendar-preview.mp4"
