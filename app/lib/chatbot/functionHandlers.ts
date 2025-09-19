@@ -8,6 +8,13 @@ import {
 } from "@/app/enums/ReminderEnums";
 import { Reminder } from "@/app/interfaces/Reminder";
 import { FunctionCallType } from "@/app/enums/functionCall";
+import { FunctionCall } from "@google/genai";
+import { getErrorMessage, reportErrorMessage } from "@/app/utils/handleReport";
+import {
+  CLOSE_MODAL_DELAY_ON_FUNC_CALL_MS,
+  PROJECT_DEMO_URL_DICT,
+  SCROLL_DELAY_MS,
+} from "./config";
 
 const handleNavigation = async (
   args: Record<string, unknown> | undefined,
@@ -22,9 +29,12 @@ const handleNavigation = async (
 
   if (uiState.scrollTargetList.has(targetId)) {
     if (uiState.setChatOpen) {
-      setTimeout(() => uiState.setChatOpen(false), 300);
+      setTimeout(
+        () => uiState.setChatOpen(false),
+        CLOSE_MODAL_DELAY_ON_FUNC_CALL_MS
+      );
     }
-    setTimeout(() => uiState.scrollToSection(targetId), 500);
+    setTimeout(() => uiState.scrollToSection(targetId), SCROLL_DELAY_MS);
   }
 };
 
@@ -68,21 +78,45 @@ const handleShowProjectDemo = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   uiState: ReturnType<typeof useUIState>
 ) => {
-  const urlDict = {
-    "remainder-api": "https://reminder-demo-app.vercel.app/",
-    "xcuisite": "https://www.xcuisite.store/",
-    "personal-assistant": "https://www.zishenchan.com/projects/personal-ai",
-  } as Record<string, string>;
   console.log(args);
   const name = typeof args?.name === "string" ? args.name : "no";
-  const url = urlDict[name];
+  const url = PROJECT_DEMO_URL_DICT[name];
+  if (!url) {
+    console.error(`Project Demo URL for ${name} not found`);
+    return;
+  }
   appActions.showProjectDemo(url);
 };
 
 export const functionRegistry = {
-  [FunctionCallType.NavigateSection]: handleNavigation,
-  [FunctionCallType.NavigateProjects]: handleNavigation,
-  [FunctionCallType.AddNewReminder]: handleAddReminder,
-  [FunctionCallType.SendEmail]: handleSendEmail,
-  [FunctionCallType.ShowProjectDemo]: handleShowProjectDemo,
+  [FunctionCallType.NavigateSection.name]: handleNavigation,
+  [FunctionCallType.NavigateProjects.name]: handleNavigation,
+  [FunctionCallType.AddNewReminder.name]: handleAddReminder,
+  [FunctionCallType.SendEmail.name]: handleSendEmail,
+  [FunctionCallType.ShowProjectDemo.name]: handleShowProjectDemo,
+};
+
+export const executeFunctionCall = async (
+  functionCall: FunctionCall | undefined,
+  appActions: ReturnType<typeof useAppActions>,
+  uiState: ReturnType<typeof useUIState>
+) => {
+  if (!functionCall) return;
+  const functionName = functionCall?.name;
+  const functionArgs = functionCall?.args;
+
+  const handler =
+    functionRegistry[functionName as keyof typeof functionRegistry];
+
+  if (handler) {
+    try {
+      await handler(functionArgs, appActions, uiState);
+    } catch (err) {
+      const errMsg = getErrorMessage(err);
+      reportError(errMsg);
+    }
+  } else {
+    reportErrorMessage("Unknown Function Called");
+    console.error(handler);
+  }
 };

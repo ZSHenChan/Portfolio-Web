@@ -1,33 +1,34 @@
 import { FunctionDeclaration, Type } from "@google/genai";
 import { FunctionCallType } from "@/app/enums/functionCall";
+// import { ProjectDemoType } from "@/app/enums/projectDemo";
 
-export const functionCallDict = new Map<string, string>();
-functionCallDict.set(
-  FunctionCallType.NavigateSection,
-  "The user is about to see the content themselves. Do not provide information about the contents in the section."
+export const funcSysMsgDict = new Map<string, string>();
+funcSysMsgDict.set(
+  FunctionCallType.NavigateSection.name,
+  "User is navigated to the portfolio section."
 );
-functionCallDict.set(
-  FunctionCallType.SendEmail,
-  "Notify the user that is email is about to be sent."
+funcSysMsgDict.set(
+  FunctionCallType.SendEmail.name,
+  "An email is sent on behalf of user."
 );
-functionCallDict.set(
-  FunctionCallType.NavigateProjects,
-  "The user is about to see the project themselves. Do not provide information about the project."
+funcSysMsgDict.set(
+  FunctionCallType.NavigateProjects.name,
+  "User is navigated to the target project section."
 );
-functionCallDict.set(
-  FunctionCallType.AddNewReminder,
-  "Notify that a new reminder for Zi Shen is added to the list. No additional information is needed."
+funcSysMsgDict.set(
+  FunctionCallType.AddNewReminder.name,
+  "New reminder is added."
 );
-functionCallDict.set(
-  FunctionCallType.ShowProjectDemo,
-  "Notify the user a new tab will be open for the project demo."
+funcSysMsgDict.set(
+  FunctionCallType.ShowProjectDemo.name,
+  "A new tab is open for the project demo."
 );
 
 const addNewReminderDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.AddNewReminder,
+  name: FunctionCallType.AddNewReminder.name,
   parameters: {
     type: Type.OBJECT,
-    description: "Adding a new reminder for Zi Shen.",
+    description: FunctionCallType.AddNewReminder.description,
     properties: {
       title: {
         type: Type.STRING,
@@ -60,15 +61,14 @@ const addNewReminderDeclaration: FunctionDeclaration = {
 };
 
 const navigateSectionDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.NavigateSection,
+  name: FunctionCallType.NavigateSection.name,
   parameters: {
     type: Type.OBJECT,
-    description:
-      "navigate to a section of the website. Only return function when keyword navigate is detected.",
+    description: FunctionCallType.NavigateSection.description,
     properties: {
       section: {
         type: Type.STRING,
-        description: "The target section to navigate to.",
+        description: "The specific section to navigate to.",
         enum: ["contact", "hero", "techstack", "about"],
       },
     },
@@ -77,15 +77,15 @@ const navigateSectionDeclaration: FunctionDeclaration = {
 };
 
 const navigateProjectsDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.NavigateProjects,
+  name: FunctionCallType.NavigateProjects.name,
   parameters: {
     type: Type.OBJECT,
-    description: "navigate user to a specific project.",
+    description: FunctionCallType.NavigateProjects.description,
     properties: {
       project: {
         type: Type.STRING,
         description:
-          "The target project to navigate to. Do not return anything if the user does not specify which project. default value to 'projects' if user did not specify which project to nagivate to.",
+          "The target project to navigate to. The option 'projects' is only applicable only if the users ask to see all the projects.",
         enum: [
           "projects",
           "reminder-api",
@@ -94,6 +94,8 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
           "hologram",
           "personal-assistant",
           "automation-manager",
+          "stock-ai",
+          "event-capture",
         ],
       },
     },
@@ -102,54 +104,54 @@ const navigateProjectsDeclaration: FunctionDeclaration = {
 };
 
 const sendEmailDeclaration: FunctionDeclaration = {
-  name: FunctionCallType.SendEmail,
+  name: FunctionCallType.SendEmail.name,
   parameters: {
     type: Type.OBJECT,
-    description: "Help the user to send an email to zi shen.",
+    description: FunctionCallType.SendEmail.description,
     properties: {
       email: {
         type: Type.STRING,
-        description: "user email. This field cannot be empty",
+        description: "user email. This field cannot be empty or unknown.",
       },
       name: {
         type: Type.STRING,
-        description: "user name. This field cannot be empty.",
+        description: "user name. This field cannot be empty or unknown.",
       },
       title: {
         type: Type.STRING,
         description:
-          "email title. Write a short title for the email, summarize the content if no title is given",
+          "A short title for the email. This field cannot be empty or unknown. This field can be read from the conversation by summarize.",
       },
       description: {
         type: Type.STRING,
         description:
-          "email description. This is the message that will be sent to zi shen. If no description is given, write a short message to zi shen based on the conversation history.",
+          "A brief email description. This field is optional and can be deduced from the conversation.",
       },
     },
     required: ["name", "email", "title"],
   },
 };
 
-const showProjectDemo: FunctionDeclaration = {
-  name: FunctionCallType.ShowProjectDemo,
-  parameters: {
-    type: Type.OBJECT,
-    description: "Show user the demo of a specific project.",
-    properties: {
-      name: {
-        type: Type.STRING,
-        description: "The name of project to show user.",
-        enum: ["reminder-api", "xcuisite", "personal-assistant"],
-      },
-    },
-    required: ["name"],
-  },
-};
+// const showProjectDemo: FunctionDeclaration = {
+//   name: FunctionCallType.ShowProjectDemo.name,
+//   parameters: {
+//     type: Type.OBJECT,
+//     description: FunctionCallType.ShowProjectDemo.description,
+//     properties: {
+//       name: {
+//         type: Type.STRING,
+//         description: "The name of project to show user.",
+//         enum: Object.values(ProjectDemoType),
+//       },
+//     },
+//     required: ["name"],
+//   },
+// };
 
 export const functionCallList = [
   sendEmailDeclaration,
   navigateProjectsDeclaration,
   navigateSectionDeclaration,
   addNewReminderDeclaration,
-  showProjectDemo,
+  // showProjectDemo,
 ];
