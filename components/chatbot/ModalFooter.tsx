@@ -2,7 +2,7 @@
 import { cn } from "@/app/utils/cn";
 import React, { useState } from "react";
 import { ChatInstance } from "./demoChatHistory";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
 import { executeFunctionCall } from "@/app/lib/chatbot/functionHandlers";
 import { v4 as uuidv4 } from "uuid";
@@ -14,53 +14,45 @@ import {
   CHATBOT_WAITING_PLACEHOLDER,
   MAX_CHAT_HISTORY_INSTANCE,
 } from "@/app/lib/chatbot/config";
+import { AnimatedToggleButton } from "../Buttons/AnimatedToggleButton";
 
-const AnimationToggleButton = ({
-  text,
-  isOn,
-  setIsOn,
-}: {
-  text: string;
-  isOn: boolean;
-  setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const toggleSwitch = () =>
-    setIsOn((prev) => {
-      return !prev;
-    });
-
+const AnimationToggleButton = () => {
+  const { allowAnimation, setAllowAnimation } = useUIState();
   return (
-    <div className="flex flex-col items-center justify-center ">
-      <motion.button
-        className={`w-[40px] h-[20px] rounded-[25px] flex p-[2px] cursor-pointer`}
-        style={{
-          justifyContent: "flex-" + (isOn ? "end" : "start"),
-        }}
-        onClick={toggleSwitch}
-        animate={{
-          backgroundColor: isOn ? "#1f2937" : "#e2e8f0",
-        }}
-      >
-        <motion.div
-          className="w-[16px] h-full bg-white/80 rounded-[25px]"
-          layout
-          transition={{
-            type: "spring",
-            visualDuration: 0.3,
-            bounce: 0.2,
-          }}
-          animate={{
-            backgroundColor: isOn ? "#e2e8f0" : "#1f2937",
-          }}
-        />
-      </motion.button>
-      <p className="text-xs text-slate-300">{text}</p>
-    </div>
+    <AnimatedToggleButton
+      text="Animation"
+      isOn={allowAnimation}
+      setIsOn={setAllowAnimation}
+    />
   );
 };
 
+const FunctionCallToggleButton = ({
+  isOn,
+  setIsOn,
+}: {
+  isOn: boolean;
+  setIsOn: (open: boolean) => void;
+}) => {
+  return (
+    <AnimatedToggleButton text="Function Call" isOn={isOn} setIsOn={setIsOn} />
+  );
+};
+
+const footerVariants = {
+  hidden: { y: 50, opacity: 0, duration: 0.5 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: 0.7,
+      duration: 0.5,
+      type: "spring",
+    },
+  },
+};
+
 export const ModalFooter = () => {
-  const [activeAnimation, setActiveAnimation] = useState(false);
   const [enableFuncall, setEnableFuncall] = useState(true);
   const [isThinking, setIsThinking] = useState(false);
   const { setChatHistory, chatHistory } = useModal();
@@ -127,26 +119,31 @@ export const ModalFooter = () => {
   };
 
   return (
-    <div
-      className={cn("flex justify-between p-4 backdrop-blur-md bg-slate-50/20")}
-    >
-      <div className="flex items-center gap-4">
-        <AnimationToggleButton
-          text="Animation"
-          isOn={activeAnimation}
-          setIsOn={setActiveAnimation}
-        />
-        <AnimationToggleButton
-          text="Function Call"
-          isOn={enableFuncall}
-          setIsOn={setEnableFuncall}
-        />
-      </div>
-      <ChatbotInput
-        onSubmit={handleSubmit}
-        isSubmitting={isThinking}
-        activeAnimation={activeAnimation}
-      />
-    </div>
+    <AnimatePresence>
+      {uiState.isChatOpen && (
+        <motion.div
+          variants={uiState.allowAnimation ? footerVariants : undefined}
+          initial="hidden"
+          animate={uiState.isChatOpen ? "visible" : "hidden"}
+          exit="hidden"
+          className={cn(
+            "flex justify-between p-4 backdrop-blur-md bg-slate-50/20"
+          )}
+        >
+          <div className="flex items-center gap-4">
+            <AnimationToggleButton />
+            <FunctionCallToggleButton
+              isOn={enableFuncall}
+              setIsOn={setEnableFuncall}
+            />
+          </div>
+          <ChatbotInput
+            onSubmit={handleSubmit}
+            isSubmitting={isThinking}
+            activeAnimation={uiState.allowAnimation}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

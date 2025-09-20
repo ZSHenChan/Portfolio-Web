@@ -4,14 +4,35 @@ import { ChatInstance } from "./demoChatHistory";
 import { motion, LayoutGroup } from "motion/react";
 import { useModal } from "./Animated-Modal";
 import { cn } from "@/app/utils/cn";
+import { useUIState } from "@/app/context/UIStateContext";
 
 const itemVariants = {
-  initial: { y: 100 },
-  animate: { y: 0, transition: { duration: 0.5, type: "spring" } },
+  hidden: { y: 50, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 12,
+    },
+  },
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 1,
+    },
+  },
 };
 
 export function ModalContent() {
   const { chatHistory } = useModal();
+  const { isChatOpen, allowAnimation } = useUIState();
   const listEndRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,34 +53,40 @@ export function ModalContent() {
         "flex flex-col-reverse flex-1 px-4 pb-4 h-full overflow-y-scroll"
       )}
     >
-      <ul className="w-full pb-2 flex flex-col items-stretch">
+      <motion.ul
+        variants={allowAnimation ? containerVariants : undefined}
+        initial="hidden"
+        animate={isChatOpen ? "visible" : "exit"}
+        className="w-full pb-2 flex flex-col items-stretch"
+      >
         <LayoutGroup>
-          {chatHistory
-            .filter((chat) => chat.role != "system")
-            .map((chat: ChatInstance) => (
-              <motion.li
-                key={chat.id}
-                variants={itemVariants}
-                initial="initial"
-                animate="animate"
-                className={`py-[0.5rem] px-8 rounded-[4rem] text-start justify-center mt-6 max-w-5/6 ${
-                  chat.role == "bot"
-                    ? "bg-indigo-200/60  self-start rounded-[10px] rounded-tl-[2px]"
-                    : "bg-slate-700/40 self-end rounded-[10px] rounded-tr-[2px]"
-                }`}
-              >
-                <span
-                  className={`${
-                    chat.role == "bot" ? "text-neutral-800" : "text-neutral-300"
-                  } text-sm text-start`}
+          {isChatOpen &&
+            chatHistory
+              .filter((chat) => chat.role != "system")
+              .map((chat: ChatInstance) => (
+                <motion.li
+                  key={chat.id}
+                  variants={itemVariants}
+                  className={`py-[0.5rem] px-8 rounded-[4rem] text-start justify-center mt-6 max-w-5/6 ${
+                    chat.role == "bot"
+                      ? "bg-indigo-200/60  self-start rounded-[10px] rounded-tl-[2px]"
+                      : "bg-slate-700/40 self-end rounded-[10px] rounded-tr-[2px]"
+                  }`}
                 >
-                  {chat.message}
-                </span>
-              </motion.li>
-            ))}
+                  <span
+                    className={`${
+                      chat.role == "bot"
+                        ? "text-neutral-800"
+                        : "text-neutral-300"
+                    } text-sm text-start`}
+                  >
+                    {chat.message}
+                  </span>
+                </motion.li>
+              ))}
           <div ref={listEndRef}></div>
         </LayoutGroup>
-      </ul>
+      </motion.ul>
     </div>
   );
 }
