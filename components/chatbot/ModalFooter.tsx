@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/app/utils/cn";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ChatInstance } from "./demoChatHistory";
 import { motion, AnimatePresence } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
@@ -23,6 +23,7 @@ const AnimationToggleButton = () => {
       text="Animation"
       isOn={allowAnimation}
       setIsOn={setAllowAnimation}
+      ambient={false}
     />
   );
 };
@@ -34,8 +35,16 @@ const FunctionCallToggleButton = ({
   isOn: boolean;
   setIsOn: (open: boolean) => void;
 }) => {
+  const { isChatOpen } = useUIState();
+
   return (
-    <AnimatedToggleButton text="Function Call" isOn={isOn} setIsOn={setIsOn} />
+    <AnimatedToggleButton
+      text="Function Call"
+      isOn={isOn}
+      setIsOn={setIsOn}
+      ambient={isChatOpen}
+      firstTimeDelay={2000}
+    />
   );
 };
 
@@ -53,11 +62,11 @@ const footerVariants = {
 };
 
 export const ModalFooter = () => {
-  const [enableFuncall, setEnableFuncall] = useState(true);
+  const uiState = useUIState();
+  const [enableFuncall, setEnableFuncall] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const { setChatHistory, chatHistory } = useModal();
   const appActions = useAppActions();
-  const uiState = useUIState();
 
   const generateRandomId = () => {
     return uuidv4().slice(0, 8);
@@ -137,11 +146,7 @@ export const ModalFooter = () => {
               setIsOn={setEnableFuncall}
             />
           </div>
-          <ChatbotInput
-            onSubmit={handleSubmit}
-            isSubmitting={isThinking}
-            activeAnimation={uiState.allowAnimation}
-          />
+          <ChatbotInput onSubmit={handleSubmit} isSubmitting={isThinking} />
         </motion.div>
       )}
     </AnimatePresence>

@@ -5,11 +5,9 @@ import { PlaceholdersAndVanishInput } from "./placeholders-and-vanish-input";
 export function ChatbotInput({
   onSubmit,
   isSubmitting,
-  activeAnimation,
 }: {
   onSubmit: (inputText: string) => void;
   isSubmitting: boolean;
-  activeAnimation: boolean;
 }) {
   const placeholders = [
     "Tell me about XCuisite website.",
@@ -23,7 +21,6 @@ export function ChatbotInput({
       placeholders={placeholders}
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
-      activeAnimation={activeAnimation}
     />
   );
 }

@@ -3,24 +3,24 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/app/utils/cn";
+import { useUIState } from "@/app/context/UIStateContext";
 
 export function PlaceholdersAndVanishInput({
   placeholders,
   onSubmit,
   isSubmitting,
-  activeAnimation = true,
 }: {
   placeholders: string[];
   onSubmit: (textInput: string) => void;
   isSubmitting: boolean;
-  activeAnimation: boolean;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+  const { allowAnimation } = useUIState();
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startAnimation = () => {
     intervalRef.current = setInterval(() => {
-      if (!activeAnimation) return;
+      if (!allowAnimation) return;
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
     }, 4000);
   };
@@ -113,7 +113,7 @@ export function PlaceholdersAndVanishInput({
 
   useEffect(() => {
     draw();
-  }, [value, draw, activeAnimation]);
+  }, [value, draw, allowAnimation]);
 
   const animate = (start: number) => {
     const animateFrame = (pos: number = 0) => {
@@ -165,14 +165,14 @@ export function PlaceholdersAndVanishInput({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !animating && !isSubmitting) {
       vanishAndSubmit();
-      if (!activeAnimation) {
+      if (!allowAnimation) {
         onSubmit(inputRef?.current?.value || "");
       }
     }
   };
 
   const vanishAndSubmit = () => {
-    if (activeAnimation) {
+    if (allowAnimation) {
       setAnimating(true);
       draw();
 
