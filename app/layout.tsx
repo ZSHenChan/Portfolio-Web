@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "./providers";
-import { AnimatedModal } from "@/components/chatbot/Modal";
+import { Modal } from "@/components/Modal/Modal";
 import { CustomToaster } from "./utils/Toaster";
 import { Footer } from "@/components/Footer/Footer";
 
@@ -44,7 +44,7 @@ export default function RootLayout({
           <main>
             <CustomToaster />
             {children}
-            <AnimatedModal />
+            <Modal />
             <Footer />
           </main>
         </Providers>

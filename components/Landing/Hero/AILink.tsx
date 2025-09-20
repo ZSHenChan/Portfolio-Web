@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 
 export function AILink({ className }: { className?: string }) {
@@ -15,11 +16,11 @@ export function AILink({ className }: { className?: string }) {
       }}
       viewport={{ once: true }}
       transition={{
-        delay: 1,
-        duration: 1,
+        delay: 0,
+        duration: 0.4,
         ease: "easeInOut",
       }}
-      className={className}
+      className={cn(className)}
     >
       AI
     </motion.div>
