@@ -1,12 +1,12 @@
 "use client";
 import { cn } from "@/app/utils/cn";
 import { useState } from "react";
-import { ChatInstance } from "./demoChatHistory";
+import { ChatInstance } from "../chatbot/demoChatHistory";
 import { motion, AnimatePresence } from "motion/react";
 import { fetchChatbotReply, Reply } from "@/app/lib/chatbot/fetchReply";
 import { executeFunctionCall } from "@/app/lib/chatbot/functionHandlers";
 import { v4 as uuidv4 } from "uuid";
-import { useModal } from "./Animated-Modal";
+import { useModal } from "@/app/context/ModalContext";
 import { ChatbotInput } from "./ChatbotInput";
 import { useAppActions } from "@/app/context/AppActionsContext";
 import { useUIState } from "@/app/context/UIStateContext";

@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef, useEffect } from "react";
-import { ChatInstance } from "./demoChatHistory";
 import { motion, LayoutGroup } from "motion/react";
-import { useModal } from "./Animated-Modal";
+import { useModal } from "@/app/context/ModalContext";
 import { cn } from "@/app/utils/cn";
 import { useUIState } from "@/app/context/UIStateContext";
+import { ChatInstance } from "../chatbot/demoChatHistory";
 
 const itemVariants = {
   hidden: { y: 50, opacity: 0 },
