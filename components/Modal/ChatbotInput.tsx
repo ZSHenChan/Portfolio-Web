@@ -14,11 +14,11 @@ export function ChatbotInput({
   setIsFocus: (focus: boolean) => void;
 }) {
   const placeholders = [
-    "Tell me about yourself.",
+    "Tell me about yourself",
     "How can I contact you?",
     "What are the skills you have?",
-    "What are the projects you have worked on?",
-    "Can you show me your projects?",
+    "Show me your recent projects",
+    "What are your personal experiences?",
   ];
   return (
     <PlaceholdersAndVanishInput
