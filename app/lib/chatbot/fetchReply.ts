@@ -59,7 +59,10 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
   try {
     const conversationHistoryString = JSON.stringify(request.chatHistory);
 
-    const [functionCallResponse, searchQuery] = await Promise.all([
+    const [functionCallResponse, searchQuery]: [
+      Awaited<ReturnType<typeof fetchFunctionCalls>>,
+      Awaited<ReturnType<typeof fetchStructQueryPrompt>>
+    ] = await Promise.all([
       fetchFunctionCalls(conversationHistoryString),
       fetchStructQueryPrompt(
         conversationHistoryString,
@@ -92,11 +95,11 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     if (searchQuery.needSearch && !functionExecApproved) {
       searchResults = await fetchSearchResults(
         searchQuery.synthesisQuery,
-        QUERY_SEARCH_LIMIT
+        searchQuery.searchQueryLimit | QUERY_SEARCH_LIMIT
       );
       if (DEBUG_MODE)
         console.log(
-          `--- Function Call: Found ${searchResults.length} search results`
+          `--- Azure FunctionApp : Found ${searchResults.length} search results`
         );
     }
 

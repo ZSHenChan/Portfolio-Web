@@ -24,8 +24,6 @@ ${conversation}
 ${JSON.stringify(functionCall)}
 [Function Description]
 ${specificDescription}`;
-  console.log("===========Approval============");
-  console.log(prompt);
 
   try {
     const response = await ai.models.generateContent({

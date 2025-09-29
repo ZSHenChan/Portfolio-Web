@@ -61,10 +61,34 @@ const footerVariants = {
   },
 };
 
+const buttonGroupVariants = {
+  hidden: {
+    x: -70,
+    opacity: 0,
+    transition: {
+      type: "spring",
+      stiffness: 500,
+      damping: 30,
+      mass: 0.5,
+    },
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 500,
+      damping: 30,
+      mass: 0.5,
+    },
+  },
+};
+
 export const ModalFooter = () => {
   const uiState = useUIState();
   const [enableFuncall, setEnableFuncall] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const { setChatHistory, chatHistory } = useModal();
   const appActions = useAppActions();
 
@@ -136,17 +160,32 @@ export const ModalFooter = () => {
           animate={uiState.isChatOpen ? "visible" : "hidden"}
           exit="hidden"
           className={cn(
-            "flex justify-between p-4 backdrop-blur-md bg-slate-50/20"
+            "relative flex gap-4 justify-end p-4 backdrop-blur-md bg-slate-50/20"
           )}
         >
-          <div className="flex items-center gap-4">
-            <AnimationToggleButton />
-            <FunctionCallToggleButton
-              isOn={enableFuncall}
-              setIsOn={setEnableFuncall}
-            />
-          </div>
-          <ChatbotInput onSubmit={handleSubmit} isSubmitting={isThinking} />
+          <AnimatePresence>
+            {!isFocus && (
+              <motion.div
+                className="absolute left-[1rem] top-[1.5rem] flex items-center gap-4"
+                variants={buttonGroupVariants}
+                initial="hidden"
+                animate={isFocus ? "hidden" : "visible"}
+                exit="hidden"
+              >
+                <AnimationToggleButton />
+                <FunctionCallToggleButton
+                  isOn={enableFuncall}
+                  setIsOn={setEnableFuncall}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <ChatbotInput
+            onSubmit={handleSubmit}
+            isSubmitting={isThinking}
+            isFocus={isFocus}
+            setIsFocus={setIsFocus}
+          />
         </motion.div>
       )}
     </AnimatePresence>
