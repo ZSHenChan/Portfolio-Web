@@ -15,8 +15,8 @@ export function PlaceholdersAndVanishInput({
   placeholders: string[];
   onSubmit: (textInput: string) => void;
   isSubmitting: boolean;
-  isFocus: boolean;
-  setIsFocus: (focus: boolean) => void;
+  isFocus?: boolean;
+  setIsFocus?: (focus: boolean) => void;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const { allowAnimation } = useUIState();
@@ -61,13 +61,11 @@ export function PlaceholdersAndVanishInput({
   };
 
   const handleFocus = () => {
-    console.log("Input focused");
-    setIsFocus(true);
+    if (setIsFocus) setIsFocus(true);
   };
 
   const handleBlur = () => {
-    console.log("Input unfocused");
-    setIsFocus(false);
+    if (setIsFocus) setIsFocus(false);
   };
 
   const inputVariants = {
