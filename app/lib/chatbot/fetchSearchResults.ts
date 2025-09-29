@@ -23,6 +23,7 @@ interface SearchResponse {
 export interface QueryStructure {
   synthesisQuery: string;
   needSearch: boolean;
+  searchQueryLimit: number;
 }
 
 const ai = new GoogleGenAI({ apiKey: envServer.GOOGLE_CONSOLE_API_KEY });
@@ -52,6 +53,12 @@ ${conversationHistoryString}`,
               type: Type.BOOLEAN,
               description:
                 "Indicate whether searching for information is needed based on the user question.",
+            },
+            searchQueryLimit: {
+              type: Type.STRING,
+              enum: ["3", "5", "7"],
+              description:
+                "Indicate the number of search query limit for information retrieval. Higher search limit is required when the user is asking for more information, for instance 'tell me more about this project'. Minimum is 3",
             },
           },
         },

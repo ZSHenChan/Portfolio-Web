@@ -63,20 +63,23 @@ const footerVariants = {
 
 const buttonGroupVariants = {
   hidden: {
-    x: -50,
+    x: -70,
     opacity: 0,
     transition: {
-      duration: 0.2,
-      ease: "easeOut",
+      type: "spring",
+      stiffness: 500,
+      damping: 30,
+      mass: 0.5,
     },
   },
   visible: {
     x: 0,
     opacity: 1,
     transition: {
-      delay: 0.1,
-      duration: 0.5,
       type: "spring",
+      stiffness: 500,
+      damping: 30,
+      mass: 0.5,
     },
   },
 };
@@ -163,7 +166,6 @@ export const ModalFooter = () => {
           <AnimatePresence>
             {!isFocus && (
               <motion.div
-                layout
                 className="absolute left-[1rem] top-[1.5rem] flex items-center gap-4"
                 variants={buttonGroupVariants}
                 initial="hidden"

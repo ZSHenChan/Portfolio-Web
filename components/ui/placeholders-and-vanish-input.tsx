@@ -72,15 +72,19 @@ export function PlaceholdersAndVanishInput({
     focused: {
       width: "100%",
       transition: {
-        duration: 0.3,
-        ease: "easeOut",
+        type: "spring",
+        stiffness: 500,
+        damping: 100,
+        mass: 0.8,
       },
     },
     unfocused: {
       width: "50%",
       transition: {
-        duration: 0.3,
-        ease: "easeOut",
+        type: "spring",
+        stiffness: 600,
+        damping: 30,
+        mass: 1.0,
       },
     },
   };
@@ -95,11 +99,6 @@ export function PlaceholdersAndVanishInput({
   };
   return (
     <motion.form
-      layout
-      transition={{
-        duration: 0.5,
-        type: "spring",
-      }}
       variants={inputVariants}
       initial="unfocused"
       animate={isFocus ? "focused" : "unfocused"}
