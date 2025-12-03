@@ -9,7 +9,7 @@ import {
 import { Reminder } from "@/app/interfaces/Reminder";
 import { ProjectHeading } from "@/components/Projects/ProjectHeading";
 import toast from "react-hot-toast";
-import { PlaceholdersAndVanishInput } from "@/components/chatbot/placeholders-and-vanish-input";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import {
   fetchFunctionCalls,
   fetchFunctionCallResponse,
@@ -79,7 +79,6 @@ export function ReminderGrid() {
         placeholders={placeholders}
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}
-        activeAnimation={false}
       />
       <div className="h-[10dvh]" />
       <ProjectText className="mb-12">

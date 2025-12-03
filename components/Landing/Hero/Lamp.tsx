@@ -1,15 +1,42 @@
 "use client";
-import React from "react";
-import { motion } from "motion/react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/app/utils/cn";
-import { FadeUpInView } from "../../ui/FadeUpInView";
 import { ScrollableSection } from "../../layout/ScrollableSection";
 
 export function Lamp({ children }: { children: React.ReactNode }) {
+  const [showOverlay, setShowOverlay] = useState(true);
   return (
-    <LampContainer>
-      <FadeUpInView className="text-center">{children} </FadeUpInView>
-    </LampContainer>
+    <>
+      <AnimatePresence>
+        {showOverlay && (
+          <motion.div
+            initial={{
+              opacity: 1,
+            }}
+            whileInView={{
+              opacity: 0,
+            }}
+            viewport={{ once: true }}
+            transition={{
+              delay: 2,
+              duration: 1.5,
+              ease: "easeInOut",
+            }}
+            onAnimationComplete={() => {
+              setShowOverlay(false);
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className={cn(
+              "fixed inset-0 h-[100dvh] w-[100dvw] bg-black/95 z-40"
+            )}
+          />
+        )}
+      </AnimatePresence>
+      <LampContainer>{children}</LampContainer>
+    </>
   );
 }
 
@@ -24,16 +51,17 @@ export const LampContainer = ({
     <ScrollableSection
       id="hero"
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0 mb-0 lg:mb-0",
+        "relative grid place-item-center min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md mb-0 lg:mb-0",
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-[0%]">
+      <div className="absolute top-50 flex w-full flex-1 scale-y-125 items-center justify-center isolate">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
+          viewport={{ once: true }}
           transition={{
-            delay: 0.3,
+            delay: 3,
             duration: 0.8,
             ease: "easeInOut",
           }}
@@ -48,8 +76,9 @@ export const LampContainer = ({
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
+          viewport={{ once: true }}
           transition={{
-            delay: 0.3,
+            delay: 3,
             duration: 0.8,
             ease: "easeInOut",
           }}
@@ -67,8 +96,9 @@ export const LampContainer = ({
         <motion.div
           initial={{ width: "8rem" }}
           whileInView={{ width: "16rem" }}
+          viewport={{ once: true }}
           transition={{
-            delay: 0.3,
+            delay: 3,
             duration: 0.8,
             ease: "easeInOut",
           }}
@@ -77,8 +107,9 @@ export const LampContainer = ({
         <motion.div
           initial={{ width: "15rem" }}
           whileInView={{ width: "30rem" }}
+          viewport={{ once: true }}
           transition={{
-            delay: 0.3,
+            delay: 3,
             duration: 0.8,
             ease: "easeInOut",
           }}
@@ -88,9 +119,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-[130%] lg:-translate-y-[80%] flex-col items-center px-5">
-        {children}
-      </div>
+      <div className="relative z-50">{children}</div>
     </ScrollableSection>
   );
 };

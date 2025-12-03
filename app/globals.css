@@ -61,6 +61,23 @@ html {
   --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
+@keyframes text-fade-in {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hero-text {
+  opacity: 0;
+  animation: text-fade-in 6s ease-in-out forwards;
+}
+
 @keyframes spotlight {
   0% {
     opacity: 0;

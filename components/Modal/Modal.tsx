@@ -1,21 +1,13 @@
 "use client";
 import React, { useRef, useEffect } from "react";
-import { Modal, ModalBody, ModalTrigger } from "./Animated-Modal";
+import { ModalProvider } from "@/app/context/ModalContext";
+import { ModalTrigger } from "./ModalTrigger";
+import { ModalBody } from "./ModalBody";
 import { ModalContent } from "./ModalContent";
 import { ModalFooter } from "./ModalFooter";
 
-export function AnimatedModal() {
+export function Modal() {
   const listEndRef = useRef<null | HTMLDivElement>(null);
-
-  // * testing use
-  // useEffect(() => {
-  //   const handle = async () => {
-  //     getFunctionCalls({
-  //       query: "navigate to section projects",
-  //     });
-  //   };
-  //   handle();
-  // }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -31,7 +23,7 @@ export function AnimatedModal() {
 
   return (
     <div className="w-screen flex items-center justify-center">
-      <Modal>
+      <ModalProvider>
         <ModalTrigger
           onOpen={scrollToBottom}
           className="fixed bottom-[30px] right-[30px] z-5 cursor-pointer"
@@ -42,7 +34,7 @@ export function AnimatedModal() {
           <ModalContent />
           <ModalFooter />
         </ModalBody>
-      </Modal>
+      </ModalProvider>
     </div>
   );
 }

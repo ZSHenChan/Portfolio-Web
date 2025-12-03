@@ -7,6 +7,8 @@ import React, {
 } from "react";
 
 interface UIStateContextProps {
+  allowAnimation: boolean;
+  setAllowAnimation: (open: boolean) => void;
   scrollToSection: (sectionId: string) => void;
   isChatOpen: boolean;
   setChatOpen: (open: boolean) => void;
@@ -22,6 +24,7 @@ const UIStateContext = createContext<UIStateContextProps | undefined>(
 export const UIStateContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
+  const [allowAnimation, setAllowAnimation] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [scrollTargetList, setScrollTargetList] = useState<Set<string>>(
     new Set()
@@ -53,9 +56,11 @@ export const UIStateContextProvider: React.FC<{
   }, []);
 
   const UIStateContextValue: UIStateContextProps = {
-    scrollToSection,
+    allowAnimation,
+    setAllowAnimation,
     isChatOpen,
     setChatOpen,
+    scrollToSection,
     scrollTargetList,
     registerScrollTarget,
     unregisterScrollTarget,
