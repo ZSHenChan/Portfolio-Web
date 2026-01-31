@@ -1,8 +1,7 @@
 "use server";
 import { envClient } from "@/app/env/client";
 import { envServer } from "@/app/env/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import { GoogleGenAI } from "@google/genai";
 import { ChatInstance } from "@/components/chatbot/demoChatHistory";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage } from "@/app/utils/handleReport";
@@ -10,20 +9,21 @@ import { generatePrompt } from "./generatePrompt";
 import { fetchFunctionCalls } from "./fetchFunctionCalls";
 import { funcSysMsgDict } from "./functionCalls";
 import {
-  fetchSearchResults,
-  ResultInstance,
+  // fetchSearchResults,
+  // ResultInstance,
   fetchStructQueryPrompt,
 } from "./fetchSearchResults";
 import {
   REPLY_ERROR_FALLBACK_MSG,
   GEMINI_GENERATION_CONFIG,
   INITIAL_CHAT_HISTORY,
-  QUERY_SEARCH_LIMIT,
+  // QUERY_SEARCH_LIMIT,
   DEBUG_MODE,
-  REPLY_SYN_PROMPT,
 } from "./config";
 import { fetchExcDecisionStruct } from "./fetchFunctionApproval";
 import { FunctionCallType } from "@/app/enums/functionCall";
+import path from "path";
+import { promises as fs } from "fs";
 
 export interface Reply {
   message: string;
@@ -40,15 +40,11 @@ interface Request {
 function initiateChatSession() {
   const API_KEY = envServer.GEMINI_API_KEY;
   const MODEL_NAME = envClient.NEXT_PUBLIC_GEMINI_MODEL_MAIN;
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  const chatSession = ai.chats.create({
     model: MODEL_NAME,
-    systemInstruction: REPLY_SYN_PROMPT,
-  });
-
-  const chatSession = model.startChat({
-    generationConfig: GEMINI_GENERATION_CONFIG,
     history: INITIAL_CHAT_HISTORY,
+    config: GEMINI_GENERATION_CONFIG,
   });
   return chatSession;
 }
@@ -61,12 +57,12 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
 
     const [functionCallResponse, searchQuery]: [
       Awaited<ReturnType<typeof fetchFunctionCalls>>,
-      Awaited<ReturnType<typeof fetchStructQueryPrompt>>
+      Awaited<ReturnType<typeof fetchStructQueryPrompt>>,
     ] = await Promise.all([
       fetchFunctionCalls(conversationHistoryString),
       fetchStructQueryPrompt(
         conversationHistoryString,
-        request.chatHistory[request.chatHistory.length - 1].message
+        request.chatHistory[request.chatHistory.length - 1].message,
       ),
     ]);
 
@@ -78,12 +74,12 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     let functionExecApproved = false;
     if (request.enableFunctionCalling && functionCallResponse.functionCall) {
       const functionType = Object.values(FunctionCallType).find(
-        (func) => func.name === functionCallResponse.functionCall?.name
+        (func) => func.name === functionCallResponse.functionCall?.name,
       );
       const funcExecApproveObj = await fetchExcDecisionStruct(
         conversationHistoryString,
         functionCallResponse.functionCall,
-        functionType?.description ?? ""
+        functionType?.description ?? "",
       );
       functionExecApproved = funcExecApproveObj.approve;
       if (DEBUG_MODE) {
@@ -91,30 +87,35 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       }
     }
 
-    let searchResults: ResultInstance[] = [];
-    if (searchQuery.needSearch && !functionExecApproved) {
-      searchResults = await fetchSearchResults(
-        searchQuery.synthesisQuery,
-        searchQuery.searchQueryLimit | QUERY_SEARCH_LIMIT
-      );
-      if (DEBUG_MODE)
-        console.log(
-          `--- Azure FunctionApp : Found ${searchResults.length} search results`
-        );
-    }
+    // let searchResults: ResultInstance[] = [];
+    // if (searchQuery.needSearch && !functionExecApproved) {
+    //   searchResults = await fetchSearchResults(
+    //     searchQuery.synthesisQuery,
+    //     searchQuery.searchQueryLimit | QUERY_SEARCH_LIMIT
+    //   );
+    //   if (DEBUG_MODE)
+    //     console.log(
+    //       `--- Azure FunctionApp : Found ${searchResults.length} search results`
+    //     );
+    // }
 
     const funcSysMsg = functionCallResponse?.functionCall?.name
       ? funcSysMsgDict.get(functionCallResponse?.functionCall?.name)
       : "";
 
+    const filePath = path.join(process.cwd(), "public", "knowledge.json");
+    const fileContents = await fs.readFile(filePath, "utf-8");
+    const jsonData = JSON.parse(fileContents);
+
     const prompt = await generatePrompt(
       conversationHistoryString,
-      searchResults,
-      functionExecApproved ? functionCallResponse.functionCall : undefined
+      JSON.stringify(jsonData),
+      functionExecApproved ? functionCallResponse.functionCall : undefined,
     );
 
-    const result = await chatSession.sendMessage(prompt);
-    const replyText = result.response.text();
+    const response = await chatSession.sendMessage({ message: prompt });
+    const replyText = response.text;
+    if (!replyText) throw new Error("Unable to fetch response");
 
     return {
       message: replyText,

@@ -108,8 +108,9 @@ export const GEMINI_GENERATION_CONFIG = {
   temperature: 0.25,
   topP: 0.95,
   topK: 40,
-  maxOutputTokens: 120,
+  maxOutputTokens: 1020,
   responseMimeType: "text/plain",
+  systemInstruction: REPLY_SYN_PROMPT,
 };
 
 export const INITIAL_CHAT_HISTORY = [

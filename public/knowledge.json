@@ -1,0 +1,129 @@
+[
+  {
+    "id": "profile_bio",
+    "category": "general",
+    "title": "Profile: Zi Shen (Bio & Education)",
+    "date": "2026-01",
+    "tech_stack": ["Backend Engineering", "AI Integration", "Mathematics"],
+    "content": "I am Zi Shen, a Year 4 undergraduate pursuing a B.Sc. in Mathematical and Computer Sciences at Nanyang Technological University (NTU), Singapore. I currently hold a CGPA of 4.49 and expect to graduate in July 2026.\n\n**Focus & Interests**\nMy primary professional focus is on backend development and integrating AI into practical software solutions. Personally, I enjoy creating iOS Shortcuts, playing musical instruments, hiking, and travelling.\n\n**Portfolio Overview**\nMy work spans personal projects like Stock AI and Event Capture, as well as professional experiences including the Automation Manager (5G testing) and the SCCC Accent Database.",
+    "summary": "Year 4 NTU CS & Math student (CGPA 4.49) graduating July 2026. Based in Singapore, focusing on Backend Dev and AI.",
+    "importance_score": 10
+  },
+  {
+    "id": "profile_tech_skills",
+    "category": "skills",
+    "title": "Technical Skills & Professional Approach",
+    "date": "2026-01",
+    "tech_stack": [
+      ".NET Core",
+      "React",
+      "PostgreSQL",
+      "Azure SQL",
+      "gRPC",
+      "REST APIs"
+    ],
+    "content": "My technical expertise is centered on full-stack development with a strong emphasis on backend performance and type safety.\n\n**Core Technology Stack**\n* **Backend:** My framework of choice is **.NET** (specifically .NET Core/.NET 8). I appreciate its strong typing, performance, and ecosystem.\n* **Frontend:** I am most comfortable building interactive UIs using **React**, often leveraging libraries like Framer Motion for enhanced UX.\n* **Database:** I primarily use **PostgreSQL** for its reliability and feature set, but I am also proficient with cloud-native relational databases like **Azure SQL**.\n* **Protocols:** Beyond standard REST APIs, I have practical experience implementing **gRPC** for high-performance inter-service communication, notably used in my Automation Manager project to optimize gateway-to-microservice traffic.\n\n**Work Style & Philosophy**\n* **Collaboration:** I thrive in team settings that utilize agile practices. I find daily stand-ups valuable for unblocking challenges and sharing knowledge across the team.\n* **Continuous Learning:** I actively maintain industry awareness by following tech newsletters (TechCrunch, Rundown) and developer communities (DailyDevs), ensuring my skills remain current with emerging trends.",
+    "summary": "A summary of technical competencies, focusing on .NET, React, and PostgreSQL. It also outlines professional habits, including a preference for agile teamwork and continuous learning via industry publications.",
+    "importance_score": 10
+  },
+  {
+    "id": "proj_event_capture",
+    "category": "project",
+    "title": "Event Capture: Intelligent Calendar Automation",
+    "date": "2024-11",
+    "tech_stack": [
+      "iOS Shortcuts",
+      "Natural Language Processing (NLP)",
+      "LLM Prompt Engineering",
+      "Calendar API"
+    ],
+    "content": "The Event Capture project is an intelligent automation tool designed to eliminate the friction of manual calendar entry. Born from the frustration of interrupting workflows to type out schedules, this tool allows users to instantly add events using simple voice or text commands. It streamlines the scheduling process by replacing multiple manual steps with a single, intuitive interaction.\n\n**Key Features**\n* **Event Capture:** Users can select text from any source (email, websites, etc.), and the system automatically converts it into a structured calendar event, filtering out irrelevant noise.\n* **Conversation Awareness:** Utilizing Natural Language Processing (NLP), the tool listens to or reads conversation flows to extract key details like dates, times, and locations intelligently.\n* **Batch Processing:** The 'Multiple Events' feature supports adding lists of events simultaneously, making it ideal for planning full itineraries or trip schedules in one go.\n\n**Technical Implementation**\nThe core technology stack combines iOS Shortcuts with an underlying NLP model. A significant portion of the engineering effort focused on **Prompt Engineering**—constructing precise prompts to ensure the LLM accurately interpreted vague user commands and returned structured data compatible with the Calendar app.\n\n**Impact & Future**\nThe project succeeded in creating an \"invisible\" user experience, where the technology fades into the background and simply gets the job done. Future roadmap items include expanding support to non-Apple calendar platforms, adding advanced fields like attendee invitations, and potentially evolving the shortcut into a standalone mobile application.",
+    "summary": "An iOS Shortcut automation that uses NLP and LLMs to convert voice, text, and on-screen content into structured calendar events. Features include conversation parsing and batch event creation, designed to remove the friction of manual scheduling.",
+    "importance_score": 4
+  },
+  {
+    "id": "proj_stock_ai",
+    "category": "project",
+    "title": "Stock AI: Unified Financial Research Platform",
+    "date": "2024-XX",
+    "tech_stack": [
+      "C#",
+      ".NET",
+      "Redis",
+      "Telegram Bot API",
+      "LLM Integration",
+      "SEC.gov API"
+    ],
+    "content": "The Stock AI project is a comprehensive financial research tool designed to solve the problem of fragmented and inefficient manual analysis. Traditionally, financial research requires juggling multiple browser tabs, spreadsheets, and disparate reports. This project consolidates these essential tools into a single, user-friendly interface, accessible via a Telegram bot and command-line inputs.\n\n**Key Features & Functionality**\nThe platform implements several core capabilities to streamline the user workflow:\n1. **Shallow Research with LLM:** Integrates Large Language Models to provide rapid, up-to-date insights and summaries on specific companies, replacing the need for manual news scraping.\n2. **Dynamic Event Tracking:** Users can search for future market events, specifically identifying upcoming Initial Public Offerings (IPOs) and earnings releases to stay ahead of market movements.\n3. **Financial Data Access:** Provides direct access to key financial statistics and allows users to search for and retrieve official company filings (such as 10-K and 10-Q reports) directly from credible sources like SEC.gov.\n\n**Technical Architecture**\nThe system is built on a **C# (.NET)** framework backend server, chosen for its robustness in handling financial data structures. The user interface is deployed as a **Telegram bot**, ensuring accessibility across devices. To handle high concurrency and improve response times for multiple users, **Redis** was implemented for temporary caching.\n\n**Challenges & Solutions**\n* **User Experience (UX):** A major challenge was making a CLI-based tool accessible to non-coders. This was addressed by designing a simplified command syntax (e.g., `/company APPL`) that requires no technical knowledge to operate.\n* **Data Integrity:** Sourcing data from government entities like SEC.gov presented formatting inconsistencies. The solution involved implementing rigorous data cleaning pipelines to identify and extract only relevant information before presentation.\n* **Performance:** Managing simultaneous requests was solved by integrating Redis caching, which reduced load on the backend and external APIs.\n\n**Future Roadmap**\nDevelopment plans include integrating real-time news search, automated Discounted Cash Flow (DCF) sheet generation, and advanced statistical analysis for market price forecasting and historical performance ratings.",
+    "summary": "A C# and .NET-based financial research tool integrated into a Telegram bot. It aggregates financial data, SEC filings, and LLM-driven analysis into a single interface, utilizing Redis for high-performance caching.",
+    "importance_score": 5
+  },
+  {
+    "id": "proj_portfolio_ai",
+    "category": "project",
+    "title": "Portfolio AI Assistant: Digital Twin",
+    "date": "2025-01",
+    "tech_stack": [
+      "Gemini 1.5 Flash",
+      "Google AI API",
+      "React",
+      "Python",
+      "Google Cloud",
+      "Prompt Engineering"
+    ],
+    "content": "The Portfolio AI Assistant is a digital replica designed to answer inquiries about Zi Shen's academic background, projects, and professional experience. Inspired by the goal of automating visitor interactions, it serves as a 24/7 intelligent agent embedded directly into the portfolio website.\n\n**Technical Architecture**\nThe system adopts a hybrid architecture:\n* **Brain:** Powered by **Gemini 1.5 Flash** (via Google AI for Developers API), chosen for its low latency and high reasoning capabilities.\n* **Frontend:** Built with **React** to provide a clean, chat-based user interface.\n* **Backend:** A **Python** service hosted on **Google Cloud** that manages API communication, context tracking, and security.\n\n**Key Capabilities**\n* **Context Awareness:** Maintains conversation history to handle follow-up questions and ambiguous queries effectively.\n* **Accuracy Control:** Relies on a strict internal knowledge base ('cheat sheet') to minimize hallucinations, with a fallback mechanism to ask for clarification when unsure.\n* **Security:** Privacy-first design that discards data post-conversation and encrypts all communications. It strictly avoids storing personal user data.\n\n**Challenges & Engineering**\nA major hurdle was managing the knowledge base and preventing hallucinations. This was overcome through rigorous **Prompt Engineering** and parameter tuning (scope definition, flow tracking). The development process required significant data cleaning and fine-tuning to ensure the model's tone and facts matched reality.\n\n**Current Status**\nDevelopment began in January 2025. The model is currently live and undergoes continuous fine-tuning to improve its conversational fluidity and question-answering accuracy.",
+    "summary": "A custom AI chatbot powered by Gemini 1.5 Flash and Google Cloud. It acts as a digital twin to answer questions about the portfolio, featuring context-aware conversations, strict knowledge grounding, and a privacy-focused architecture.",
+    "importance_score": 7
+  },
+  {
+    "id": "exp_sccc",
+    "category": "experience",
+    "title": "SCCC: Interactive Articulatory Accent Database",
+    "date": "2024-XX",
+    "tech_stack": [
+      "React",
+      "Next.js",
+      "Mantine UI",
+      "Bun",
+      "Docker",
+      "Continuous Fetching"
+    ],
+    "content": "The SCCC Interactive Articulatory Accent Database is a specialized digital archive designed to visualize and play spontaneous speech excerpts of Singapore Mandarin. The project serves as an interactive accent chart, allowing researchers and users to compare subtle linguistic differences across various speakers.\n\n**Role & Responsibilities**\nMy primary role was engineering the frontend user interface. The goal was to build a system that allows users to seamlessly listen to, analyze, and compare different audio samples speaking identical phrases. \n\n**Technical Challenges: High-Volume Data Rendering**\nThe critical engineering challenge was performance. The application needed to fetch and render a massive amount of audio metadata on a single page without causing UI freeze or long load times. Standard fetching methods would have resulted in poor user experience due to the sheer payload size.\n\n**Solutions & Architecture**\n* **Data Handling Strategy:** I implemented a **continuous fetching and paging** mechanism. Instead of blocking the UI to load everything at once, the application loads data chunks incrementally, ensuring the page remains responsive while subsequent data populates in the background.\n* **Caching Layer:** To further optimize performance, I implemented strict caching policies to prevent redundant network requests when users navigated between different data views.\n* **UI/UX Optimization:** To solve the layout overcrowding issue, I designed a compact table layout using **Mantine UI**. Detailed metadata was offloaded to **Modals** (triggered on click) and **Hover Cards** (for quick previews), keeping the main interface clean and DOM-light.\n\n**Tech Stack**\nThe project was built using **Next.js** and **React** for the frontend, **Bun** as the JavaScript runtime for speed, and **Docker** for containerized deployment.",
+    "summary": "A high-performance web interface for a Singapore Mandarin accent database. Key contributions involved optimizing frontend performance for large datasets using continuous fetching, pagination, and caching strategies, alongside a Mantine-based UI for complex data visualization.",
+    "importance_score": 4
+  },
+  {
+    "id": "proj_hologram",
+    "category": "project",
+    "title": "Hologram Chatbot: Interactive AI Avatar",
+    "date": "2024-XX",
+    "tech_stack": [
+      "React",
+      "Microsoft Azure (Functions, Blob Storage)",
+      "Python",
+      "OpenAI Whisper (STT)",
+      "Google TTS",
+      "Lip-Sync Framework"
+    ],
+    "content": "The Hologram Chatbot is an interactive, full-stack AI avatar designed to answer inquiries regarding the Gaia building at NTU. Unlike standard text-based bots, this project creates an immersive experience by combining real-time animation with audio-visual interaction. Users can communicate via voice or text, and the 'hologram' responds with synchronized lip movements and audio output.\n\n**System Architecture**\nThe application integrates multiple AI services to create a seamless loop:\n1. **Input:** User speech is captured and converted to text using **OpenAI Whisper (STT)**.\n2. **Processing:** The query is sent to a **Microsoft Azure** backend, where relevant knowledge is retrieved via vector search.\n3. **Output:** The LLM response is converted to audio using **Google TTS**, which drives the frontend lip-sync framework to animate the avatar in real-time.\n\n**Data Engineering Pipeline**\nTo power the chatbot's knowledge base, I built a serverless data pipeline using **Azure Function Apps** and Python. This pipeline handles the ingestion, indexing, and vectorization of diverse unstructured data formats—including PDFs, Word docs, HTML files, and CSX scripts—storing them in Azure Blob Storage for retrieval.\n\n**Infrastructure Challenges**\nA major complexity in this project was managing the Azure cloud environment for a team. Setting up resource groups, databases, and containers required strict security governance. I resolved these issues by implementing **Azure Role-Based Access Control (RBAC)**, ensuring granular permission grants (e.g., connection strings, service access) were correctly distributed among developers without compromising security.",
+    "summary": "An interactive AI avatar for NTU's Gaia building featuring real-time lip-syncing and voice interaction. Built on React and Microsoft Azure, it utilizes a Python-based serverless pipeline to vectorize diverse document types (PDFs, HTML) and leverages Azure RBAC for secure team resource management.",
+    "importance_score": 5
+  },
+  {
+    "id": "exp_automation_manager",
+    "category": "experience",
+    "title": "Automation Manager: 5G Signal Testing Infrastructure",
+    "date": "2024-XX",
+    "tech_stack": [
+      ".NET Core",
+      "gRPC",
+      "Consul",
+      "TCP/IP",
+      "Protobuf",
+      "Microservices Architecture"
+    ],
+    "content": "The Automation Manager is a specialized infrastructure designed to automate 5G signal testing on Android devices. It streamlines the validation of network performance, quality of service (QoS), and data throughput for voice and data use cases.\n\n**System Architecture & Workflow**\nThe system operates on a microservices architecture. The workflow begins with a client-side request sent to a RESTful API Gateway.  The gateway's controller then dispatches a **gRPC** request to the target microservice. Test commands (AT/adb) are stored in modifiable XML files and executed dynamically, with feedback returned to the server for immediate debugging and result evaluation.\n\n**Technical Implementation**\n* **Communication Protocol:** The core communication relies on **.NET gRPC** using server-streaming RPC. By serializing messages with **Protobuf** and transmitting via HTTP/2, the system achieves low latency, flow control, and header compression—critical for high-performance testing.\n* **Signal Handling:** TCP/IP is utilized for the direct signal transmission layer, employing a standard three-way handshake to establish secure connections with the testing hardware.\n* **Service Mesh:** **Consul** serves as the data plane and service mesh. It handles service registration, health checks, and traffic control, ensuring robust communication between service instances and sidecar proxies.\n\n**Challenges & Solutions**\n* **gRPC Integration:** Unlike REST, gRPC requires shared `.proto` files on both client and server. I resolved versioning and access issues by restructuring the directory hierarchy to centralize these definitions and modifying the project files (`.csproj`) to share access seamlessly.\n* **Browser Compatibility:** Since browser support for HTTP/2 (required by gRPC) is limited, I implemented Consul as a proxy layer to bridge the gap between web clients and the backend services.",
+    "summary": "A microservice-based system for automated 5G testing on Android, powered by .NET gRPC and Consul. It features a hybrid REST/gRPC architecture for low-latency communication and uses Consul for service discovery and proxying.",
+    "importance_score": 5
+  }
+]
