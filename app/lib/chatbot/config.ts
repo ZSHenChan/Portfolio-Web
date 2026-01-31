@@ -1,5 +1,7 @@
 import { ProjectDemoType } from "@/app/enums/projectDemo";
 import { envClient } from "@/app/env/client";
+import { Code, BarChart, Briefcase, FileText } from "lucide-react";
+import { ResumeOption } from "@/app/interfaces/Resume";
 
 export const DEBUG_MODE = envClient.NEXT_PUBLIC_DEV_MODE ?? false;
 
@@ -180,3 +182,41 @@ export const PROJECT_DEMO_URL_DICT: Record<string, string> = {
 };
 
 export const FETCH_FAIL_FALLBACK_MSG = "Error happened when fetching functions";
+
+//* Resume Generation
+export const RESUME_OPTIONS: ResumeOption[] = [
+  {
+    id: "Software Engineering",
+    label: "Software Engineer",
+    icon: Code,
+    text: "Tailored for this role",
+    filename: "resume/resume_sw.pdf",
+    downloadFilename: "zishenchan_SW.pdf",
+  },
+  {
+    id: "Data Analysis",
+    label: "Data Analyst",
+    icon: BarChart,
+    text: "Tailored for this role",
+    filename: "resume/resume_da.pdf",
+    downloadFilename: "zishenchan_DA.pdf",
+  },
+  {
+    id: "General",
+    label: "General Resume",
+    icon: FileText,
+    text: "Tailored for this role",
+    filename: "resume/resume_ai.pdf",
+    downloadFilename: "zishenchan_general.pdf",
+  },
+  {
+    id: "Custom",
+    label: "Custom Resume",
+    icon: Briefcase,
+    text: "Not in the list? Try this",
+    filename: "resume/resume_custom.pdf",
+    downloadFilename: "zishenchan_custom.pdf",
+  },
+];
+
+export const MASTER_RESUME_FILEPATH = "resume/master_data.json";

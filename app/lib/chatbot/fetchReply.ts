@@ -1,7 +1,5 @@
 "use server";
 import { envClient } from "@/app/env/client";
-import { envServer } from "@/app/env/server";
-import { GoogleGenAI } from "@google/genai";
 import { ChatInstance } from "@/components/chatbot/demoChatHistory";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage } from "@/app/utils/handleReport";
@@ -24,6 +22,7 @@ import { fetchExcDecisionStruct } from "./fetchFunctionApproval";
 import { FunctionCallType } from "@/app/enums/functionCall";
 import path from "path";
 import { promises as fs } from "fs";
+import { gemini_client as ai } from "@/lib/gemini";
 
 export interface Reply {
   message: string;
@@ -38,9 +37,7 @@ interface Request {
 }
 
 function initiateChatSession() {
-  const API_KEY = envServer.GEMINI_API_KEY;
   const MODEL_NAME = envClient.NEXT_PUBLIC_GEMINI_MODEL_MAIN;
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
   const chatSession = ai.chats.create({
     model: MODEL_NAME,
     history: INITIAL_CHAT_HISTORY,

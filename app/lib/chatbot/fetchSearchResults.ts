@@ -2,10 +2,11 @@
 
 import { envServer } from "@/app/env/server";
 import { getErrorMessage } from "@/app/utils/handleReport";
-import { GoogleGenAI, Type } from "@google/genai";
+import { Type } from "@google/genai";
 import { fetchWithRetry } from "@/app/utils/fetchWithRetry";
 import { envClient } from "@/app/env/client";
 import { SEARCH_QUERY_SYN_PROMPT } from "./config";
+import { gemini_client as ai } from "@/lib/gemini";
 
 export interface ResultInstance {
   id: string | null;
@@ -26,11 +27,9 @@ export interface QueryStructure {
   searchQueryLimit: number;
 }
 
-const ai = new GoogleGenAI({ apiKey: envServer.GOOGLE_CONSOLE_API_KEY });
-
 export async function fetchStructQueryPrompt(
   conversationHistoryString: string,
-  fallbackQuery: string
+  fallbackQuery: string,
 ): Promise<QueryStructure> {
   try {
     const response = await ai.models.generateContent({
@@ -72,7 +71,7 @@ ${conversationHistoryString}`,
   } catch (err) {
     const errMsg = getErrorMessage(err);
     console.error(
-      `Error while fetching search query: ${errMsg}. Using user last message`
+      `Error while fetching search query: ${errMsg}. Using user last message`,
     );
     return {
       synthesisQuery: fallbackQuery,
@@ -83,7 +82,7 @@ ${conversationHistoryString}`,
 
 export async function fetchSearchQueryPrompt(
   conversationHistoryString: string,
-  fallbackQuery: string
+  fallbackQuery: string,
 ) {
   const instructions = SEARCH_QUERY_SYN_PROMPT;
 
@@ -99,7 +98,7 @@ ${conversationHistoryString}`,
   } catch (err) {
     const errMsg = getErrorMessage(err);
     console.error(
-      `Error while fetching search query: ${errMsg}. Using user last message`
+      `Error while fetching search query: ${errMsg}. Using user last message`,
     );
     return fallbackQuery;
   }
@@ -107,7 +106,7 @@ ${conversationHistoryString}`,
 
 export async function fetchSearchResults(
   query: string,
-  limit: number = 3
+  limit: number = 3,
 ): Promise<ResultInstance[]> {
   // No need for a try...catch here, as fetchWithRetry handles it.
   const res = await fetchWithRetry(envServer.TXTAI_BASE_URL, {

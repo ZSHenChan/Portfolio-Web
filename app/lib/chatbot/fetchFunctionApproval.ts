@@ -1,22 +1,20 @@
 "use server";
 
-import { envServer } from "@/app/env/server";
 import { getErrorMessage } from "@/app/utils/handleReport";
-import { FunctionCall, GoogleGenAI, Type } from "@google/genai";
+import { FunctionCall, Type } from "@google/genai";
 import { envClient } from "@/app/env/client";
 import { DECIDE_FUNCTION_CALL_SYS_INSTURCTION } from "./config";
+import { gemini_client as ai } from "@/lib/gemini";
 
 export interface FunctionExcDecisionStruct {
   approve: boolean;
   reason: string;
 }
 
-const ai = new GoogleGenAI({ apiKey: envServer.GOOGLE_CONSOLE_API_KEY });
-
 export async function fetchExcDecisionStruct(
   conversation: string,
   functionCall: FunctionCall,
-  specificDescription: string
+  specificDescription: string,
 ): Promise<FunctionExcDecisionStruct> {
   const prompt = `[Conversation]
 ${conversation}
@@ -56,7 +54,7 @@ ${specificDescription}`;
   } catch (err) {
     const errMsg = getErrorMessage(err);
     console.error(
-      `Error while fetching search query: ${errMsg}. Using user last message`
+      `Error while fetching search query: ${errMsg}. Using user last message`,
     );
     return {
       approve: false,

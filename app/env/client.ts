@@ -16,6 +16,7 @@ export const envClient = createEnv({
     NEXT_PUBLIC_GEMINI_MODEL_QUERY: z.string(),
     NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL: z.string(),
     NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER: z.string(),
+    NEXT_PUBLIC_GEMINI_MODEL_RESUME: z.string(),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_DEV_MODE: process.env.NEXT_PUBLIC_DEV_MODE,
@@ -35,5 +36,7 @@ export const envClient = createEnv({
       process.env.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL,
     NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER:
       process.env.NEXT_PUBLIC_GEMINI_MODEL_FUNC_CALL_APPROVER,
+    NEXT_PUBLIC_GEMINI_MODEL_RESUME:
+      process.env.NEXT_PUBLIC_GEMINI_MODEL_RESUME,
   },
 });
