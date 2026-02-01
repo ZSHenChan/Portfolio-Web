@@ -20,8 +20,7 @@ import {
 } from "./config";
 import { fetchExcDecisionStruct } from "./fetchFunctionApproval";
 import { FunctionCallType } from "@/app/enums/functionCall";
-import path from "path";
-import { promises as fs } from "fs";
+import { getKnowledgeData } from "@/lib/resume-loader";
 import { gemini_client as ai } from "@/lib/gemini";
 
 export interface Reply {
@@ -100,13 +99,11 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       ? funcSysMsgDict.get(functionCallResponse?.functionCall?.name)
       : "";
 
-    const filePath = path.join(process.cwd(), "public", "knowledge.json");
-    const fileContents = await fs.readFile(filePath, "utf-8");
-    const jsonData = JSON.parse(fileContents);
+    const knowledgeData = getKnowledgeData();
 
     const prompt = await generatePrompt(
       conversationHistoryString,
-      JSON.stringify(jsonData),
+      JSON.stringify(knowledgeData),
       functionExecApproved ? functionCallResponse.functionCall : undefined,
     );
 
