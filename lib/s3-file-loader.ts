@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 import { FinalResumeData } from "@/app/interfaces/Resume";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { KnowledgeItem } from "@/app/lib/chatbot/types";
@@ -42,3 +42,26 @@ export const getKnowledgeData = async (
 
   return JSON.parse(str) as KnowledgeItem;
 };
+
+const getGeneralPdf = async (key: string) => {
+  const command = new GetObjectCommand({
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: key,
+  });
+
+  const response = await s3.send(command);
+
+  if (!response.Body) throw new Error("Fetched empty body");
+
+  return response.Body.transformToByteArray();
+};
+
+export async function downloadResumePdf(key: string) {
+  try {
+    const pdfBytes = await getGeneralPdf(key);
+    return Buffer.from(pdfBytes).toString("base64");
+  } catch (error) {
+    console.error("Error downloading PDF:", error);
+    return null;
+  }
+}

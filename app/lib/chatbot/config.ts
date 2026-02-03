@@ -190,7 +190,7 @@ export const RESUME_OPTIONS: ResumeOption[] = [
     label: "Software Engineer",
     icon: Code,
     text: "Tailored for this role",
-    filename: "resume/resume_sw.pdf",
+    filename: "resume_sw.pdf",
     downloadFilename: "zishenchan_SW.pdf",
   },
   {
@@ -198,7 +198,7 @@ export const RESUME_OPTIONS: ResumeOption[] = [
     label: "Data Analyst",
     icon: BarChart,
     text: "Tailored for this role",
-    filename: "resume/resume_da.pdf",
+    filename: "resume_da.pdf",
     downloadFilename: "zishenchan_DA.pdf",
   },
   {
@@ -206,7 +206,7 @@ export const RESUME_OPTIONS: ResumeOption[] = [
     label: "General Resume",
     icon: FileText,
     text: "Tailored for this role",
-    filename: "resume/resume_ai.pdf",
+    filename: "resume_ai.pdf",
     downloadFilename: "zishenchan_general.pdf",
   },
   {
@@ -214,9 +214,10 @@ export const RESUME_OPTIONS: ResumeOption[] = [
     label: "Custom Resume",
     icon: Briefcase,
     text: "Not in the list? Try this",
-    filename: "resume/resume_custom.pdf",
+    filename: "resume_custom.pdf",
     downloadFilename: "zishenchan_custom.pdf",
   },
 ];
 
-export const MASTER_RESUME_FILEPATH = "resume/master_data.json";
+export const MASTER_RESUME_FILENAME = "master_data.json";
+export const LLM_KNOWLEDGE_FILENAME = "knowledge.json";

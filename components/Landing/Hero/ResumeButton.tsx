@@ -8,6 +8,7 @@ import { fetchResumeData } from "@/app/lib/chatbot/fetchCustomizedResume";
 import { ResumeOption } from "@/app/interfaces/Resume";
 import { RESUME_OPTIONS } from "@/app/lib/chatbot/config";
 import toast from "react-hot-toast";
+import { downloadResumePdf } from "@/lib/s3-file-loader";
 
 export function ResumeButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +17,39 @@ export function ResumeButton() {
   const [showCustomInput, setShowCustomInput] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
 
-  const handleStaticDownload = (option: ResumeOption) => {
-    saveAs(option.filename, option.downloadFilename);
+  const handleStaticDownload = async (option: ResumeOption) => {
+    try {
+      setLoading(option.id);
 
-    setIsOpen(false);
+      const base64Data = await toast.promise(
+        downloadResumePdf(option.filename),
+        {
+          loading: "Fetching resume...",
+          success: "Got it!",
+          error: "Fetching failed. Please try again later.",
+        },
+      );
+
+      if (!base64Data) {
+        throw new Error("Failed to retrieve file");
+      }
+
+      const binaryString = window.atob(base64Data);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const blob = new Blob([bytes], { type: "application/pdf" });
+
+      saveAs(blob, option.downloadFilename);
+
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Static download failed:", error);
+    } finally {
+      setLoading(null);
+    }
   };
 
   const handleCustomGeneration = async () => {
@@ -31,7 +61,7 @@ export function ResumeButton() {
       const customized_data = await toast.promise(
         fetchResumeData(jobDescription),
         {
-          loading: "Fetching and processing required data...",
+          loading: "Fetching and Processing data...",
           success: "Got it!",
           error: "Fetching failed. Please try again later.",
         },
