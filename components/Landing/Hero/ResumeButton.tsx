@@ -8,7 +8,7 @@ import { fetchResumeData } from "@/app/lib/chatbot/fetchCustomizedResume";
 import { ResumeOption } from "@/app/interfaces/Resume";
 import { RESUME_OPTIONS } from "@/app/lib/chatbot/config";
 import toast from "react-hot-toast";
-import { downloadResumePdf } from "@/lib/s3-file-loader";
+import { downloadResumePdf, getMasterResume } from "@/lib/s3-file-loader";
 
 export function ResumeButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,28 +55,42 @@ export function ResumeButton() {
   const handleCustomGeneration = async () => {
     if (!jobDescription.trim()) return;
 
+    const toastId = toast.loading("Fetching Required Data...");
+
     try {
       setLoading("Custom");
+      const master_data = await getMasterResume();
 
-      const customized_data = await toast.promise(
-        fetchResumeData(jobDescription),
-        {
-          loading: "Fetching and Processing data...",
-          success: "Got it!",
-          error: "Fetching failed. Please try again later.",
-        },
+      toast.loading("Initializing prompts...", { id: toastId });
+      setTimeout(() => {
+        toast.loading("Waiting response from Gemini...", { id: toastId });
+      }, 4000);
+      const customized_data = await fetchResumeData(
+        jobDescription,
+        JSON.stringify(master_data),
       );
-      if (!customized_data) return;
+      if (!customized_data) throw new Error("No data returned from LLM");
 
+      toast.loading("Generating Resume...", { id: toastId });
       const blob = await generateResume(customized_data);
 
-      saveAs(blob, `zi_shen_chan_custom_resume.docx`);
-      setIsOpen(false);
+      toast.loading("Finalizing...", { id: toastId });
 
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      toast.success("Resume generated!", { id: toastId });
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      saveAs(blob, `zi_shen_chan_custom_resume.docx`);
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setIsOpen(false);
       setShowCustomInput(false);
       setJobDescription("");
     } catch (error) {
       console.error("Resume generation failed:", error);
+      toast.error("Resume generated failed. Please try again later.", {
+        id: toastId,
+      });
     } finally {
       setLoading(null);
     }
@@ -87,6 +101,16 @@ export function ResumeButton() {
       setShowCustomInput(true);
     } else {
       handleStaticDownload(option);
+    }
+  };
+
+  const handleDoubleClickPaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      setJobDescription(jobDescription + text);
+    } catch (err) {
+      console.error("Failed to read clipboard:", err);
+      alert("Please allow clipboard access to use double-click paste.");
     }
   };
 
@@ -165,13 +189,14 @@ export function ResumeButton() {
                 </div>
               ) : (
                 // 2. CUSTOM INPUT FORM
-                <div className="space-y-4 animate-in slide-in-from-right-10 duration-200">
+                <div className="space-y-6 animate-in slide-in-from-right-10 duration-200">
                   <div className="relative">
                     <textarea
                       value={jobDescription}
                       onChange={(e) => setJobDescription(e.target.value)}
-                      placeholder="Paste the job description or role requirements here..."
-                      className="w-full h-40 p-3 bg-slate-900 border border-slate-800 rounded-lg text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none text-sm"
+                      onDoubleClick={handleDoubleClickPaste}
+                      placeholder="Ctrl+v or DOUBLE click to paste the job description or role requirements here..."
+                      className="w-full h-60 p-3 bg-slate-900 border border-slate-800 rounded-lg text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none text-sm"
                       disabled={loading === "Custom"}
                     />
                   </div>
@@ -188,7 +213,7 @@ export function ResumeButton() {
                     {loading === "Custom" ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Generating Custom Resume...
+                        Loading...
                       </>
                     ) : (
                       <>
@@ -205,8 +230,8 @@ export function ResumeButton() {
             <div className="p-4 bg-slate-900/30 text-center border-t border-slate-800">
               <p className="text-xs text-slate-500">
                 {showCustomInput
-                  ? "AI will analyze requirements to highlight your best matching skills"
-                  : "Powered by Docx & Gemini"}
+                  ? "AI will analyze requirements to highlight best matching skills from my database"
+                  : "Powered by Docx & Gemini 3 Pro"}
               </p>
             </div>
           </div>

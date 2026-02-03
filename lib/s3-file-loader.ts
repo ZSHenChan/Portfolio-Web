@@ -2,6 +2,10 @@
 import { FinalResumeData } from "@/app/interfaces/Resume";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { KnowledgeItem } from "@/app/lib/chatbot/types";
+import {
+  LLM_KNOWLEDGE_FILENAME,
+  MASTER_RESUME_FILENAME,
+} from "@/app/lib/chatbot/config";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
@@ -12,7 +16,7 @@ const s3 = new S3Client({
 });
 
 export async function getMasterResume(
-  key: string = "master_data.json",
+  key: string = MASTER_RESUME_FILENAME,
 ): Promise<FinalResumeData> {
   const command = new GetObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
@@ -28,7 +32,7 @@ export async function getMasterResume(
 }
 
 export const getKnowledgeData = async (
-  key: string = "knowledge.json",
+  key: string = LLM_KNOWLEDGE_FILENAME,
 ): Promise<KnowledgeItem> => {
   const command = new GetObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,

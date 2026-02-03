@@ -41,7 +41,10 @@ interface CompleteTemplateStructure {
   skills: SkillsData;
 }
 
-export const fetchResumeData = async (job_description: string) => {
+export const fetchResumeData = async (
+  job_description: string,
+  master_data: string,
+) => {
   const MASTER_RESUME_DATA = await getMasterResume();
 
   const response = await ai.models.generateContent({
@@ -51,7 +54,7 @@ export const fetchResumeData = async (job_description: string) => {
   Filter and format the user's master resume data into the requested structure specifically for the Job Description: "${job_description}".
   
   User Master Data:
-  ${JSON.stringify(MASTER_RESUME_DATA)}`,
+  ${master_data}`,
 
     config: {
       responseMimeType: "application/json",
