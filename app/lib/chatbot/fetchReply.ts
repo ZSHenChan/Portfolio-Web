@@ -20,7 +20,7 @@ import {
 } from "./config";
 import { fetchExcDecisionStruct } from "./fetchFunctionApproval";
 import { FunctionCallType } from "@/app/enums/functionCall";
-import { getKnowledgeData } from "@/lib/resume-loader";
+import { getKnowledgeData } from "@/lib/s3-file-loader";
 import { gemini_client as ai } from "@/lib/gemini";
 
 export interface Reply {

@@ -4,7 +4,7 @@ import { gemini_client as ai } from "@/lib/gemini";
 import { Type } from "@google/genai";
 import { ResumeEntry, SkillsData } from "@/app/interfaces/Resume";
 import { envClient } from "@/app/env/client";
-import { getMasterResume } from "@/lib/resume-loader";
+import { getMasterResume } from "@/lib/s3-file-loader";
 
 const ResumeEntrySchema = {
   type: Type.OBJECT,
@@ -43,8 +43,10 @@ interface CompleteTemplateStructure {
 
 export const fetchResumeData = async (job_description: string) => {
   const MASTER_RESUME_DATA = await getMasterResume();
+
   const response = await ai.models.generateContent({
     model: envClient.NEXT_PUBLIC_GEMINI_MODEL_RESUME,
+
     contents: `instruction: You are a resume expert. 
   Filter and format the user's master resume data into the requested structure specifically for the Job Description: "${job_description}".
   

@@ -7,6 +7,7 @@ import { generateResume } from "@/lib/docx";
 import { fetchResumeData } from "@/app/lib/chatbot/fetchCustomizedResume";
 import { ResumeOption } from "@/app/interfaces/Resume";
 import { RESUME_OPTIONS } from "@/app/lib/chatbot/config";
+import toast from "react-hot-toast";
 
 export function ResumeButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,15 @@ export function ResumeButton() {
     try {
       setLoading("Custom");
 
-      const customized_data = await fetchResumeData(jobDescription);
+      const customized_data = await toast.promise(
+        fetchResumeData(jobDescription),
+        {
+          loading: "Fetching and processing required data...",
+          success: "Got it!",
+          error: "Fetching failed. Please try again later.",
+        },
+      );
+      if (!customized_data) return;
 
       const blob = await generateResume(customized_data);
 
@@ -38,7 +47,6 @@ export function ResumeButton() {
       setJobDescription("");
     } catch (error) {
       console.error("Resume generation failed:", error);
-      alert("Failed to generate resume. Please try again.");
     } finally {
       setLoading(null);
     }

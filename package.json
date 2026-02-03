@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.981.0",
     "@emailjs/browser": "^4.4.1",
     "@google/genai": "^0.8.0",
     "@radix-ui/react-hover-card": "^1.1.6",
