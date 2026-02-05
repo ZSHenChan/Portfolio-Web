@@ -9,30 +9,34 @@ export function SectionHero({ id }: { id: string }) {
   return (
     <div id={id}>
       <Lamp>
-        <h1
+        <div
           className={cn(
-            "bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight md:text-5xl lg:text-7xl mb-4 "
+            "bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center font-medium tracking-tight place-items-center",
           )}
         >
-          <span className={cn("hero-text")}>
-            My name is Zi Shen <br />
-            <br />I bring{" "}
-          </span>
-          <LinkPreview
-            url="./projects/personal-ai"
-            className={cn(
-              "relative text-5xl lg:text-8xl font-bold inline-block"
-            )}
-            isStatic
-            imageSrc="/image/preview-personal-ai.png"
-          >
-            <AILink />
-          </LinkPreview>{" "}
-          <span className={cn("hero-text")}>to life</span>
-        </h1>
-        <FadeUpInView delay={3.5} initialOpacity={0} className="text-center">
-          <ResumeButton />
-        </FadeUpInView>
+          <h1 className={cn("py-4 text-4xl md:text-5xl lg:text-5xl mb-4 ")}>
+            <span className={cn("hero-text")}>
+              My name is Zi Shen
+              <br />
+              <br />I Build{" "}
+            </span>
+            <LinkPreview
+              url="./projects/personal-ai"
+              className={cn("relative text-5xl lg:text-6xl font-bold inline-block")}
+              isStatic
+              imageSrc="/image/preview-personal-ai.png"
+            >
+              <AILink />
+            </LinkPreview>{" "}
+            <span className={cn("hero-text")}>Solutions</span>
+          </h1>
+          <p className={cn("w-[30ch] lg:w-[45ch] lg:text-lg opacity-65 hero-text mb-6")}>
+            LLM integrations to automated data pipelines—turning manual tasks into intelligent systems.
+          </p>
+          <FadeUpInView delay={3.5} initialOpacity={0} className="text-center">
+            <ResumeButton />
+          </FadeUpInView>
+        </div>
       </Lamp>
     </div>
   );
