@@ -7,6 +7,8 @@ import { Modal } from "@/components/Modal/Modal";
 import { CustomToaster } from "./utils/Toaster";
 import { Footer } from "@/components/Footer/Footer";
 
+import { Analytics } from "@vercel/analytics/next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,15 +39,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <main>
             <CustomToaster />
             {children}
             <Modal />
             <Footer />
+            <Analytics />
           </main>
         </Providers>
       </body>
