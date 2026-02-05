@@ -212,7 +212,7 @@ export const RESUME_OPTIONS: ResumeOption[] = [
     id: "General",
     label: "General",
     icon: FileText,
-    text: "Overall Skills and Transferable Skills Focused",
+    text: "Technical and Transferable Skills Balanced",
     filename: "resume_ai.pdf",
     downloadFilename: "zishenchan_general.pdf",
   },
