@@ -17,7 +17,7 @@ export const SectionAbout = ({ id }: { id: string }) => {
         <div className="h-[18dvh]"></div>
         <SectionHeading>About Me</SectionHeading>
         <TextGenerateEffect
-          className="text-center text-lg lg:text-2xl gap-5"
+          className="text-center text-lg lg:text-xl gap-5"
           textContainerClass="md:leading-[1.6]"
           delay={0}
           filter={false}
