@@ -21,14 +21,11 @@ export function ResumeButton() {
     try {
       setLoading(option.id);
 
-      const base64Data = await toast.promise(
-        downloadResumePdf(option.filename),
-        {
-          loading: "Fetching resume...",
-          success: "Got it!",
-          error: "Fetching failed. Please try again later.",
-        },
-      );
+      const base64Data = await toast.promise(downloadResumePdf(option.filename), {
+        loading: "Fetching resume...",
+        success: "Resume Fetched! Downloading File...",
+        error: "Fetching failed. Please try again later.",
+      });
 
       if (!base64Data) {
         throw new Error("Failed to retrieve file");
@@ -62,13 +59,16 @@ export function ResumeButton() {
       const master_data = await getMasterResume();
 
       toast.loading("Initializing prompts...", { id: toastId });
+
       setTimeout(() => {
-        toast.loading("Waiting response from Gemini...", { id: toastId });
+        toast.loading("Handpicking Experiences..", { id: toastId });
       }, 4000);
-      const customized_data = await fetchResumeData(
-        jobDescription,
-        JSON.stringify(master_data),
-      );
+
+      setTimeout(() => {
+        toast.loading("Phrasing Details...", { id: toastId });
+      }, 8000);
+
+      const customized_data = await fetchResumeData(jobDescription, JSON.stringify(master_data));
       if (!customized_data) throw new Error("No data returned from LLM");
 
       toast.loading("Generating Resume...", { id: toastId });
@@ -125,10 +125,7 @@ export function ResumeButton() {
 
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
-            onClick={() => setIsOpen(false)}
-          />
+          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
 
           <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
@@ -143,15 +140,10 @@ export function ResumeButton() {
                   </button>
                 )}
                 <h3 className="text-xl font-medium text-slate-200">
-                  {showCustomInput
-                    ? "Paste Job Description"
-                    : "Select Resume Version"}
+                  {showCustomInput ? "Paste Job Description" : "Select Resume Version"}
                 </h3>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-slate-400 hover:text-white transition-colors"
-              >
+              <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -176,12 +168,8 @@ export function ResumeButton() {
                           <Icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <div className="font-medium text-slate-200 group-hover:text-white">
-                            {option.label}
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {option.text}
-                          </div>
+                          <div className="font-medium text-slate-200 group-hover:text-white">{option.label}</div>
+                          <div className="text-xs text-slate-500">{option.text}</div>
                         </div>
                       </button>
                     );
@@ -195,7 +183,7 @@ export function ResumeButton() {
                       value={jobDescription}
                       onChange={(e) => setJobDescription(e.target.value)}
                       onDoubleClick={handleDoubleClickPaste}
-                      placeholder="Ctrl+v or DOUBLE click to paste the job description or role requirements here..."
+                      placeholder="Ctrl+V or DOUBLE click to paste the job description or role requirements here..."
                       className="w-full h-60 p-3 bg-slate-900 border border-slate-800 rounded-lg text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none text-sm"
                       disabled={loading === "Custom"}
                     />
@@ -218,7 +206,7 @@ export function ResumeButton() {
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4" />
-                        Generate with AI
+                        Tailor Resume
                       </>
                     )}
                   </button>
