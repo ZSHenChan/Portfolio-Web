@@ -4,6 +4,7 @@ import { Label } from "./Label";
 import { Input } from "./Input";
 import { cn } from "@/app/utils/cn";
 import { sendFormEmail } from "@/app/api/sendEmail";
+import { EMAIL_ADDRESS } from "@/app/config";
 
 export function Form() {
   const form = useRef<HTMLFormElement>(null);
@@ -19,42 +20,19 @@ export function Form() {
       <form className="my-8" onSubmit={handleSubmit} ref={form}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="name">Name*</Label>
-          <Input
-            name="name"
-            id="name"
-            required
-            placeholder="Zi Shen"
-            type="text"
-          />
+          <Input name="name" id="name" required placeholder="Zi Shen" type="text" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email*</Label>
-          <Input
-            name="email"
-            id="email"
-            required
-            placeholder="zshen2002@gmail.com"
-            type="email"
-          />
+          <Input name="email" id="email" required placeholder={EMAIL_ADDRESS} type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="title">Title*</Label>
-          <Input
-            name="title"
-            id="title"
-            placeholder="email title"
-            required
-            type="text"
-          />
+          <Input name="title" id="title" placeholder="email title" required type="text" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-8">
           <Label htmlFor="content">Comments</Label>
-          <Input
-            name="content"
-            id="content"
-            placeholder="send some thoughts"
-            type="text"
-          />
+          <Input name="content" id="content" placeholder="send some thoughts" type="text" />
         </LabelInputContainer>
 
         <button
@@ -78,16 +56,6 @@ const BottomGradient = () => {
   );
 };
 
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn("flex w-full flex-col space-y-2", className)}>
-      {children}
-    </div>
-  );
+const LabelInputContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+  return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
 };

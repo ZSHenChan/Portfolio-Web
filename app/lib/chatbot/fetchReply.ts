@@ -1,6 +1,6 @@
 "use server";
 import { envClient } from "@/app/env/client";
-import { ChatInstance } from "@/components/chatbot/demoChatHistory";
+import { ChatInstance } from "@/app/interfaces/Chatbot";
 import { FunctionCall } from "@google/genai";
 import { getErrorMessage } from "@/app/utils/handleReport";
 import { generatePrompt } from "./generatePrompt";
@@ -56,10 +56,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
       Awaited<ReturnType<typeof fetchStructQueryPrompt>>,
     ] = await Promise.all([
       fetchFunctionCalls(conversationHistoryString),
-      fetchStructQueryPrompt(
-        conversationHistoryString,
-        request.chatHistory[request.chatHistory.length - 1].message,
-      ),
+      fetchStructQueryPrompt(conversationHistoryString, request.chatHistory[request.chatHistory.length - 1].message),
     ]);
 
     if (DEBUG_MODE) {
@@ -114,9 +111,7 @@ export async function fetchChatbotReply(request: Request): Promise<Reply> {
     return {
       message: replyText,
       error: false,
-      functionCall: functionExecApproved
-        ? functionCallResponse.functionCall
-        : undefined,
+      functionCall: functionExecApproved ? functionCallResponse.functionCall : undefined,
       funcSysMsg: funcSysMsg,
     };
   } catch (err) {

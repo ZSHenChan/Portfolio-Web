@@ -4,12 +4,8 @@ import { useState } from "react";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import toast from "react-hot-toast";
 import { FadeUpInView } from "../ui/FadeUpInView";
-import {
-  motion,
-  AnimatePresence,
-  useSpring,
-  useMotionValue,
-} from "motion/react";
+import { motion, AnimatePresence, useSpring, useMotionValue } from "motion/react";
+import { EMAIL_ADDRESS } from "@/app/config";
 
 export function EmailCopy() {
   const [isOpen, setOpen] = useState(false);
@@ -28,7 +24,7 @@ export function EmailCopy() {
 
   const handleCopyEmail = () => {
     navigator.clipboard
-      .writeText("zshen2002@gmail.com")
+      .writeText(EMAIL_ADDRESS)
       .then(() => {
         toast("Email address copied to clipboard!");
       })

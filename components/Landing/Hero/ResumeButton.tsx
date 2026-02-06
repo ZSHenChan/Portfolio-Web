@@ -6,9 +6,10 @@ import { Loader2, X, Sparkles, ArrowLeft } from "lucide-react";
 import { generateResume } from "@/lib/docx";
 import { fetchResumeData } from "@/app/lib/chatbot/fetchCustomizedResume";
 import { ResumeOption } from "@/app/interfaces/Resume";
-import { RESUME_OPTIONS } from "@/app/lib/chatbot/config";
+import { RESUME_OPTIONS } from "@/app/config";
 import toast from "react-hot-toast";
 import { downloadResumePdf, getMasterResume } from "@/lib/s3-file-loader";
+import purify from "dompurify";
 
 export function ResumeButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,8 @@ export function ResumeButton() {
   const handleCustomGeneration = async () => {
     if (!jobDescription.trim()) return;
 
+    const sanitizedJobDescription = purify.sanitize(jobDescription);
+
     const toastId = toast.loading("Fetching Required Data...");
 
     try {
@@ -68,7 +71,7 @@ export function ResumeButton() {
         toast.loading("Phrasing Details...", { id: toastId });
       }, 8000);
 
-      const customized_data = await fetchResumeData(jobDescription, JSON.stringify(master_data));
+      const customized_data = await fetchResumeData(sanitizedJobDescription, JSON.stringify(master_data));
       if (!customized_data) throw new Error("No data returned from LLM");
 
       toast.loading("Generating Resume...", { id: toastId });

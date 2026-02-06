@@ -4,7 +4,7 @@ import { motion, LayoutGroup } from "motion/react";
 import { useModal } from "@/app/context/ModalContext";
 import { cn } from "@/app/utils/cn";
 import { useUIState } from "@/app/context/UIStateContext";
-import { ChatInstance } from "../chatbot/demoChatHistory";
+import { ChatInstance } from "@/app/interfaces/Chatbot";
 
 const itemVariants = {
   hidden: { y: 50, opacity: 0 },
@@ -48,11 +48,7 @@ export function ModalContent() {
   };
 
   return (
-    <div
-      className={cn(
-        "flex flex-col-reverse flex-1 px-4 pb-4 h-full overflow-y-scroll"
-      )}
-    >
+    <div className={cn("flex flex-col-reverse flex-1 px-4 pb-4 h-full overflow-y-scroll")}>
       <motion.ul
         variants={allowAnimation ? containerVariants : undefined}
         initial="hidden"
@@ -74,11 +70,7 @@ export function ModalContent() {
                   }`}
                 >
                   <span
-                    className={`${
-                      chat.role == "bot"
-                        ? "text-neutral-800"
-                        : "text-neutral-300"
-                    } text-sm text-start`}
+                    className={`${chat.role == "bot" ? "text-neutral-800" : "text-neutral-300"} text-sm text-start`}
                   >
                     {chat.message}
                   </span>

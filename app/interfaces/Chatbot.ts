@@ -8,3 +8,9 @@ export interface KnowledgeItem {
   summary: string;
   importance_score: number;
 }
+
+export interface ChatInstance {
+  id: string;
+  message: string;
+  role: string;
+}

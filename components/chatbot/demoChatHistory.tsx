@@ -1,8 +1,4 @@
-export interface ChatInstance {
-  id: string;
-  message: string;
-  role: string;
-}
+import { ChatInstance } from "@/app/interfaces/Chatbot";
 
 export const CHAT_HISTORY: ChatInstance[] = [
   {
@@ -12,8 +8,7 @@ export const CHAT_HISTORY: ChatInstance[] = [
   },
   {
     id: "1",
-    message:
-      "[Disable function calling to prevent navigations performed by my assistant]",
+    message: "[Disable function calling to prevent navigations performed by my assistant]",
     role: "bot",
   },
   {

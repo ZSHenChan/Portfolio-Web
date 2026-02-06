@@ -1,7 +1,5 @@
 import { ProjectDemoType } from "@/app/enums/projectDemo";
 import { envClient } from "@/app/env/client";
-import { Code, BarChart, Briefcase, FileText, Bot } from "lucide-react";
-import { ResumeOption } from "@/app/interfaces/Resume";
 
 export const DEBUG_MODE = envClient.NEXT_PUBLIC_DEV_MODE ?? false;
 
@@ -181,50 +179,3 @@ export const PROJECT_DEMO_URL_DICT: Record<string, string> = {
 };
 
 export const FETCH_FAIL_FALLBACK_MSG = "Error happened when fetching functions";
-
-//* Resume Generation
-export const RESUME_OPTIONS: ResumeOption[] = [
-  {
-    id: "Full Stack Developer",
-    label: "Full Stack Developer",
-    icon: Code,
-    text: "Focus on System Architectures",
-    filename: "resume_sw.pdf",
-    downloadFilename: "zishenchan_SW.pdf",
-  },
-  {
-    id: "AI Engineering",
-    label: "AI Engineering",
-    icon: Bot,
-    text: "Customized for Agentic Workflows",
-    filename: "resume_ai.pdf",
-    downloadFilename: "zishenchan_SW.pdf",
-  },
-  {
-    id: "Data Analysis",
-    label: "Data Analysis",
-    icon: BarChart,
-    text: "Customized for Data Science Lifecycle",
-    filename: "resume_da.pdf",
-    downloadFilename: "zishenchan_DA.pdf",
-  },
-  {
-    id: "General",
-    label: "General",
-    icon: FileText,
-    text: "Technical and Transferable Skills Balanced",
-    filename: "resume_ai.pdf",
-    downloadFilename: "zishenchan_general.pdf",
-  },
-  {
-    id: "Custom",
-    label: "Custom",
-    icon: Briefcase,
-    text: "Not in the list? Try this",
-    filename: "resume_custom.pdf",
-    downloadFilename: "zishenchan_custom.pdf",
-  },
-];
-
-export const MASTER_RESUME_FILENAME = "master_data.json";
-export const LLM_KNOWLEDGE_FILENAME = "knowledge.json";

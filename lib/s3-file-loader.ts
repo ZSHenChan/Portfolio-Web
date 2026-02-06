@@ -1,11 +1,8 @@
 "use server";
 import { FinalResumeData } from "@/app/interfaces/Resume";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { KnowledgeItem } from "@/app/lib/chatbot/types";
-import {
-  LLM_KNOWLEDGE_FILENAME,
-  MASTER_RESUME_FILENAME,
-} from "@/app/lib/chatbot/config";
+import { KnowledgeItem } from "@/app/interfaces/Chatbot";
+import { LLM_KNOWLEDGE_FILENAME, MASTER_RESUME_FILENAME } from "@/app/config";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
@@ -15,9 +12,7 @@ const s3 = new S3Client({
   },
 });
 
-export async function getMasterResume(
-  key: string = MASTER_RESUME_FILENAME,
-): Promise<FinalResumeData> {
+export async function getMasterResume(key: string = MASTER_RESUME_FILENAME): Promise<FinalResumeData> {
   const command = new GetObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: key,
@@ -31,9 +26,7 @@ export async function getMasterResume(
   return JSON.parse(str) as FinalResumeData;
 }
 
-export const getKnowledgeData = async (
-  key: string = LLM_KNOWLEDGE_FILENAME,
-): Promise<KnowledgeItem> => {
+export const getKnowledgeData = async (key: string = LLM_KNOWLEDGE_FILENAME): Promise<KnowledgeItem> => {
   const command = new GetObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: key,

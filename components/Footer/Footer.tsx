@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FOOTER_LAST_UPDATE } from "@/app/config";
 
 export const Footer = () => {
   const year = new Date().getFullYear();
@@ -44,10 +45,7 @@ export const Footer = () => {
       <ul className="flex flex-col lg:flex-row justify-center text-center mb-8 gap-4 lg:gap-12">
         {footerLinks.map((item) => (
           <li key={item.name}>
-            <Link
-              className="font-bold text-xl cursor-pointer hover:text-neutral-200/80"
-              href={item.link}
-            >
+            <Link className="font-bold text-xl cursor-pointer hover:text-neutral-200/80" href={item.link}>
               {item.name}
             </Link>
           </li>
@@ -69,8 +67,7 @@ export const Footer = () => {
         ))}
       </ul>
       <p className="text-center text-slate-600">
-        &copy; {year} Zi Shen Chan. All Rights Reserved. Last update: 13 June
-        2025
+        &copy; {year} Zi Shen Chan. All Rights Reserved. Last update: {FOOTER_LAST_UPDATE}
       </p>
     </div>
   );

@@ -20,8 +20,7 @@ const ResumeEntrySchema = {
     },
     date: {
       type: Type.STRING,
-      description:
-        "The duration of the experience (e.g., 'Jan 2025 - Present').",
+      description: "The duration of the experience (e.g., 'Jan 2025 - Present').",
     },
     bullets: {
       type: Type.ARRAY,
@@ -33,6 +32,7 @@ const ResumeEntrySchema = {
   },
 };
 
+// Local Use only
 interface CompleteTemplateStructure {
   summary: string;
   "Work Experiences & Internships": ResumeEntry[];
@@ -41,10 +41,7 @@ interface CompleteTemplateStructure {
   skills: SkillsData;
 }
 
-export const fetchResumeData = async (
-  job_description: string,
-  master_data: string,
-) => {
+export const fetchResumeData = async (job_description: string, master_data: string) => {
   const MASTER_RESUME_DATA = await getMasterResume();
 
   const response = await ai.models.generateContent({
@@ -60,17 +57,11 @@ export const fetchResumeData = async (
       responseMimeType: "application/json",
       responseSchema: {
         type: Type.OBJECT,
-        required: [
-          "summary",
-          "Work Experiences & Internships",
-          "Personal Projects",
-          "Leadership Experiences",
-        ],
+        required: ["summary", "Work Experiences & Internships", "Personal Projects", "Leadership Experiences"],
         properties: {
           summary: {
             type: Type.STRING,
-            description:
-              "A professional summary tailored to the target job description.",
+            description: "A professional summary tailored to the target job description.",
           },
           "Work Experiences & Internships": {
             type: Type.ARRAY,
@@ -101,8 +92,7 @@ export const fetchResumeData = async (
               },
               "Interests": {
                 type: Type.STRING,
-                description:
-                  "A comma-separated string of personal hobbies or interests.",
+                description: "A comma-separated string of personal hobbies or interests.",
               },
             },
           },
